@@ -1,0 +1,22 @@
+import fetcher from "./fetcher"
+
+export const signupAPI = async (payload) => {
+    try {
+        // console.log('payload: ', payload);
+        // payload: { taiKhoan: "", matKhau:""...}
+        // back-end muốn mình gửi lên gì thì gửi lên giống vậy
+        const response = await fetcher.post("/QuanLyNguoiDung/DangKy", payload);
+        return response.data.content;
+    } catch (error) {
+        throw "API gặp lỗi";
+    }
+}
+
+export const signinAPI = async (payload) => {
+    try {
+        const response = await fetcher.post("/QuanLyNguoiDung/DangNhap", payload);
+        return response.data.content;
+    } catch (error) {
+        throw "API gặp lỗi";
+    }
+}
