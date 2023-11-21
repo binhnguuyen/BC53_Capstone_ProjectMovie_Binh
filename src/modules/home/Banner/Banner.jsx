@@ -4,6 +4,10 @@ import { getBannersAPI } from "../../../apis/movieApi";
 import Slider from "react-slick";
 import { Box, Skeleton } from "@mui/material";
 
+// thư viện Lottie
+import Lottie from 'react-lottie';
+import animationData from "../../../Lotties/Aniki Hamster.json"
+
 // setting của slick
 const settings = {
   dots: true,
@@ -16,6 +20,17 @@ const settings = {
 };
 
 const Banner = () => {
+  // thư viện Lottie
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    // animationData: animationData,
+    // rendererSettings: {
+    //   preserveAspectRatio: 'xMidYMid slice'
+    // }
+  };
+
   // khi load trang lên, thằng banner chạy thì nó sẽ chạy thằng useQuerry và get API
   // đặt data là 1 cái mảng ngay từ đầu luôn để nó ko bị undefined lúc đầu
   // dùng useQuery để khi có 1 thay đổi thì nó sẽ GET API về
@@ -32,6 +47,8 @@ const Banner = () => {
 
   if (isLoading) {
     return (
+      // thư viện Lottie
+      // <Lottie options={defaultOptions} width={300} height={300}/>
       // Skeleton này khi loading nó sẽ chỉ hiện ra trong lúc chờ load API kiểu giống FaceBook và Youtube
       <Skeleton variant="rectangular" sx={{ height: 500 }} animation="wave" />
     );
@@ -39,6 +56,7 @@ const Banner = () => {
 
   return (
     <div>
+      
       {/* {
         data.map((item) => {
           return (
