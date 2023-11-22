@@ -14,10 +14,6 @@ const Showing = () => {
     loop: true,
     autoplay: true,
     animationData: animationData,
-    // animationData: animationData,
-    // rendererSettings: {
-    //   preserveAspectRatio: 'xMidYMid slice'
-    // }
   };
 
   // cái hook giúp mình chuyển trang
@@ -28,19 +24,16 @@ const Showing = () => {
     queryKey: ["showing"],
     queryFn: getListMovieAPI,
   });
-  // console.log('data: ', data);
-  // console.log('isLoading: ', isLoading);
-  // console.log('isError: ', isError);
-  // console.log('error: ', error);
 
-  // if (isLoading) {
-  //   return (
-  //     // thư viện Lottie
-  //     // <Lottie options={defaultOptions} width={300} height={300}/>
-  //     // Skeleton này khi loading nó sẽ chỉ hiện ra trong lúc chờ load API kiểu giống FaceBook và Youtube
-  //     <Skeleton variant="rectangular" sx={{ height: 500 }} animation="wave" />
-  //   );
-  // }
+
+  if (isLoading) {
+    return (
+      // thư viện Lottie
+      // <Lottie options={defaultOptions} width={300} height={300}/>
+      // Skeleton này khi loading nó sẽ chỉ hiện ra trong lúc chờ load API kiểu giống FaceBook và Youtube
+      <Skeleton variant="rectangular" sx={{ height: 500 }} animation="wave" />
+    );
+  }
 
   return (
     // thằng Container này từ MUI, thay nó cho thằng div
@@ -57,18 +50,11 @@ const Showing = () => {
           <Grid item xs={4} key={item.maPhim}>
             {/* col */}
             <Card >
-
-              {
-                isLoading ? (
-                  <Skeleton variant="rectangular" sx={{ height: 400 }} animation="wave" />
-                ) : (
-                  <CardMedia
-                    sx={{ height: 400 }}
-                    image={item.hinhAnh}
-                    title="green iguana"
-                  />
-                )
-              }
+              <CardMedia
+                sx={{ height: 400 }}
+                image={item.hinhAnh}
+                title="green iguana"
+              />
               <CardContent>
                 <Typography
                   gutterBottom

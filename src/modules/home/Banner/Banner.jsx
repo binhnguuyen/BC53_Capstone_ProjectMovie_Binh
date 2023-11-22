@@ -25,10 +25,6 @@ const Banner = () => {
     loop: true,
     autoplay: true,
     animationData: animationData,
-    // animationData: animationData,
-    // rendererSettings: {
-    //   preserveAspectRatio: 'xMidYMid slice'
-    // }
   };
 
   // khi load trang lên, thằng banner chạy thì nó sẽ chạy thằng useQuerry và get API
@@ -40,10 +36,7 @@ const Banner = () => {
     // function nhận 1 cái async function, cái async function đc viết bên movieApi để tăng tính tái sử dụng
     queryFn: getBannersAPI,
   });
-  // console.log('data: ', data);
-  // console.log('isLoading: ', isLoading);
-  // console.log('isError: ', isError);
-  // console.log('error: ', error);
+
 
   if (isLoading) {
     return (
