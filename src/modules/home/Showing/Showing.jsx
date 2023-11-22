@@ -1,10 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react'
 import { getListMovieAPI } from "../../../apis/movieApi";
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography, Container } from "@mui/material"
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography, Container, Skeleton } from "@mui/material"
 import { useNavigate } from 'react-router-dom';
 
+// thư viện Lottie
+import Lottie from 'react-lottie';
+import animationData from "../../../Lotties/Aniki Hamster.json"
+
 const Showing = () => {
+  // thư viện Lottie
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+  };
+
   // cái hook giúp mình chuyển trang
   const navigate = useNavigate()
   // khi load trang lên, thằng banner chạy thì nó sẽ chạy thằng useQuerry và get API
@@ -13,10 +24,16 @@ const Showing = () => {
     queryKey: ["showing"],
     queryFn: getListMovieAPI,
   });
-  // console.log('data: ', data);
-  // console.log('isLoading: ', isLoading);
-  // console.log('isError: ', isError);
-  // console.log('error: ', error);
+
+
+  if (isLoading) {
+    return (
+      // thư viện Lottie
+      // <Lottie options={defaultOptions} width={300} height={300}/>
+      // Skeleton này khi loading nó sẽ chỉ hiện ra trong lúc chờ load API kiểu giống FaceBook và Youtube
+      <Skeleton variant="rectangular" sx={{ height: 500 }} animation="wave" />
+    );
+  }
 
   return (
     // thằng Container này từ MUI, thay nó cho thằng div
@@ -39,15 +56,15 @@ const Showing = () => {
                 title="green iguana"
               />
               <CardContent>
-                <Typography 
+                <Typography
                   gutterBottom
                   variant="h5"
                   component="div"
                   className="truncate" >
                   {item.tenPhim}
                 </Typography>
-                <Typography 
-                variant="body2"
+                <Typography
+                  variant="body2"
                   color="text.secondary"
                   className="truncate truncate--2">
                   {item.moTa}
@@ -55,11 +72,11 @@ const Showing = () => {
               </CardContent>
               <CardActions>
                 <Button size="small"
-                variant="contained"
-                fullWidth
-                onClick={() => {
-                  navigate(`movie/${item.maPhim}`)
-                }}
+                  variant="contained"
+                  fullWidth
+                  onClick={() => {
+                    navigate(`movie/${item.maPhim}`)
+                  }}
                 >Xem chi tiết
                 </Button>
               </CardActions>
