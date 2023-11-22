@@ -1,4 +1,4 @@
-import { Button, Container, Grid, Stack, TextField, Typography } from '@mui/material'
+import { Button, Container, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from '@mui/material'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { GROUP_CODE } from "../../../constants";
@@ -11,6 +11,7 @@ import { signupAPI } from '../../../apis/userAPI';
 import { LoadingButton } from '@mui/lab';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '../../../routes/path';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const schemaSignup = yup.object({
     taiKhoan: yup
@@ -31,7 +32,14 @@ const schemaSignup = yup.object({
 });
 
 const Signup = () => {
-    const navigate = useNavigate();    
+    const navigate = useNavigate();
+
+    // khu này để khi ấn vào icon con mắt thì show password ra
+    const [showPassword, setShowPassword] = React.useState(false);
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
@@ -55,6 +63,7 @@ const Signup = () => {
         // khi đưa lên API thành công (tức tạo tk thành công) thì đá luôn sang trang đăng nhập
         // gắn values và đưa sẵn dữ liệu lên để trong TH muốn fill dữ liệu trong form bên trang sign in
         onSuccess: (values) => {
+            // chuyển use về trang HOME
             navigate(PATH.SIGN_IN);
         },
         onError: (error) => {
@@ -132,25 +141,36 @@ const Signup = () => {
                             // })}
                             // error={Boolean(errors.taiKhoan)}
                             // helperText={Boolean(errors.taiKhoan) && errors.taiKhoan.message}
-                            />
-                            <TextField label="Mật khẩu" fullWidth type='password' {...register("matKhau")}
-                                // trạng thái error này giúp css khi validate trả về lỗi, chẳng hạn màu chữ thành màu đỏ
-                                error={Boolean(errors.matKhau)}
-                                // nội dung hiển thị ra khi validate trả về lỗi
-                                helperText={Boolean(errors.matKhau) && errors.matKhau.message}
-                            // {...register("matKhau", {
-                            //     required: {
-                            //         value: true,
-                            //         message: "Vui lòng nhập thông tin",
-                            //     },
-                            //     pattern: {
-                            //         value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
-                            //         message: "Mật khẩu phải bao gồm 8 ký tự trở lên, 1 ký tự hoa, 1 ký tự thường và 1 ký tự đặc biệt",
-                            //     }
-                            // })}
-                            // error={Boolean(errors.matKhau)}
-                            // helperText={Boolean(errors.matKhau) && errors.matKhau.message}
-                            />
+                            />                            
+                            <FormControl variant="outlined" fullWidth>
+                                <InputLabel htmlFor="outlined-adornment-password"
+                                    error={Boolean(errors.matKhau)}
+                                >
+                                    Mật khẩu
+                                </InputLabel>
+                                <OutlinedInput
+                                    error={Boolean(errors.matKhau)}
+                                    {...register("matKhau")}
+                                    id="outlined-adornment-password"
+                                    type={showPassword ? 'text' : 'password'}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                            >
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                    label="Password"
+                                />
+                                <FormHelperText error={Boolean(errors.matKhau)}>
+                                    {Boolean(errors.matKhau) && errors.matKhau.message}
+                                </FormHelperText>
+                            </FormControl>
                             {/* {errors.matKhau && <p style={{ color: "red" }}>{errors.matKhau.message}</p>} */}
                             <TextField label="Số điện thoại" fullWidth
                                 {...register("soDt")}

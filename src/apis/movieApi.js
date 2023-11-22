@@ -19,7 +19,7 @@ export const getListMovieAPI = async () => {
       },
       //"/QuanLyPhim/LayDanhSachPhim?maNhom=GP01&page=1&pageSize=10"
     });
-    console.log("response", response);
+    // console.log("response", response);
     return response.data.content; // là 1 mảng
   } catch (error) {}
 };

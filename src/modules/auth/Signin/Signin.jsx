@@ -9,8 +9,9 @@ import { useMutation } from '@tanstack/react-query';
 // Thư viện Yup giúp mình validate Hook Form
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useAuth } from '../../../contexts/UserContext/UserContext';
 
 const schemaSignin = yup.object({
   taiKhoan: yup
@@ -29,6 +30,8 @@ const schemaSignin = yup.object({
 
 
 const Signin = () => {
+  // do trùng tên hàm nên chỗ này đổi tên
+  const { currentUser, handleSignin: handleSigninContext } = useAuth();
   const navigate = useNavigate();
 
   // khu này để khi ấn vào icon con mắt thì show password ra
@@ -43,28 +46,41 @@ const Signin = () => {
       taiKhoan: "",
       matKhau: "",
     },
-    resolver: yupResolver(schemaSignin),
+    // resolver: yupResolver(schemaSignin),
     // sự kiện này có onChange, onBlue, onSubmit
     mode: "all",
   });
 
+
   const { mutate: handleSignin, isPending } = useMutation({
     mutationFn: (values) => signinAPI(values),
-    onSuccess: () => {
-      navigate(PATH.HOME);
+    onSuccess: (values) => {
+      // lưu user dưới local storage trước
+      handleSigninContext(values);
+
+      // tuỳ vào loại người dùng mà đá sang trang khác nhau
+      if ( values.maLoaiNguoiDung === "KhachHang" ) navigate(PATH.HOME);
+      if ( values.maLoaiNguoiDung === "QuanTri" ) navigate(PATH.ADMIN);
+
     },
     onError: (error) => {
-      // alert("Lỗi Call API");
+      alert("Tài khoản hoặc mật khẩu không đúng");
     },
   });
 
   const onSubmit = (values) => {
+    // console.log('values: ', values);
     handleSignin(values);
   };
 
   const onError = (errors) => {
-    console.log('errors: ', errors);
+    // console.log('errors: ', errors);
     alert("Lỗi submit");
+  }
+
+  // nếu có currentUser thì đá sang trang HOME
+  if (currentUser) {
+    return <Navigate to={PATH.HOME} />;
   }
 
   return (
