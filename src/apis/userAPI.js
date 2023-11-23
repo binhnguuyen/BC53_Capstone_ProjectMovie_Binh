@@ -8,7 +8,7 @@ export const signupAPI = async (payload) => {
         const response = await fetcher.post("/QuanLyNguoiDung/DangKy", payload);
         return response.data.content;
     } catch (error) {
-        throw "Lỗi Call API";
+        throw "Lỗi Call API khi đăng ký";
     }
 }
 
@@ -17,6 +17,6 @@ export const signinAPI = async (payload) => {
         const response = await fetcher.post("/QuanLyNguoiDung/DangNhap", payload);
         return response.data.content;
     } catch (error) {
-        throw "Lỗi Call API";
+        throw "Lỗi Call API khi đăng nhập";
     }
 }

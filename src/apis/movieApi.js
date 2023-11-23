@@ -21,7 +21,10 @@ export const getListMovieAPI = async () => {
     });
     // console.log("response", response);
     return response.data.content; // là 1 mảng
-  } catch (error) {}
+  } 
+  catch (error) {
+    throw Error(error)
+  }
 };
 
 export const getMovieDetailsAPI = async (movieId) => {
@@ -36,6 +39,15 @@ export const getMovieDetailsAPI = async (movieId) => {
     // phải quăng lỗi ra thì bên Query mới biết có lỗi và nó sẽ retry call API lại
     throw Error(error)
   }
-
 };
+
+export const addMovieAPI = async(payload) => {
+  try {
+    const response = await fetcher.post("/QuanLyPhim/ThemPhimUploadHinh", payload);
+    return response.date.content;
+  } 
+  catch (error) {
+    throw Error(error)
+  }
+}
 

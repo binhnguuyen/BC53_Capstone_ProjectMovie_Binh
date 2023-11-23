@@ -12,6 +12,9 @@ import { GROUP_CODE } from "../../../../constants";
 import dayjs from "dayjs";
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useMutation } from "@tanstack/react-query";
+import { addMovieAPI } from "../../../../apis/movieApi";
+import { LoadingButton } from "@mui/lab";
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -52,7 +55,7 @@ const schemaAddMovie = yup.object({
 });
 
 const AddMovie = () => {
-    const { handleSubmit, register, control, setValue, formState: { errors } } = useForm({
+    const { handleSubmit, register, control, setValue, formState: { errors }, watch } = useForm({
         defaultValues: {
             tenPhim: "",
             trailer: "",
@@ -71,8 +74,30 @@ const AddMovie = () => {
 
     });
 
+    // nó lắng nghe những cái file mình upload lên
+    const file = watch("hinhAnh");
+
+    const { mutate: handleAddMovie, isPending } = useMutation({
+        mutationFn: (payload) => addMovieAPI(payload),
+    });
+
     const onSubmit = (formValues) => {
         console.log("formValues", formValues);
+        // sử dụng formdata để khi đưa lên API nó sẽ chuyển sang định dạng Json mà ko bị lỗi và mất file
+        const formData = new FormData();
+        formData.append("tenPhim", formValues.tenPhim);
+        formData.append("trailer", formValues.trailer);
+        formData.append("moTa", formValues.moTa);
+        formData.append("maNhom", formValues.maNhom);
+        formData.append("ngayKhoiChieu", formValues.ngayKhoiChieu);
+        formData.append("sapChieu", formValues.sapChieu);
+        formData.append("dangChieu", formValues.dangChieu);
+        formData.append("hot", formValues.hot);
+        formData.append("danhGia", formValues.danhGia);
+        // do hình ảnh là 1 array nên bóc tách lấy phần tử thứ 0
+        formData.append("hinhAnh", formValues.hinhAnh[0]);
+
+        handleAddMovie(formData);
     };
 
     const onError = (errors) => {
@@ -85,6 +110,17 @@ const AddMovie = () => {
     //         setValue("tenPhim", "");
     //     }
     // }, [data]);
+
+    // Hàm preview hình ảnh khi upload hình ảnh vào
+    const previewImage = (file) => {
+        return URL.createObjectURL(file);
+    };
+
+    useEffect(() => {
+        if (file?.length > 0) {
+            console.log("previewImage", previewImage(file?.[0])); // url
+        }
+    }, [file]);
 
     return (
         // muốn xài date picker thì phải bọc thằng LocalizationProvider ngoài cùng
@@ -135,7 +171,7 @@ const AddMovie = () => {
                                     sx={{ display: 'inline' }}
                                     alignItems="flex-start"
                                     control={
-                                        <Switch name="dangChieu" {...register("dangChieu")}/>
+                                        <Switch name="dangChieu" {...register("dangChieu")} />
                                     }
                                     label="Đang chiếu"
                                     labelPlacement="start"
@@ -144,7 +180,7 @@ const AddMovie = () => {
                                     sx={{ display: 'inline' }}
                                     alignItems="flex-start"
                                     control={
-                                        <Switch name="sapChieu" {...register("sapChieu")}/>
+                                        <Switch name="sapChieu" {...register("sapChieu")} />
                                     }
                                     label="Sắp chiếu"
                                     labelPlacement="start"
@@ -153,7 +189,7 @@ const AddMovie = () => {
                                     sx={{ display: 'inline' }}
                                     alignItems="flex-start"
                                     control={
-                                        <Switch name="hot" {...register("hot")}/>
+                                        <Switch name="hot" {...register("hot")} />
                                     }
                                     label="Hot"
                                     labelPlacement="start"
@@ -162,12 +198,32 @@ const AddMovie = () => {
                                     error={Boolean(errors.danhGia)}
                                     helperText={Boolean(errors.danhGia) && errors.danhGia.message}
                                 />
-                                {/* Có 3 nút switch Đang chiếu, Sắp chiue61, Hot về nhà làm */}
-                                <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-                                    Upload file
-                                    <VisuallyHiddenInput type="file" {...register("hinhAnh")} />
-                                </Button>
-                                <Button variant="contained" size="large" type="submit">Thêm phim</Button>
+                                {/* Có 3 nút switch Đang chiếu, Sắp chiếu, Hot về nhà làm */}
+                                {!file && (
+                                    <Button
+                                        component="label"
+                                        variant="contained"
+                                        startIcon={<CloudUploadIcon />}
+                                    >
+                                        Upload file
+                                        <VisuallyHiddenInput 
+                                        type="file" 
+                                        {...register("hinhAnh")} 
+                                        accept=".png, .jpeg, .jpg, .gif"/>
+                                    </Button>
+                                )}
+                                {file?.length > 0 && (
+                                    <>
+                                        <img src={previewImage(file[0])} width={240} />
+                                        <Button onClick={() => setValue("hinhAnh", undefined)}>Xoá hình</Button>
+                                    </>
+                                )}
+                                <LoadingButton
+                                    loading={isPending}
+                                    variant="contained"
+                                    size="large" type="submit">
+                                    Thêm phim
+                                </LoadingButton>
                             </Stack>
                         </form>
                     </Grid>
