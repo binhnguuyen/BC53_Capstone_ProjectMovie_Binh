@@ -4,18 +4,7 @@ import { getListMovieAPI } from "../../../apis/movieApi";
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography, Container, Skeleton } from "@mui/material"
 import { useNavigate } from 'react-router-dom';
 
-// thư viện Lottie
-import Lottie from 'react-lottie';
-import animationData from "../../../Lotties/Aniki Hamster.json"
-
 const Showing = () => {
-  // thư viện Lottie
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-  };
-
   // cái hook giúp mình chuyển trang
   const navigate = useNavigate()
   // khi load trang lên, thằng banner chạy thì nó sẽ chạy thằng useQuerry và get API
@@ -28,8 +17,6 @@ const Showing = () => {
 
   if (isLoading) {
     return (
-      // thư viện Lottie
-      // <Lottie options={defaultOptions} width={300} height={300}/>
       // Skeleton này khi loading nó sẽ chỉ hiện ra trong lúc chờ load API kiểu giống FaceBook và Youtube
       <Skeleton variant="rectangular" sx={{ height: 500 }} animation="wave" />
     );
