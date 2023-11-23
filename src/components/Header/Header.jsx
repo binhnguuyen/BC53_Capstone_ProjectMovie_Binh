@@ -21,7 +21,7 @@ const Header = () => {
   console.log('currentUser: ', currentUser);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} >
       {/* <AppBar position="static"> */}
       <Toolbar>
         <IconButton
@@ -37,8 +37,8 @@ const Header = () => {
           News
         </Typography>
         {currentUser ? (
-          <Stack direction={"row"} spacing={2}>
-            <Typography>{currentUser.hoTen}</Typography>
+          <Stack direction={"row"} spacing={2} alignItems={"center"}>
+            <Typography variant="h6">Xin chào {currentUser.hoTen}</Typography>
             <Button size="large" variant="contained" onClick={() => {
               handleLogout();
               // đăng xuất rồi thì đá qua trang HOME
