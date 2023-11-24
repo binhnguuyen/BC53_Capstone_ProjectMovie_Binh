@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react'
 import { getListMovieAPI } from "../../../apis/movieApi";
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography, Container, Skeleton } from "@mui/material"
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography, Container, Skeleton, Box } from "@mui/material"
 import { useNavigate } from 'react-router-dom';
 
 const Showing = () => {
@@ -39,40 +39,49 @@ const Showing = () => {
             <Card >
               {
                 !isLoading ? (
-                  <CardMedia
-                    sx={{ height: 400 }}
-                    image={item.hinhAnh}
-                    title="green iguana"
-                  />
+                  <Box>
+                    <CardMedia
+                      sx={{ height: 400 }}
+                      image={item.hinhAnh}
+                      title="green iguana"
+                    />
+                    <CardContent>
+                      <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="div"
+                        className="truncate" >
+                        {item.tenPhim}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        className="truncate truncate--2">
+                        {item.moTa}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small"
+                        variant="contained"
+                        fullWidth
+                        onClick={() => {
+                          navigate(`movie/${item.maPhim}`)
+                        }}
+                      >Xem chi tiết
+                      </Button>
+                    </CardActions>
+                  </Box>
                 ) : (
-                  <Skeleton variant="rectangular" sx={{ height: 500 }} animation="wave" />
+                  <React.Fragment>
+                    <Skeleton variant="rounded" sx={{ height: 400 }} animation="wave" style={{ margin: 10 }} />
+                    <Skeleton animation="wave" height={25} style={{ margin: 10 }} />
+                    <Skeleton animation="wave" height={25} width="80%" style={{ margin: 10 }} />
+                    <Skeleton variant="rounded" sx={{ height: 50 }} animation="wave" style={{ margin: 10 }} />
+                  </React.Fragment>
                 )
               }
-              <CardContent>
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component="div"
-                  className="truncate" >
-                  {item.tenPhim}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  className="truncate truncate--2">
-                  {item.moTa}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small"
-                  variant="contained"
-                  fullWidth
-                  onClick={() => {
-                    navigate(`movie/${item.maPhim}`)
-                  }}
-                >Xem chi tiết
-                </Button>
-              </CardActions>
+
+
             </Card>
           </Grid>
         ))}

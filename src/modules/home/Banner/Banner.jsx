@@ -2,7 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { getBannersAPI } from "../../../apis/movieApi";
 import Slider from "react-slick";
-import { Box, Skeleton } from "@mui/material";
+import { Box, Grid, Skeleton } from "@mui/material";
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
 
 // setting của slick
 const settings = {
@@ -26,43 +28,57 @@ const Banner = () => {
     queryFn: getBannersAPI,
   });
 
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'grey' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
+
+
 
   if (isLoading) {
     return (
       // Skeleton này khi loading nó sẽ chỉ hiện ra trong lúc chờ load API kiểu giống FaceBook và Youtube
-      <Skeleton variant="rectangular" sx={{ height: 500 }} animation="wave" />
+      <Grid container>
+        <Grid xs={12}>
+          <Item>
+            <Skeleton variant="rounded" sx={{ height: 400 }} animation="wave" style={{ margin: 10 }} />
+          </Item>
+        </Grid>
+        <Grid xs={4}>
+          <Item>
+            <Skeleton variant="rounded" sx={{ height: 400 }} animation="wave" style={{ margin: 10 }} />
+            <Skeleton animation="wave" height={25} style={{ margin: 10 }} />
+            <Skeleton animation="wave" height={25} width="80%" style={{ margin: 10 }} />
+            <Skeleton variant="rounded" sx={{ height: 50 }} animation="wave" style={{ margin: 10 }} />
+          </Item>
+        </Grid>
+        <Grid xs={4}>
+          <Item>
+            <Skeleton variant="rounded" sx={{ height: 400 }} animation="wave" style={{ margin: 10 }} />
+            <Skeleton animation="wave" height={25} style={{ margin: 10 }} />
+            <Skeleton animation="wave" height={25} width="80%" style={{ margin: 10 }} />
+            <Skeleton variant="rounded" sx={{ height: 50 }} animation="wave" style={{ margin: 10 }} />
+          </Item>
+        </Grid>
+        <Grid xs={4}>
+          <Item>
+            <Skeleton variant="rounded" sx={{ height: 400 }} animation="wave" style={{ margin: 10 }} />
+            <Skeleton animation="wave" height={25} style={{ margin: 10 }} />
+            <Skeleton animation="wave" height={25} width="80%" style={{ margin: 10 }} />
+            <Skeleton variant="rounded" sx={{ height: 50 }} animation="wave" style={{ margin: 10 }} />
+          </Item>
+        </Grid>
+      </Grid>
     );
   }
 
   return (
     <div>
-      
-      {/* {
-        data.map((item) => {
-          return (
-            <img
-              src={item.hinhAnh}
-              width="100%"
-              height={400}
-              style={{ objectFit: "cover" }}
-            />
-          );
-        })
-      } */}
-      {/* slider này nó clone lại cái settings */}
-      {/* ko viết vầy thì có thể viết như sau
-      < Slider dots={settings.dots}
-      infinite={settings.infinite}
-      speed={settings.speed} 
-      slidesToShow={settings.slidesToShow}
-      slidesToScroll={settings.slidesToScroll}
-      > */}
       <Slider
-        // dot={settings.dots}
-        // infinite={settings.infinite}
-        // speed={settings.speed}
-        // slidesToShow={settings.slidesToShow}
-        // slidesToScroll={settings.slidesToScroll}
+        // slider này nó clone lại cái settings
         {...settings}
       >
         {data.map((item, index) => {
