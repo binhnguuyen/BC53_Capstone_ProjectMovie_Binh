@@ -15,12 +15,12 @@ const Showing = () => {
   });
 
 
-  if (isLoading) {
-    return (
-      // Skeleton này khi loading nó sẽ chỉ hiện ra trong lúc chờ load API kiểu giống FaceBook và Youtube
-      <Skeleton variant="rectangular" sx={{ height: 500 }} animation="wave" />
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     // Skeleton này khi loading nó sẽ chỉ hiện ra trong lúc chờ load API kiểu giống FaceBook và Youtube
+  //     <Skeleton variant="rectangular" sx={{ height: 500 }} animation="wave" />
+  //   );
+  // }
 
   return (
     // thằng Container này từ MUI, thay nó cho thằng div
@@ -37,11 +37,17 @@ const Showing = () => {
           <Grid item xs={4} key={item.maPhim}>
             {/* col */}
             <Card >
-              <CardMedia
-                sx={{ height: 400 }}
-                image={item.hinhAnh}
-                title="green iguana"
-              />
+              {
+                !isLoading ? (
+                  <CardMedia
+                    sx={{ height: 400 }}
+                    image={item.hinhAnh}
+                    title="green iguana"
+                  />
+                ) : (
+                  <Skeleton variant="rectangular" sx={{ height: 500 }} animation="wave" />
+                )
+              }
               <CardContent>
                 <Typography
                   gutterBottom

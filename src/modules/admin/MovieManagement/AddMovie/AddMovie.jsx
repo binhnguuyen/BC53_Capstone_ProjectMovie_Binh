@@ -12,7 +12,7 @@ import { GROUP_CODE } from "../../../../constants";
 import dayjs from "dayjs";
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addMovieAPI } from "../../../../apis/movieApi";
 import { LoadingButton } from "@mui/lab";
 
@@ -55,6 +55,9 @@ const schemaAddMovie = yup.object({
 });
 
 const AddMovie = () => {
+    // thằng này tự gọi lại API sau khi thêm xoá sửa
+    const queryClient = useQueryClient();
+
     const { handleSubmit, register, control, setValue, formState: { errors }, watch } = useForm({
         defaultValues: {
             tenPhim: "",
@@ -79,6 +82,12 @@ const AddMovie = () => {
 
     const { mutate: handleAddMovie, isPending } = useMutation({
         mutationFn: (payload) => addMovieAPI(payload),
+        // useQuery({ queryKey: ["list-movie-admin", page , so]})
+        onSuccess: () => {
+            // call api get list sau khi thêm xoá sửa
+            // queryKey là cái khi call API mà mình đưa vào
+            queryClient.invalidateQueries({ queryKey: ["list-movie-admin"] });
+        }
     });
 
     const onSubmit = (formValues) => {
@@ -206,10 +215,10 @@ const AddMovie = () => {
                                         startIcon={<CloudUploadIcon />}
                                     >
                                         Upload file
-                                        <VisuallyHiddenInput 
-                                        type="file" 
-                                        {...register("hinhAnh")} 
-                                        accept=".png, .jpeg, .jpg, .gif"/>
+                                        <VisuallyHiddenInput
+                                            type="file"
+                                            {...register("hinhAnh")}
+                                            accept=".png, .jpeg, .jpg, .gif" />
                                     </Button>
                                 )}
                                 {file?.length > 0 && (

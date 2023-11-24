@@ -9,6 +9,7 @@ import Signup from "./modules/auth/Signup";
 import { UserProvider } from "./contexts/UserContext/UserContext";
 import AdminLayout from "./layouts/AdminLayout/AdminLayout";
 import AddMovie from "./modules/admin/MovieManagement/AddMovie";
+// import Memo from "./modules/renders/Memo";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="movie/:movieId" element={<Details />} />
             <Route path={PATH.SIGN_IN} element={<Signin />} />
             <Route path={PATH.SIGN_UP} element={<Signup />} />
+            {/* <Route path="prevent-re-render" element={< Memo/>}/> */}
           </Route>
 
           <Route path={PATH.ADMIN} element={<AdminLayout />}>

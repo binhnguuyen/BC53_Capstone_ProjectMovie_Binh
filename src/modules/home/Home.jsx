@@ -17,19 +17,20 @@ const Home = () => {
     animationData: animationData,
   };
 
-  const {isLoading} = useQuery({
-    // key để caching lại data
-    queryKey: [],
-    // function nhận 1 cái async function, cái async function đc viết bên movieApi để tăng tính tái sử dụng
-    queryFn: "",
-  });
+  // const {isLoading} = useQuery({
+  //   // key để caching lại data
+  //   queryKey: [],
+  //   // function nhận 1 cái async function, cái async function đc viết bên movieApi để tăng tính tái sử dụng
+  //   queryFn: "",
+  // });
 
-  if (isLoading) {
-    return (
-      // thư viện Lottie
-      <Lottie options={defaultOptions} width={300} height={300}/>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     // thư viện Lottie
+  //     <Lottie options={defaultOptions} width={300} height={300}/>
+  //   );
+  // }
+  
   return (
     <div>
       <Banner />
