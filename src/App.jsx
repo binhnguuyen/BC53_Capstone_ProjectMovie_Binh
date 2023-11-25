@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomeModule from "./modules/home";
+import Home from "./modules/home";
 import NotFound from "./modules/not-found";
 import MovieLayout from "./layouts/MovieLayout";
 import Details from "./modules/details";
@@ -18,18 +18,21 @@ function App() {
     <UserProvider>
       <BrowserRouter>
         <Routes>
+          {/* Layout của user */}
           <Route path={PATH.HOME} element={<MovieLayout />}>
-            <Route index element={<HomeModule />} />
+            <Route index element={<Home />} />
             <Route path="movie/:movieId" element={<Details />} />
             <Route path={PATH.SIGN_IN} element={<Signin />} />
             <Route path={PATH.SIGN_UP} element={<Signup />} />
             {/* <Route path="prevent-re-render" element={< Memo/>}/> */}
           </Route>
 
+          {/* Layout của Admin */}
           <Route path={PATH.ADMIN} element={<AdminLayout />}>
             <Route index element={<AddMovie />} />
           </Route>
 
+          {/* Trang NotFound */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
