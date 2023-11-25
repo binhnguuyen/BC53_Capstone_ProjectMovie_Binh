@@ -38,7 +38,7 @@ const Banner = () => {
 
 
 
-  if (!isLoading) {
+  if (isLoading) {
     return (
       // Skeleton này khi loading nó sẽ chỉ hiện ra trong lúc chờ load API kiểu giống FaceBook và Youtube
       <Grid container >
