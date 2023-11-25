@@ -34,11 +34,18 @@ const Showing = () => {
         {/* row */}
         {data.map((item) => (
           // col-x trong BS
-          <Grid item xs={4} key={item.maPhim}>
+          <Grid item xs={4} lg={3} key={item.maPhim}>
             {/* col */}
             <Card >
               {
-                !isLoading ? (
+                isLoading ? (
+                  <Box>
+                    <Skeleton variant="rounded" sx={{ height: 400 }} animation="wave" style={{ margin: 10 }} />
+                    <Skeleton animation="wave" height={25} style={{ margin: 10 }} />
+                    <Skeleton animation="wave" height={25} width="80%" style={{ margin: 10 }} />
+                    <Skeleton variant="rounded" sx={{ height: 50 }} animation="wave" style={{ margin: 10 }} />
+                  </Box>
+                ) : (
                   <Box>
                     <CardMedia
                       sx={{ height: 400 }}
@@ -71,13 +78,7 @@ const Showing = () => {
                       </Button>
                     </CardActions>
                   </Box>
-                ) : (
-                  <React.Fragment>
-                    <Skeleton variant="rounded" sx={{ height: 400 }} animation="wave" style={{ margin: 10 }} />
-                    <Skeleton animation="wave" height={25} style={{ margin: 10 }} />
-                    <Skeleton animation="wave" height={25} width="80%" style={{ margin: 10 }} />
-                    <Skeleton variant="rounded" sx={{ height: 50 }} animation="wave" style={{ margin: 10 }} />
-                  </React.Fragment>
+
                 )
               }
 

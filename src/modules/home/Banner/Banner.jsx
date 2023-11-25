@@ -38,13 +38,13 @@ const Banner = () => {
 
 
 
-  if (isLoading) {
+  if (!isLoading) {
     return (
       // Skeleton này khi loading nó sẽ chỉ hiện ra trong lúc chờ load API kiểu giống FaceBook và Youtube
-      <Grid container>
-        <Grid xs={12}>
+      <Grid container >
+        <Grid xs={12} md={12} lg={12}>
           <Item>
-            <Skeleton variant="rounded" sx={{ height: 400 }} animation="wave" style={{ margin: 10 }} />
+            <Skeleton variant="rounded" sx={{ height: 500 }} animation="wave" style={{ margin: 10 }} />
           </Item>
         </Grid>
         <Grid xs={4}>
@@ -84,7 +84,7 @@ const Banner = () => {
         {data.map((item, index) => {
           return (
             // cái box này để bọc lại phần nội dung của carousel
-            <Box sx={{ height: 400 }} key={index}>
+            <Box style={{ height: "auto", width: "100%"}} key={index}>
               <img
                 src={item.hinhAnh}
                 width="100%"
