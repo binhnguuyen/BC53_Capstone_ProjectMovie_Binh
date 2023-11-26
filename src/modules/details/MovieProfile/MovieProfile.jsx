@@ -1,11 +1,28 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getMovieDetailsAPI } from "../../../apis/movieApi";
+import { Box, CardActions, Card, CardMedia, CardContent, Container, Grid, Skeleton, Typography, Button, Modal } from '@mui/material';
+import dayjs from 'dayjs';
 
 const MovieProfile = ({ movieId }) => {
-  // console.log('movieId: ', movieId);
-  // const id = "";
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: "none",
+    border: 'none',
+    p: 4,
+  };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const navigate = useNavigate();
+
   // dùng useQuery để khi có 1 thay đổi thì nó sẽ GET API về
   const { data = {}, isLoading, isError, error } = useQuery({
     queryKey: ["movie-details"],
@@ -21,14 +38,126 @@ const MovieProfile = ({ movieId }) => {
     // còn nếu movieId chưa có thì queryFn sẽ ko chạy
     enabled: !!movieId,
   });
-  console.log('data: ', data);
-  // console.log('isLoading: ', isLoading);
-  // console.log('isError: ', isError);
-  // console.log('error: ', error);
+
+
+  const handleURLYouTube = (url) => {
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    var match = url.match(regExp);
+    var videoID = (match&&match[7].length==11)? match[7] : false;
+    var embedUrl = `https://www.youtube.com/embed/${videoID}`;
+
+    return embedUrl;
+  }
+
   return (
-    <div>
-      MovieProfile
-    </div>
+    <Container maxWidth="md">
+      {
+        isLoading ? (
+          <Box maxWidth="md">
+            <Grid container spacing={2}>
+              <Grid xs={6} lg={6}>
+                <Skeleton variant="rounded" sx={{ height: 500 }} animation="wave" style={{ margin: 10 }} />
+              </Grid>
+              <Grid xs={6} lg={6}>
+                <Skeleton animation="wave" height={25} width="60%" style={{ margin: 10 }} />
+                <Skeleton variant="rounded" sx={{ height: 50 }} animation="wave" style={{ margin: 10 }} />
+                <Skeleton animation="wave" height={25} width="60%" style={{ margin: 10 }} />
+                <Skeleton animation="wave" height={25} width="60%" style={{ margin: 10 }} />
+                <Skeleton variant="rounded" sx={{ height: 50 }} width="60%" animation="wave" style={{ margin: 10 }} />
+              </Grid>
+            </Grid>
+          </Box>
+        ) : (
+          <Box
+            sx={{
+              flexGrow: 1,
+              bgcolor: "background.paper",
+              display: "flex",
+            }}
+          >
+            <Grid container spacing={2}>
+              <Grid xs={6} lg={6} paddingRight={2}>
+                <CardMedia
+                  sx={{ height: "100%" }}
+                  image={data.hinhAnh}
+                  title="green iguana"
+                />
+              </Grid>
+              <Grid xs={6} lg={6} >
+                <CardContent >
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="div"
+                    className="truncate"
+                    marginBottom={2}
+                  >
+                    {data.tenPhim}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    color="text.secondary"
+                    className="truncate truncate--2"
+                    marginBottom={2}
+                  >
+                    Ngày chiếu:
+                    {
+                      dayjs(data.ngayKhoiChieu).format("DD/MM/YYYY ~ hh:mm")
+                    }
+                  </Typography>
+                  <Typography
+                    justifyContent=""
+                    variant="body"
+                    color="text.secondary"
+                  >
+                    {data.moTa}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="large"
+                    variant="contained"
+                    color='secondary'
+                    width={100}
+                    // href={data.trailer}
+                    onClick={handleOpen}
+                    target="_blank"
+                  >Xem Trailer
+                  </Button>
+                  <Button size="large"
+                    variant="contained"
+                    width={100}
+                    onClick={() => {
+                      navigate(PATH.HOME);
+                    }}
+                  >Mua vé
+                  </Button>
+                </CardActions>
+              </Grid>
+              <Grid>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <iframe
+                      width="1280"
+                      height="720"
+                      src={handleURLYouTube(data.trailer)}
+                      title="YouTube video player"
+                      frameborder="0"
+                      
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                    </iframe>
+                  </Box>
+                </Modal>
+              </Grid>
+            </Grid>
+          </Box>
+        )
+      }
+    </Container>
   )
 }
 

@@ -71,7 +71,7 @@ const ShowTimes = ({ movieId }) => {
         display: "flex",
       }}
     >
-      ShowTimes
+      
       <Tabs
         orientation="vertical"
         aria-label="Vertical tabs example"

@@ -78,11 +78,8 @@ const Showing = () => {
                       </Button>
                     </CardActions>
                   </Box>
-
                 )
               }
-
-
             </Card>
           </Grid>
         ))}
