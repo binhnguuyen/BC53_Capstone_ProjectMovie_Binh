@@ -42,12 +42,12 @@ const Banner = () => {
     return (
       // Skeleton này khi loading nó sẽ chỉ hiện ra trong lúc chờ load API kiểu giống FaceBook và Youtube
       <Grid container >
-        <Grid xs={12} md={12} lg={12}>
+        <Grid item xs={12} md={12} lg={12}>
           <Item>
             <Skeleton variant="rounded" sx={{ height: 500 }} animation="wave" style={{ margin: 10 }} />
           </Item>
         </Grid>
-        <Grid xs={4}>
+        <Grid item xs={4}>
           <Item>
             <Skeleton variant="rounded" sx={{ height: 400 }} animation="wave" style={{ margin: 10 }} />
             <Skeleton animation="wave" height={25} style={{ margin: 10 }} />
@@ -55,7 +55,7 @@ const Banner = () => {
             <Skeleton variant="rounded" sx={{ height: 50 }} animation="wave" style={{ margin: 10 }} />
           </Item>
         </Grid>
-        <Grid xs={4}>
+        <Grid item xs={4}>
           <Item>
             <Skeleton variant="rounded" sx={{ height: 400 }} animation="wave" style={{ margin: 10 }} />
             <Skeleton animation="wave" height={25} style={{ margin: 10 }} />
@@ -63,7 +63,7 @@ const Banner = () => {
             <Skeleton variant="rounded" sx={{ height: 50 }} animation="wave" style={{ margin: 10 }} />
           </Item>
         </Grid>
-        <Grid xs={4}>
+        <Grid item xs={4}>
           <Item>
             <Skeleton variant="rounded" sx={{ height: 400 }} animation="wave" style={{ margin: 10 }} />
             <Skeleton animation="wave" height={25} style={{ margin: 10 }} />
