@@ -6,4 +6,5 @@ export const PATH = {
     USER_MANAGEMENT: "/user-management",
     SIGN_IN: "/sign-in",
     SIGN_UP: "/sign-up",
+    BOOKING: "/booking",
 }

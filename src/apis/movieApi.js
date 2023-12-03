@@ -31,7 +31,7 @@ export const getMovieDetailsAPI = async (movieId) => {
   try {
     const response = await fetcher.get("/QuanLyPhim/LayThongTinPhim", {
       params: {
-        MaPhim: movieId,
+        maPhim: movieId,
       },
     });
     return response.data.content

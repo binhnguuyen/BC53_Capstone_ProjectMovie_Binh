@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { getMovieShowTimesAPI } from "../../../apis/cinemaAPI"
 import { Box, Button, Container, Stack, Tab, Tabs, Typography } from "@mui/material";
 import dayjs from 'dayjs';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { PATH } from '../../../routes/path';
 
 // Ở đầy dùng Vertical tabs của MUI
 function TabPanel(props) {
@@ -33,12 +35,15 @@ function TabPanel(props) {
 // }
 
 const ShowTimes = ({ movieId }) => {
+  const navigate = useNavigate();
+
   const [value, setValue] = useState("");
   const handleChange = (newValue) => {
     setValue(newValue);
   };
+
   // dùng useQuery để khi có 1 thay đổi thì nó sẽ GET API về
-  const { data = {}, isLoading } = useQuery({
+  const { data = {}, isLoading, isError, error } = useQuery({
     // thằng function này phải truyền tham số movieId vào nên phải dùng callback function
     // thằng nào ko cần truyền tham số thì chỉ gọi ra giống bên Showing là OK
     // queryFn: () => {
@@ -46,13 +51,14 @@ const ShowTimes = ({ movieId }) => {
     // },
     // hoặc viết gọn lại như sau
     queryKey: ["showtimes", movieId],
+    queryFn: () => getMovieShowTimesAPI(movieId),
     // nếu movieId khác undefined(tức là false) thì cái queryFn trên mới chạy
     // tức là khi có movieId mới chạy
     // còn nếu movieId chưa có thì queryFn sẽ ko chạy
-    queryFn: () => getMovieShowTimesAPI(movieId),
     enabled: !!movieId,
   });
   const cinemaSystems = data.heThongRapChieu || [];
+  console.log('cinemaSystems: ', cinemaSystems);
 
   // khi cinemaSystems thay đổi (>0) thì mặc định render ra thằng đầu tiên
   useEffect(() => {
@@ -123,16 +129,19 @@ const ShowTimes = ({ movieId }) => {
                       "DD/MM/YYYY ~ hh:mm"
                     )
                     return (
-                      <Button
-                        variant="outlined"
-                        size='large'
-                        style={{
-                          fontSize: 20,
-                          fontWeight: 700,
-                        }}
-                      >
-                        {times}
-                      </Button>
+                        <Button
+                          variant="outlined"
+                          size='large'
+                          style={{
+                            fontSize: 20,
+                            fontWeight: 700,
+                          }}
+                          onClick={() => {
+                            navigate(`${PATH.BOOKING}/${lichChieu.maLichChieu}`)
+                          }}
+                        >
+                          {times}
+                        </Button>
                     );
                   })}
                 </Stack>
@@ -143,7 +152,6 @@ const ShowTimes = ({ movieId }) => {
         ))}
       </Box>
     </Container>
-
   );
 };
 

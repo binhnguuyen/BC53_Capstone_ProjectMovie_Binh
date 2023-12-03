@@ -19,6 +19,7 @@ const Details = lazy(() =>  import("./modules/details") )
 const Signin = lazy(() =>  import("./modules/auth/Signin") )
 const Signup = lazy(() =>  import("./modules/auth/Signup") )
 const AddMovie = lazy(() =>  import("./modules/admin/MovieManagement/AddMovie") )
+const Booking = lazy(() =>  import("./modules/booking") )
 // const Memo = lazy(() => import("./modules/renders/Memo"))
 
 
@@ -40,10 +41,19 @@ function App() {
                 </Suspense>
               }
             />
+            {/* để useParams lấy đc movieId bên trang Detailes về phải viết như sau */}
             <Route path="movie/:movieId"
               element={
                 <Suspense callBack={<div>Loading</div>}>
                   <Details />
+                </Suspense>
+              }
+            />
+            {/* để useParams lấy đc maLichChieu bên trang Booking về phải viết như sau */}
+            <Route path="booking/:maLichChieu"
+              element={
+                <Suspense callBack={<div>Loading</div>}>
+                  <Booking />
                 </Suspense>
               }
             />
