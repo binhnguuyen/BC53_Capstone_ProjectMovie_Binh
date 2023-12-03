@@ -17,14 +17,24 @@
   border: 1px solid #424242;
 }
 
-/* #gheDangChon {
+#gheDangChon {
   color: #fff;
   background-color: #4caf50;
   border: 1px solid #43a047;
+}
+
+/* #gheTrong {
+  color: #fff;
+  background-color: #eeeeee;
+  border: 1px solid #bdbdbd;
 } */
 
-#gheTrong {
+.buyButton {
+  width: 100;
+  background-color: #e65100;
   color: #fff;
-  background-color: #4caf50;
-  border: 1px solid #43a047;
+  display: flex;
+  width: 150;
+  font-size: 20;
+  margin: "auto";
 }

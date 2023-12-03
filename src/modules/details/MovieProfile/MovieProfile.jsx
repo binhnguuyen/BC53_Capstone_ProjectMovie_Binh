@@ -83,7 +83,7 @@ const MovieProfile = ({ movieId }) => {
                 <CardMedia
                   id="posterMovie"
                 >
-                  <img src={data.hinhAnh} alt="" id='posterImg'/>
+                  <img src={data.hinhAnh} alt="" id='posterImg' />
                   <Button
                     id='playVideoButton'
                     onClick={handleOpen}
@@ -133,13 +133,14 @@ const MovieProfile = ({ movieId }) => {
                     target="_blank"
                   >Xem Trailer
                   </Button> */}
-                  <Button 
-                    size="large"
+                  <Button
                     variant="contained"
-                    width={100}
-                    color="success"
                     style={{
+                      backgroundColor: "#ff3d00",
+                      display: "flex",
+                      width: 150,
                       fontSize: 20,
+                      margin: "auto",
                     }}
                     onClick={() => {
                       navigate(PATH.HOME);

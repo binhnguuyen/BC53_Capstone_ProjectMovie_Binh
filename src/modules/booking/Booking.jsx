@@ -4,6 +4,7 @@ import { getChairListAPI } from '../../apis/chairAPI';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import style from "./style.css";
+// import base from "../../styles/base.css"
 
 const Booking = () => {
     const { maLichChieu } = useParams();
@@ -53,7 +54,7 @@ const Booking = () => {
                                 return (
                                     <Grid
                                         item
-                                        // key={ghe.tenGhe}
+                                        key={ghe.tenGhe}
                                         xs={3}
                                         sm={2}
                                         md={1}
@@ -84,7 +85,6 @@ const Booking = () => {
                                     </Typography>
                                     <Typography
                                         {...typographySettings}
-                                        color={"green"}
                                     >
                                         <></>
                                         {movieInfo.tenPhim}
@@ -100,7 +100,6 @@ const Booking = () => {
                                     </Typography>
                                     <Typography
                                         {...typographySettings}
-                                        color={"green"}
                                     >
                                         <></>
                                         {movieInfo.tenCumRap}
@@ -116,7 +115,6 @@ const Booking = () => {
                                     </Typography>
                                     <Typography
                                         {...typographySettings}
-                                        color={"green"}
                                     >
                                         <></>
                                         {movieInfo.tenRap}
@@ -132,7 +130,6 @@ const Booking = () => {
                                     </Typography>
                                     <Typography
                                         {...typographySettings}
-                                        color={"green"}
                                     >
                                         <></>
                                         {movieInfo.ngayChieu} {movieInfo.gioChieu}
@@ -148,7 +145,6 @@ const Booking = () => {
                                     </Typography>
                                     <Typography
                                         {...typographySettings}
-                                        color={"green"}
                                     >
                                         <></>
                                         {movieInfo.diaChi}
@@ -158,29 +154,38 @@ const Booking = () => {
                                     {...stackSettings}
                                 >
                                     <Typography id="gheDaDat" className="ghe"></Typography>
-                                    <Typography>Ghế đã đặt</Typography>
+                                    <Typography
+                                        {...typographySettings}
+                                    >
+                                        Ghế đã đặt</Typography>
                                 </Stack>
                                 <Stack
                                     {...stackSettings}
                                 >
                                     <Typography id="gheDangChon" className="ghe"></Typography>
-                                    <Typography>Ghế đang chọn</Typography>
+                                    <Typography
+                                        {...typographySettings}
+                                    >
+                                        Ghế đang chọn
+                                    </Typography>
                                 </Stack>
                                 <Stack
                                     {...stackSettings}
                                 >
                                     <Typography id="gheTrong" className="ghe"></Typography>
-                                    <Typography>Ghế trống</Typography>
+                                    <Typography
+                                        {...typographySettings}
+                                    >
+                                        Ghế trống
+                                    </Typography>
                                 </Stack>
                             </Stack>
                             <Button
-                                size="large"
                                 variant="contained"
-                                width={100}
-                                color="success"
                                 style={{
-                                    width: 150,
+                                    backgroundColor: "#ff3d00",
                                     display: "flex",
+                                    width: 150,
                                     fontSize: 20,
                                     margin: "auto",
                                 }}
@@ -193,7 +198,7 @@ const Booking = () => {
                     </Grid>
                 </Grid>
             </Container>
-        </div>
+        </div >
     )
 }
 
