@@ -1,0 +1,38 @@
+/* main color: f44336 */
+/* main color: f44336 */
+
+#posterMovie {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+#posterMovie Button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: none;
+  color: red;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#posterMovie img {
+  width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
+#posterMovie i {
+  font-size: 80px;
+}
+
+#posterMovie:hover Button {
+  opacity: 1; /* Hiển thị khi di chuột vào .container */
+}

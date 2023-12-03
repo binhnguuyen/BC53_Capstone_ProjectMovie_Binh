@@ -4,10 +4,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getMovieDetailsAPI } from "../../../apis/movieApi";
 import { Box, CardActions, Card, CardMedia, CardContent, Container, Grid, Skeleton, Typography, Button, Modal } from '@mui/material';
 import dayjs from 'dayjs';
+import style from "./style.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 const MovieProfile = ({ movieId }) => {
 
-  const style = {
+  const styleIframe = {
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -43,14 +46,14 @@ const MovieProfile = ({ movieId }) => {
   const handleURLYouTube = (url) => {
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     var match = url.match(regExp);
-    var videoID = (match&&match[7].length==11)? match[7] : false;
+    var videoID = (match && match[7].length == 11) ? match[7] : false;
     var embedUrl = `https://www.youtube.com/embed/${videoID}`;
 
     return embedUrl;
   }
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="lg" className='container'>
       {
         isLoading ? (
           <Box maxWidth="md">
@@ -76,18 +79,25 @@ const MovieProfile = ({ movieId }) => {
             }}
           >
             <Grid container spacing={2}>
-              <Grid xs={6} lg={6} paddingRight={2}>
+              <Grid xs={6} lg={6}>
                 <CardMedia
-                  sx={{ height: "100%" }}
-                  image={data.hinhAnh}
-                  title="green iguana"
-                />
+                  id="posterMovie"
+                >
+                  <img src={data.hinhAnh} alt="" id='posterImg'/>
+                  <Button
+                    id='playVideoButton'
+                    onClick={handleOpen}
+                  >
+                    <i className="fab fa-youtube"></i>
+                  </Button>
+                </CardMedia>
+
               </Grid>
-              <Grid xs={6} lg={6} >
+              <Grid xs={6} lg={6} paddingLeft={4}>
                 <CardContent >
                   <Typography
                     gutterBottom
-                    variant="h5"
+                    variant="h4"
                     component="div"
                     className="truncate"
                     marginBottom={2}
@@ -95,9 +105,8 @@ const MovieProfile = ({ movieId }) => {
                     {data.tenPhim}
                   </Typography>
                   <Typography
-                    variant="h6"
+                    variant="h5"
                     color="text.secondary"
-                    className="truncate truncate--2"
                     marginBottom={2}
                   >
                     Ngày chiếu:
@@ -107,14 +116,15 @@ const MovieProfile = ({ movieId }) => {
                   </Typography>
                   <Typography
                     justifyContent=""
-                    variant="body"
                     color="text.secondary"
+                    variant="h6"
+                    textAlign='justify'
                   >
                     {data.moTa}
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="large"
+                  {/* <Button size="large"
                     variant="contained"
                     color='secondary'
                     width={100}
@@ -122,10 +132,11 @@ const MovieProfile = ({ movieId }) => {
                     onClick={handleOpen}
                     target="_blank"
                   >Xem Trailer
-                  </Button>
+                  </Button> */}
                   <Button size="large"
                     variant="contained"
                     width={100}
+                    color="error"
                     onClick={() => {
                       navigate(PATH.HOME);
                     }}
@@ -140,14 +151,13 @@ const MovieProfile = ({ movieId }) => {
                   aria-labelledby="modal-modal-title"
                   aria-describedby="modal-modal-description"
                 >
-                  <Box sx={style}>
+                  <Box sx={styleIframe}>
                     <iframe
                       width="1280"
                       height="720"
                       src={handleURLYouTube(data.trailer)}
                       title="YouTube video player"
                       frameborder="0"
-                      
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
                     </iframe>
                   </Box>

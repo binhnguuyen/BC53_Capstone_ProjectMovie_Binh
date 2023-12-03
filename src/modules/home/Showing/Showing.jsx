@@ -34,7 +34,7 @@ const Showing = () => {
         {/* row */}
         {data.map((item) => (
           // col-x trong BS
-          <Grid item xs={4} lg={3} key={item.maPhim}>
+          <Grid item xs={6} sm={4} md={4} lg={3} xl={3} key={item.maPhim}>
             {/* col */}
             <Card >
               {
