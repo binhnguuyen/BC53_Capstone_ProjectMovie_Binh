@@ -133,10 +133,14 @@ const MovieProfile = ({ movieId }) => {
                     target="_blank"
                   >Xem Trailer
                   </Button> */}
-                  <Button size="large"
+                  <Button 
+                    size="large"
                     variant="contained"
                     width={100}
                     color="error"
+                    style={{
+                      fontSize: 20,
+                    }}
                     onClick={() => {
                       navigate(PATH.HOME);
                     }}
