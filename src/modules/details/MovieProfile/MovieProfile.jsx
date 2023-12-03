@@ -137,7 +137,7 @@ const MovieProfile = ({ movieId }) => {
                     size="large"
                     variant="contained"
                     width={100}
-                    color="error"
+                    color="success"
                     style={{
                       fontSize: 20,
                     }}
