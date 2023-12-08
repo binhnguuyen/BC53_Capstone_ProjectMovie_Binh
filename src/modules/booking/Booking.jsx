@@ -4,6 +4,7 @@ import { getChairListAPI } from '../../apis/chairAPI';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import style from "./style.css";
+import { red } from '@mui/material/colors';
 // import base from "../../styles/base.css"
 
 const Booking = () => {
@@ -183,12 +184,13 @@ const Booking = () => {
                             <Button
                                 variant="contained"
                                 style={{
-                                    backgroundColor: "#ff3d00",
+                                    // backgroundColor: "#ff3d00",
+                                    backgroundColor: `${red[500]}`,
                                     display: "flex",
                                     width: 150,
                                     fontSize: 20,
                                     margin: "auto",
-                                }}
+                                  }}
                                 onClick={() => {
                                     // navigate(PATH.HOME);
                                 }}

@@ -6,6 +6,7 @@ import { Box, CardActions, Card, CardMedia, CardContent, Container, Grid, Skelet
 import dayjs from 'dayjs';
 import style from "./style.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { red } from '@mui/material/colors';
 
 
 const MovieProfile = ({ movieId }) => {
@@ -19,6 +20,7 @@ const MovieProfile = ({ movieId }) => {
     border: 'none',
     p: 4,
   };
+
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -135,8 +137,10 @@ const MovieProfile = ({ movieId }) => {
                   </Button> */}
                   <Button
                     variant="contained"
+                    // color={red[500]}
                     style={{
-                      backgroundColor: "#ff3d00",
+                      // backgroundColor: "#ff3d00",
+                      backgroundColor: `${red[500]}`,
                       display: "flex",
                       width: 150,
                       fontSize: 20,
