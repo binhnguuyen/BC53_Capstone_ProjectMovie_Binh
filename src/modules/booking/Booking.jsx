@@ -3,13 +3,21 @@ import React from 'react'
 import { getChairListAPI } from '../../apis/chairAPI';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
 import style from "./style.css";
 import { red } from '@mui/material/colors';
 import cn from "classnames"
+import { btMovieBookingActions } from "../../store/Chair/slice";
 
 // import base from "../../styles/base.css"
 
 const Booking = () => {
+    // tạo hàm dispatch
+    const dispatch = useDispatch();
+
+    // lấy chairsBooking, chairsBooked về 
+    const { chairsBooking, chairsBooked } = useSelector((state) => state.btMovieBooking)
+
     const { maLichChieu } = useParams();
     console.log('maLichChieu: ', maLichChieu);
 
@@ -63,7 +71,13 @@ const Booking = () => {
                                     lg={1}
                                 >
                                     {
-                                        <Typography className="ghe" id={`ghe${ghe.loaiGhe}`}>
+                                        <Typography
+                                            className="ghe"
+                                            id={`ghe${ghe.loaiGhe}`}
+                                            onClick={() => {
+                                                dispatch(btMovieBookingActions.setChairsBooking(ghe))
+                                            }}
+                                        >
                                             {ghe.tenGhe}
                                         </Typography>
                                     }
