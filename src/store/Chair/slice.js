@@ -74,6 +74,7 @@ export const btMovieBookingSlice = createSlice(
                     // document.querySelector("#paymentSuccess").classList.add("d-block");
                     state.chairsBooked = [...state.chairsBooked, ...state.chairsBooking];
                     console.log('state.chairsBooked: ', state.chairsBooked);
+                    
                     // alert("Bạn đã thanh toán thành công")
                 }
                 // sau khi thêm ghé đang chọn vào ghế đã chọn rồi thì ghế đang chọn phải đưa về mảng rỗng

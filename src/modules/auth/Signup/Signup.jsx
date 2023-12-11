@@ -63,7 +63,7 @@ const Signup = () => {
         // khi đưa lên API thành công (tức tạo tk thành công) thì đá luôn sang trang đăng nhập
         // gắn values và đưa sẵn dữ liệu lên để trong TH muốn fill dữ liệu trong form bên trang sign in
         onSuccess: (values) => {
-            // chuyển use về trang HOME
+            // chuyển use về trang Sign in
             navigate(PATH.SIGN_IN);
         },
         onError: (error) => {
