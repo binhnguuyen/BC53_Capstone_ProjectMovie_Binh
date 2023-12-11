@@ -14,9 +14,9 @@ const BookingResult = () => {
     const dispatch = useDispatch();
 
     const typographySettings = {
-        gutterBottom: true,
+        // gutterbottom: true,
         variant: "h6",
-        marginBottom: 2,
+        // marginBottom: 2,
         style: {
             fontSize: 20,
             fontWeight: 700,
@@ -197,7 +197,7 @@ const BookingResult = () => {
                         {
                             chairsBooking.map((ghe) => {
                                 return (
-                                    <TableRow key={ghe.soGhe}>
+                                    <TableRow key={ghe.maGhe}>
                                         <TableCell align="left" {...typographySettings}>{ghe.tenGhe}</TableCell>
                                         <TableCell align="center" {...typographySettings}>{ghe.giaVe}</TableCell>
                                         <TableCell align="right" {...typographySettings}>

@@ -2,9 +2,13 @@ import { Button, Container, Grid, Typography } from '@mui/material';
 import React from 'react'
 import Chair from './Chair';
 import BookingResult from './BookingResult';
+import { btMovieBookingActions } from "../../store/Chair/slice";
 import { red } from '@mui/material/colors';
+import { useDispatch } from 'react-redux';
 
 const Booking = () => {
+    // tạo hàm dispatch
+    const dispatch = useDispatch();
 
     return (
         <Container maxWidth="xl">
@@ -31,7 +35,7 @@ const Booking = () => {
                         margin: "auto",
                     }}
                     onClick={() => {
-                        // navigate(PATH.HOME);
+                        dispatch(btMovieBookingActions.setChairsBooked())
                     }}
                 >Đặt vé
                 </Button>

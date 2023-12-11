@@ -29,6 +29,7 @@ Màu đỏ theme chính
   border-radius: 5px;
   font-size: 20px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .gheThuong {
@@ -50,13 +51,15 @@ Màu đỏ theme chính
 .gheDaDat {
   color: #fff;
   background-color: #616161;
-  border: 1p;
+  border: 1px;
+  cursor: no-drop !important;
 }
 
 .gheThuong .gheDaDat {
   color: #fff;
   background-color: #616161;
   border: 1px solid #424242;
+  /* cursor: no-drop !important; */
 }
 
 .gheThuong .gheDangChon {
@@ -69,6 +72,7 @@ Màu đỏ theme chính
   color: #fff;
   background-color: #616161;
   border: 1px solid #424242;
+  /* cursor: no-drop !important; */
 }
 
 .gheVip .gheDangChon {

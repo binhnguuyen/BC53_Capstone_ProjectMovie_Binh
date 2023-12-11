@@ -26,6 +26,14 @@ const Chair = () => {
     });
     const chairList = data.danhSachGhe || [];
 
+    let gheDaDat = [];
+    for (let i in chairList) {
+        if (chairList[i].taiKhoanNguoiDat != null) {
+            gheDaDat.push(chairList[i]);
+        }
+    }
+
+
     return (
         <Grid container spacing={3}>
             {chairList.map((ghe) => {
@@ -45,13 +53,16 @@ const Chair = () => {
                                     {
                                         gheDangChon: chairsBooking.find((e) => e.maGhe === ghe.maGhe),
                                         gheDaDat: chairsBooked.find((e) => e.maGhe === ghe.maGhe),
+                                        gheDaDat: gheDaDat.find((e) => e.maGhe === ghe.maGhe),
                                     }
                                 )}
-                                style={{
-                                    cursor: "pointer"
-                                }}
                                 onClick={() => {
-                                    dispatch(btMovieBookingActions.setChairsBooking(ghe))
+                                    if (gheDaDat.find((e) => e.maGhe === ghe.maGhe) !== "") {
+                                        alert("Ghế này đã được đặt. Xin vui lòng chọn ghế khác!");
+                                    }
+                                    else {
+                                        dispatch(btMovieBookingActions.setChairsBooking(ghe))
+                                    }
                                 }}
                             >
                                 {ghe.tenGhe}

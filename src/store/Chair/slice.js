@@ -61,12 +61,12 @@ export const btMovieBookingSlice = createSlice(
                 else {
                     stateChairsBooking.push(payload);
                 }
-                console.log('stateChairsBooking: ', {...stateChairsBooking});
             },
 
             // tạo action cho chairBooked
             setChairsBooked: (state, action) => {
                 const { payload } = action;
+                console.log('payload: ', payload);
 
                 // thêm ghế đang chọn vào ghế đã chọn
                 if (state.chairsBooking.length != 0) {
