@@ -126,30 +126,20 @@ const MovieProfile = ({ movieId }) => {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  {/* <Button size="large"
-                    variant="contained"
-                    color='secondary'
-                    width={100}
-                    // href={data.trailer}
-                    onClick={handleOpen}
-                    target="_blank"
-                  >Xem Trailer
-                  </Button> */}
                   <Button
                     variant="contained"
-                    // color={red[500]}
                     style={{
-                      // backgroundColor: "#ff3d00",
                       backgroundColor: `${red[500]}`,
                       display: "flex",
-                      width: 150,
-                      fontSize: 20,
+                      width: 200,
+                      height: 50,
+                      fontSize: 24,
                       margin: "auto",
                     }}
-                    onClick={() => {
-                      navigate(PATH.HOME);
-                    }}
-                  >Mua vé
+                    // onClick={() => {
+                    //   navigate(PATH.HOME);
+                    // }}
+                  >Chọn ghế
                   </Button>
                 </CardActions>
               </Grid>

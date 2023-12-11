@@ -1,3 +1,25 @@
+/*
+Màu đỏ theme chính
+50
+#ffebee
+100
+#ffcdd2
+200
+#ef9a9a
+300
+#e57373
+400
+#ef5350
+500
+#f44336
+600
+#e53935
+700
+#d32f2f
+800
+#c62828
+900
+#b71c1c */
 .ghe {
   width: 40px;
   height: 40px;
@@ -9,46 +31,58 @@
   font-weight: 600;
 }
 
-#gheThuong {
+.gheThuong {
   background-color: #eeeeee;
   border: 1px solid #bdbdbd;
 }
 
-#gheVip {
+.gheVip {
   background-color: #ffa726;
   border: 1px solid #ff9800;
 }
 
-#gheDaDat {
-  color: #fff;
-  background-color: #616161;
-  border: 1px solid #424242;
-}
-
-#gheDangChon {
+.gheDangChon {
   color: #000;
   background-color: #4caf50;
   border: 1px solid #43a047;
 }
 
-#gheTrongVIP {
-  color: #000;
-  background-color: #ffa726;
-  border: 1px solid #ff9800;
+.gheDaDat {
+  color: #fff;
+  background-color: #616161;
+  border: 1p;
 }
 
-#gheTrongThuong {
+.gheThuong .gheDaDat {
   color: #fff;
-  background-color: #eeeeee;
-  border: 1px solid #bdbdbd;
+  background-color: #616161;
+  border: 1px solid #424242;
+}
+
+.gheThuong .gheDangChon {
+  color: #000;
+  background-color: #4caf50;
+  border: 1px solid #43a047;
+}
+
+.gheVip .gheDaDat {
+  color: #fff;
+  background-color: #616161;
+  border: 1px solid #424242;
+}
+
+.gheVip .gheDangChon {
+  color: #000;
+  background-color: #4caf50;
+  border: 1px solid #43a047;
 }
 
 .buyButton {
-  width: 100;
-  background-color: #e65100;
-  color: #fff;
-  display: flex;
   width: 150;
-  font-size: 20;
+  height: 100;
+  background-color: #d32f2f;
+  color: #fff;
+  /* display: flex; */
+  font-size: 24;
   margin: "auto";
 }

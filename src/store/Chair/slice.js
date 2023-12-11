@@ -41,14 +41,15 @@ export const btMovieBookingSlice = createSlice(
                 // document.querySelector("#paymentSuccess").classList.add("d-none");
                 // bóc tách action trong payload ra thành action luôn
                 const { payload } = action;
-                // console.log('action: ', action);
+                // console.log('payload: ', payload);
 
                 // định nghĩa chairsBooking trong state ra thành stateChairsBooking luôn
                 const stateChairsBooking = state.chairsBooking;
+                // console.log('state.chairsBooking: ', state.chairsBooking);
 
                 // action đưa lên với payload là 1 cái ghế
                 // sau đó mình phải push nó vào cái mảng rỗng stateChairsBooking trong initialState
-                const index = stateChairsBooking.findIndex((value) => value.soGhe === payload.soGhe)
+                const index = stateChairsBooking.findIndex((value) => value.maGhe === payload.maGhe)
                 // nếu đã có ghế rồi thì xoá đi
                 if (index !== -1) {
                     // stateChairsBooking.filter((value) => value.soGhe !== payload.soGhe)
@@ -60,7 +61,7 @@ export const btMovieBookingSlice = createSlice(
                 else {
                     stateChairsBooking.push(payload);
                 }
-                console.log('stateChairsBooking: ', stateChairsBooking);
+                console.log('stateChairsBooking: ', {...stateChairsBooking});
             },
 
             // tạo action cho chairBooked
