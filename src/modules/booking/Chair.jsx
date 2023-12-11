@@ -1,0 +1,65 @@
+import React from 'react'
+import { Box, Button, CardContent, Container, Divider, Grid, Stack, Typography } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { btMovieBookingActions } from "../../store/Chair/slice";
+import { getChairListAPI } from '../../apis/chairAPI';
+import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
+import cn from "classnames"
+
+
+
+const Chair = () => {
+    // tạo hàm dispatch
+    const dispatch = useDispatch();
+
+    // lấy chairsBooking, chairsBooked về 
+    const { chairsBooking, chairsBooked } = useSelector((state) => state.btMovieBooking)
+
+    const { maLichChieu } = useParams();
+
+    // Dùng useQuery để get API
+    const { data = {}, isLoading, isError, error } = useQuery({
+        queryKey: ["bookingId", maLichChieu],
+        queryFn: () => getChairListAPI(maLichChieu),
+        enabled: !!maLichChieu,
+    });
+    const chairList = data.danhSachGhe || [];
+
+    return (
+        <Grid container spacing={3}>
+            {chairList.map((ghe) => {
+                return (
+                    <Grid
+                        item
+                        key={ghe.tenGhe}
+                        xs={3}
+                        sm={2}
+                        md={1}
+                        lg={1}
+                    >
+                        {
+                            <Typography
+                                className={cn("ghe",
+                                    `ghe${ghe.loaiGhe}`,
+                                    {
+                                        gheDangChon: chairsBooking.find((e) => e.maGhe === ghe.maGhe),
+                                        gheDaDat: chairsBooked.find((e) => e.maGhe === ghe.maGhe),
+                                    }
+                                )}
+                                // id={`ghe${ghe.loaiGhe}`}
+                                onClick={() => {
+                                    dispatch(btMovieBookingActions.setChairsBooking(ghe))
+                                }}
+                            >
+                                {ghe.tenGhe}
+                            </Typography>
+                        }
+                    </Grid>
+                );
+            })}
+        </Grid>
+    )
+}
+
+export default Chair

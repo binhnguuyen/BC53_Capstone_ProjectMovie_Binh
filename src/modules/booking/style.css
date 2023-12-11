@@ -86,3 +86,19 @@ Màu đỏ theme chính
   font-size: 24;
   margin: "auto";
 }
+
+.screen {
+  text-align: center;
+  align-items: center;
+  border-bottom: 100px solid #616161;
+  height: 100px;
+  width: 100%;
+  opacity: 0.8;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  margin: 50px auto;
+  filter: drop-shadow(4px 30px 20px rgba(97, 97, 97, 0.753));
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+}
