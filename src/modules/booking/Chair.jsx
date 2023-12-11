@@ -57,11 +57,12 @@ const Chair = () => {
                                     }
                                 )}
                                 onClick={() => {
-                                    if (gheDaDat.find((e) => e.maGhe === ghe.maGhe) !== "") {
+                                    let isAreadySelected = gheDaDat.findIndex((e) => e.maGhe === ghe.maGhe)
+                                    if (isAreadySelected !== -1) {
                                         alert("Ghế này đã được đặt. Xin vui lòng chọn ghế khác!");
                                     }
                                     else {
-                                        dispatch(btMovieBookingActions.setChairsBooking(ghe))
+                                        dispatch(btMovieBookingActions.setChairsBooking(ghe));
                                     }
                                 }}
                             >
