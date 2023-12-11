@@ -47,7 +47,9 @@ const Chair = () => {
                                         gheDaDat: chairsBooked.find((e) => e.maGhe === ghe.maGhe),
                                     }
                                 )}
-                                // id={`ghe${ghe.loaiGhe}`}
+                                style={{
+                                    cursor: "pointer"
+                                }}
                                 onClick={() => {
                                     dispatch(btMovieBookingActions.setChairsBooking(ghe))
                                 }}
