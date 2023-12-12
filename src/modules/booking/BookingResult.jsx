@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, CardContent, Container, Divider, Grid, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Box, Button, CardContent, Container, Divider, Grid, Paper, Skeleton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { red } from '@mui/material/colors';
@@ -67,8 +67,13 @@ const BookingResult = () => {
                     <Typography
                         {...typographySettings}
                     >
-                        <></>
-                        {movieInfo.tenPhim}
+                        {
+                            isLoading ? (
+                                <Skeleton variant="rounded" width="300px" animation="wave" style={{ margin: 5 }} />
+                            ) : (
+                                movieInfo.tenPhim
+                            )
+                        }
                     </Typography>
                 </Stack>
                 <Stack
@@ -82,8 +87,13 @@ const BookingResult = () => {
                     <Typography
                         {...typographySettings}
                     >
-                        <></>
-                        {movieInfo.tenCumRap}
+                        {
+                            isLoading ? (
+                                <Skeleton variant="rounded" width="300px" animation="wave" style={{ margin: 5 }} />
+                            ) : (
+                                movieInfo.tenCumRap
+                            )
+                        }
                     </Typography>
                 </Stack>
                 <Stack
@@ -97,8 +107,13 @@ const BookingResult = () => {
                     <Typography
                         {...typographySettings}
                     >
-                        <></>
-                        {movieInfo.tenRap}
+                        {
+                            isLoading ? (
+                                <Skeleton variant="rounded" width="300px" animation="wave" style={{ margin: 5 }} />
+                            ) : (
+                                movieInfo.tenRap
+                            )
+                        }
                     </Typography>
                 </Stack>
                 <Stack
@@ -112,8 +127,13 @@ const BookingResult = () => {
                     <Typography
                         {...typographySettings}
                     >
-                        <></>
-                        {movieInfo.ngayChieu} {movieInfo.gioChieu}
+                        {
+                            isLoading ? (
+                                <Skeleton variant="rounded" width="300px" animation="wave" style={{ margin: 5 }} />
+                            ) : (
+                                `${movieInfo.ngayChieu} ${movieInfo.gioChieu}`
+                            )
+                        }
                     </Typography>
                 </Stack>
                 <Stack
@@ -127,8 +147,13 @@ const BookingResult = () => {
                     <Typography
                         {...typographySettings}
                     >
-                        <></>
-                        {movieInfo.diaChi}
+                        {
+                            isLoading ? (
+                                <Skeleton variant="rounded" width="300px" animation="wave" style={{ margin: 5 }} />
+                            ) : (
+                                movieInfo.diaChi
+                            )
+                        }
                     </Typography>
                 </Stack>
                 <Stack

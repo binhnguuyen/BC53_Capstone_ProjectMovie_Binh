@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, CardContent, Container, Divider, Grid, Stack, Typography } from '@mui/material';
+import { Box, Button, CardContent, Container, Divider, Grid, Skeleton, Stack, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { btMovieBookingActions } from "../../store/Chair/slice";
 import { getChairListAPI } from '../../apis/chairAPI';
@@ -36,42 +36,50 @@ const Chair = () => {
 
     return (
         <Grid container spacing={3}>
-            {chairList.map((ghe) => {
-                return (
-                    <Grid
-                        item
-                        key={ghe.tenGhe}
-                        xs={3}
-                        sm={2}
-                        md={1}
-                        lg={1}
-                    >
-                        {
-                            <Typography
-                                className={cn("ghe",
-                                    `ghe${ghe.loaiGhe}`,
-                                    {
-                                        gheDangChon: chairsBooking.find((e) => e.maGhe === ghe.maGhe),
-                                        gheDaDat: chairsBooked.find((e) => e.maGhe === ghe.maGhe),
-                                        gheDaDat: gheDaDat.find((e) => e.maGhe === ghe.maGhe),
-                                    }
-                                )}
-                                onClick={() => {
-                                    let isAreadySelected = gheDaDat.findIndex((e) => e.maGhe === ghe.maGhe)
-                                    if (isAreadySelected !== -1) {
-                                        alert("Ghế này đã được đặt. Xin vui lòng chọn ghế khác!");
-                                    }
-                                    else {
-                                        dispatch(btMovieBookingActions.setChairsBooking(ghe));
-                                    }
-                                }}
-                            >
-                                {ghe.tenGhe}
-                            </Typography>
-                        }
+            {
+                isLoading ? (
+                    <Grid xs={12} lg={12}>
+                        <Skeleton variant="rounded" sx={{ height: 800 }} animation="wave" style={{ margin: 10 }} />
                     </Grid>
-                );
-            })}
+                ) : (
+                    chairList.map((ghe) => {
+                        return (
+                            <Grid
+                                item
+                                key={ghe.tenGhe}
+                                xs={3}
+                                sm={2}
+                                md={1}
+                                lg={1}
+                            >
+                                {
+                                    <Typography
+                                        className={cn("ghe",
+                                            `ghe${ghe.loaiGhe}`,
+                                            {
+                                                gheDangChon: chairsBooking.find((e) => e.maGhe === ghe.maGhe),
+                                                gheDaDat: chairsBooked.find((e) => e.maGhe === ghe.maGhe),
+                                                gheDaDat: gheDaDat.find((e) => e.maGhe === ghe.maGhe),
+                                            }
+                                        )}
+                                        onClick={() => {
+                                            let isAreadySelected = gheDaDat.findIndex((e) => e.maGhe === ghe.maGhe)
+                                            if (isAreadySelected !== -1) {
+                                                alert("Ghế này đã được đặt. Xin vui lòng chọn ghế khác!");
+                                            }
+                                            else {
+                                                dispatch(btMovieBookingActions.setChairsBooking(ghe));
+                                            }
+                                        }}
+                                    >
+                                        {ghe.tenGhe}
+                                    </Typography>
+                                }
+                            </Grid>
+                        );
+                    })
+                )
+            }
         </Grid>
     )
 }
