@@ -38,7 +38,7 @@ const Chair = () => {
         <Grid container spacing={3}>
             {
                 isLoading ? (
-                    <Grid xs={12} lg={12}>
+                    <Grid xs={12} md={12} lg={12}>
                         <Skeleton variant="rounded" sx={{ height: 800 }} animation="wave" style={{ margin: 10 }} />
                     </Grid>
                 ) : (
