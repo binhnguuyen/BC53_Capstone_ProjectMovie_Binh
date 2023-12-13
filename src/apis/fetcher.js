@@ -22,7 +22,6 @@ fetcher.interceptors.request.use((config) => {
     // config.headers["Authorization"] = user.accessToken;
     config.headers.Authorization = `Bearer ${user.accessToken}`;
   }
-  console.log('config: ', config);
   return config;
 })
 

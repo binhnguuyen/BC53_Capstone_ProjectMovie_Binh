@@ -6,6 +6,7 @@ import { getChairListAPI } from '../../apis/chairAPI';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import cn from "classnames"
+import { useAuth } from '../../contexts/UserContext/UserContext';
 
 
 
@@ -15,7 +16,7 @@ const Chair = () => {
 
     // lấy chairsBooking, chairsBooked về 
     const { chairsBooking, chairsBooked } = useSelector((state) => state.btMovieBooking)
-
+    const { currentUser } = useAuth();
     const { maLichChieu } = useParams();
 
     // Dùng useQuery để get API
@@ -27,9 +28,13 @@ const Chair = () => {
     const chairList = data.danhSachGhe || [];
 
     let gheDaDat = [];
+    let gheBanDaDat = [];
     for (let i in chairList) {
         if (chairList[i].taiKhoanNguoiDat != null) {
             gheDaDat.push(chairList[i]);
+            if(chairList[i].taiKhoanNguoiDat === currentUser.taiKhoan) {
+                gheBanDaDat.push(chairList[i]);
+            }
         }
     }
 
@@ -59,7 +64,9 @@ const Chair = () => {
                                             {
                                                 gheDangChon: chairsBooking.find((e) => e.maGhe === ghe.maGhe),
                                                 gheDaDat: chairsBooked.find((e) => e.maGhe === ghe.maGhe),
+                                                gheBanDaDat: gheBanDaDat.find((e) => e.maGhe === ghe.maGhe),
                                                 gheDaDat: gheDaDat.find((e) => e.maGhe === ghe.maGhe),
+                                                
                                             }
                                         )}
                                         onClick={() => {

@@ -50,8 +50,7 @@ const Booking = () => {
         // values này là formBooking mình đưa vào trong hàm handleSubmit
         mutationFn: (values) => postBookedChairListAPI(values),
         onSuccess: (values) => {
-            // chuyển use về trang HOME
-            // navigate(PATH.HOME);
+            queryClient.invalidateQueries({ queryKey: ["bookingId"] });
         },
         onError: (error) => {
             alert("Lỗi rồi");

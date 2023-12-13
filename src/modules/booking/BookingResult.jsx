@@ -38,7 +38,7 @@ const BookingResult = () => {
     });
     const movieInfo = data.thongTinPhim || [];
 
-    const { chairsBooking, chairsBooked } = useSelector((state) => state.btMovieBooking)
+    const { chairsBooking } = useSelector((state) => state.btMovieBooking)
 
     return (
         <CardContent>
@@ -163,7 +163,16 @@ const BookingResult = () => {
                     <Typography
                         {...typographySettings}
                     >
-                        Ghế đã đặt</Typography>
+                        Ghế đã được đặt</Typography>
+                </Stack>
+                <Stack
+                    {...stackSettings}
+                >
+                    <Typography id="" className="ghe gheBanDaDat"></Typography>
+                    <Typography
+                        {...typographySettings}
+                    >
+                        Ghế bạn đã đặt</Typography>
                 </Stack>
                 <Stack
                     {...stackSettings}
