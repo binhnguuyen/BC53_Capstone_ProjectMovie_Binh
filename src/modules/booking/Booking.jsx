@@ -10,8 +10,14 @@ import { LoadingButton } from '@mui/lab';
 import { postBookedChairListAPI } from '../../apis/chairAPI';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 
 const Booking = () => {
+    // thư viện SweetAlert
+    const MySwal = withReactContent(Swal);
+
     // Hàm để handle modal
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -50,7 +56,16 @@ const Booking = () => {
         // values này là formBooking mình đưa vào trong hàm handleSubmit
         mutationFn: (values) => postBookedChairListAPI(values),
         onSuccess: (values) => {
-            queryClient.invalidateQueries({ queryKey: ["bookingId"] });
+            MySwal.fire({
+                icon: "success",
+                title: "Bạn đã đặt vé thành công",
+                text: "Quay lại trang phim",
+                confirmButtonText: "Đồng ý"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    queryClient.invalidateQueries({ queryKey: ["bookingId"] });
+                }
+            })
         },
         onError: (error) => {
             alert("Lỗi rồi");
@@ -73,10 +88,8 @@ const Booking = () => {
             giaVe: item.giaVe,
         }));
         const formBooking = { maLichChieu: maLichChieu, danhSachVe: formGhe };
-        console.log('formBooking: ', formBooking);
         handleBooking(formBooking);
         handleClose();
-        alert("Bạn đã đặt vé thành công");
     }
 
 
