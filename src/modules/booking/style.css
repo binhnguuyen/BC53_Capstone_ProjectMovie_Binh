@@ -1,0 +1,115 @@
+/*
+Màu đỏ theme chính
+50
+#ffebee
+100
+#ffcdd2
+200
+#ef9a9a
+300
+#e57373
+400
+#ef5350
+500
+#f44336
+600
+#e53935
+700
+#d32f2f
+800
+#c62828
+900
+#b71c1c */
+.ghe {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.gheThuong {
+  background-color: #eeeeee;
+  border: 1px solid #bdbdbd;
+}
+
+.gheVip {
+  background-color: #ffa726;
+  border: 1px solid #ff9800;
+}
+
+.gheDangChon {
+  color: #000;
+  background-color: #4caf50;
+  border: 1px solid #43a047;
+}
+
+.gheDaDat {
+  color: #fff;
+  background-color: #616161;
+  border: 1px solid #494949;
+  cursor: no-drop !important;
+}
+
+.gheBanDaDat {
+  color: #fff;
+  background-color: #f44336;
+  border: 1px #e53935;
+  cursor: no-drop !important;
+}
+
+.gheThuong .gheDaDat {
+  color: #fff;
+  background-color: #616161;
+  border: 1px solid #424242;
+  /* cursor: no-drop !important; */
+}
+
+.gheThuong .gheDangChon {
+  color: #000;
+  background-color: #4caf50;
+  border: 1px solid #43a047;
+}
+
+.gheVip .gheDaDat {
+  color: #fff;
+  background-color: #616161;
+  border: 1px solid #424242;
+  /* cursor: no-drop !important; */
+}
+
+.gheVip .gheDangChon {
+  color: #000;
+  background-color: #4caf50;
+  border: 1px solid #43a047;
+}
+
+.buyButton {
+  width: 150;
+  height: 100;
+  background-color: #d32f2f;
+  color: #fff;
+  /* display: flex; */
+  font-size: 24;
+  margin: "auto";
+}
+
+.screen {
+  text-align: center;
+  align-items: center;
+  border-bottom: 100px solid #616161;
+  height: 100px;
+  width: 100%;
+  opacity: 0.8;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  margin: 50px auto;
+  filter: drop-shadow(4px 30px 20px rgba(97, 97, 97, 0.753));
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+}

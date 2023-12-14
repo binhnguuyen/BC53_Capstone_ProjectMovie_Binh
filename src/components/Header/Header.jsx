@@ -18,7 +18,7 @@ const Header = () => {
   // const {currentUser} = useContext(UserContext);
   // console.log('currentUser: ', currentUser);
   const { currentUser, handleLogout } = useAuth();
-  console.log('currentUser: ', currentUser);
+  // console.log('currentUser: ', currentUser);
 
   return (
     <Box sx={{ flexGrow: 1 }} >

@@ -6,6 +6,8 @@ import { Box, CardActions, Card, CardMedia, CardContent, Container, Grid, Skelet
 import dayjs from 'dayjs';
 import style from "./style.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { red } from '@mui/material/colors';
+import ShowTimes from '../ShowTimes/ShowTimes';
 
 
 const MovieProfile = ({ movieId }) => {
@@ -20,9 +22,26 @@ const MovieProfile = ({ movieId }) => {
     p: 4,
   };
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 800,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    borderRadius: "20px",
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const [openTrailer, setOpenTrailer] = React.useState(false);
+  const handleOpenTrailer = () => setOpenTrailer(true);
+  const handleCloseTrailer = () => setOpenTrailer(false);
+
+  const [openRap, setOpenRap] = React.useState(false);
+  const handleOpenRap = () => setOpenRap(true);
+  const handleCloseRap = () => setOpenRap(false);
 
   const navigate = useNavigate();
 
@@ -83,10 +102,14 @@ const MovieProfile = ({ movieId }) => {
                 <CardMedia
                   id="posterMovie"
                 >
-                  <img src={data.hinhAnh} alt="" id='posterImg'/>
+                  <img src={data.hinhAnh} alt="" id='posterImg'
+                    style={{
+                      border: "2px solid #1976d2",
+                      borderRadius: "10px",
+                    }} />
                   <Button
                     id='playVideoButton'
-                    onClick={handleOpen}
+                    onClick={handleOpenTrailer}
                   >
                     <i className="fab fa-youtube"></i>
                   </Button>
@@ -124,34 +147,25 @@ const MovieProfile = ({ movieId }) => {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  {/* <Button size="large"
+                  <Button
                     variant="contained"
-                    color='secondary'
-                    width={100}
-                    // href={data.trailer}
-                    onClick={handleOpen}
-                    target="_blank"
-                  >Xem Trailer
-                  </Button> */}
-                  <Button 
-                    size="large"
-                    variant="contained"
-                    width={100}
-                    color="error"
                     style={{
-                      fontSize: 20,
+                      backgroundColor: `${red[500]}`,
+                      display: "flex",
+                      width: 200,
+                      height: 50,
+                      fontSize: 24,
+                      margin: "auto",
                     }}
-                    onClick={() => {
-                      navigate(PATH.HOME);
-                    }}
-                  >Mua vé
+                    onClick={handleOpenRap}
+                  >Chọn ghế
                   </Button>
                 </CardActions>
               </Grid>
               <Grid>
                 <Modal
-                  open={open}
-                  onClose={handleClose}
+                  open={openTrailer}
+                  onClose={handleCloseTrailer}
                   aria-labelledby="modal-modal-title"
                   aria-describedby="modal-modal-description"
                 >
@@ -168,6 +182,19 @@ const MovieProfile = ({ movieId }) => {
                 </Modal>
               </Grid>
             </Grid>
+            <Modal
+              open={openRap}
+              onClose={handleCloseRap}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h4" component="h2" align='center'>
+                  Xin vui lòng chọn rạp
+                </Typography>
+                <ShowTimes movieId={movieId} />
+              </Box>
+            </Modal>
           </Box>
         )
       }
