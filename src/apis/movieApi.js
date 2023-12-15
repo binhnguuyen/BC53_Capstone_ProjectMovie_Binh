@@ -1,5 +1,6 @@
 import { Query } from "@tanstack/react-query";
 import fetcher from "./fetcher";
+import { GROUP_CODE } from "../constants";
 
 export const getBannersAPI = async () => {
   try {
@@ -15,7 +16,7 @@ export const getListMovieAPI = async () => {
     const response = await fetcher.get("/QuanLyPhim/LayDanhSachPhim", {
       params: {
         // khi mình nhóm nào thì phải sửa cái maNhom của mình thành tên đó
-        maNhom: "GP03",
+        maNhom: GROUP_CODE,
       },
       //"/QuanLyPhim/LayDanhSachPhim?maNhom=GP01&page=1&pageSize=10"
     });
