@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { getBannersAPI } from "../../../apis/movieApi";
 import Slider from "react-slick";
-import { Box, Grid, Skeleton } from "@mui/material";
+import { Box, Container, Grid, Skeleton } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 
@@ -76,7 +76,7 @@ const Banner = () => {
   }
 
   return (
-    <div>
+    <Container maxWidth="xl" sx={{marginBottom: 10}}>
       <Slider
         // slider này nó clone lại cái settings
         {...settings}
@@ -94,7 +94,7 @@ const Banner = () => {
           );
         })}
       </Slider>
-    </div >
+    </Container >
   );
 
 };

@@ -34,8 +34,8 @@ const Home = () => {
   return (
     <div>
       <Banner />
-      <Cinema />
       <Showing />
+      <Cinema />
     </div>
   );
 };

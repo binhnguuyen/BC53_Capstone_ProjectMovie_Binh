@@ -11,6 +11,7 @@ const Showing = () => {
   // đặt data là 1 cái mảng ngay từ đầu luôn để nó ko bị undefined lúc đầu
   const { data = [], isLoading, isError, error } = useQuery({
     queryKey: ["showing"],
+    // queryFn ko truyền vào tham số thì gọi thế này(nếu có truyền tham số thì phải gọi bằng 1 callback)
     queryFn: getListMovieAPI,
   });
 
@@ -25,7 +26,7 @@ const Showing = () => {
   return (
     // thằng Container này từ MUI, thay nó cho thằng div
     // nó sẽ có chức năng giống container của BS
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ marginBottom: 10 }}>
       {/* <Button variant="outlined" size="large">
         Hello World
       </Button> */}
