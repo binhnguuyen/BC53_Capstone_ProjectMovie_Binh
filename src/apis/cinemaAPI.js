@@ -27,12 +27,12 @@ export const getTheaterSystemInfo = async () => {
     }
 }
 
-export const getTheaterInfo = async (theaterId) => {
+export const getTheaterInfo = async (theaterSystemId) => {
     try {
         // thằng này sẽ gắn cái path trong () vào cái baseURL(định nghĩa bên fetcher) và tự hiểu method là get luôn cho mình
         const response = await fetcher.get("/QuanLyRap/LayThongTinCumRapTheoHeThong", {
             params: {
-                maHeThongRap: theaterId,
+                maHeThongRap: theaterSystemId,
             },
         });
         return response.data.content; // là 1 mảng
@@ -42,12 +42,12 @@ export const getTheaterInfo = async (theaterId) => {
     }
 }
 
-export const getShowtimeInfo = async (theaterId) => {
+export const getShowtimeInfo = async (theaterSystemId) => {
     try {
         // thằng này sẽ gắn cái path trong () vào cái baseURL(định nghĩa bên fetcher) và tự hiểu method là get luôn cho mình
         const response = await fetcher.get("/QuanLyRap/LayThongTinLichChieuHeThongRap", {
             params: {
-                maHeThongRap: theaterId,
+                maHeThongRap: theaterSystemId,
                 maNhom: GROUP_CODE,
             },
         });
