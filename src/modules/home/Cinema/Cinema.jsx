@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react'
 import { getTheaterSystemInfo, getTheaterInfo, getShowtimeInfo } from '../../../apis/cinemaAPI';
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
+
 
 // Ở đầy dùng Vertical tabs của MUI
 function TabPanel(props) {
@@ -61,6 +63,7 @@ const Cinema = () => {
   });
   const theater = theaterData || [];
   console.log('theater: ', theater);
+  console.log('theater[0].maCumRap: ', theater[0]?.maCumRap);
 
 
   const { data: showtimeData, isLoading: isLoadingShowtimeInfo } = useQuery({
@@ -72,6 +75,7 @@ const Cinema = () => {
   const showtime = showtimeData || [];
   console.log('showtime: ', showtime);
   console.log('showtime[0].lstCumRap: ', showtime[0]?.lstCumRap);
+
 
 
   const handleChangeTheaterSystemId = (newValue) => {
@@ -97,8 +101,8 @@ const Cinema = () => {
       }
     }
     setShowtimeInfo(showtimeList);
+    console.log('showtimeInfo: ', showtimeInfo);
   }
-  console.log('showtimeInfo: ', showtimeInfo);
 
 
   // khi theaterSystem thay đổi (>0) thì mặc định render ra thằng đầu tiên
@@ -106,14 +110,22 @@ const Cinema = () => {
     if (theaterSystem.length > 0) {
       setTheaterSystemId(theaterSystem[0].maHeThongRap);
     }
-
   }, [theaterSystem]);
 
   useEffect(() => {
     if (theater.length > 0) {
       setTheaterId(theater[0].maCumRap);
+      handleChangeShowtimeInfo(theater[0].maCumRap);
+      console.log("Được rồi nha 1");
     }
   }, [theater]);
+
+  useEffect(() => {
+    if (showtime[0]?.lstCumRap.length > 0) {
+      handleChangeShowtimeInfo(theater[0].maCumRap);
+      console.log("Được rồi nha 2");
+    }
+  }, [showtime[0]?.lstCumRap]);
 
 
   return (
@@ -213,9 +225,14 @@ const Cinema = () => {
                         navigate(`movie/${item.maPhim}`)
                       }}
                       label={
-                        <Box textAlign="left">
+                        <Box sx={{
+                          flexGrow: 1,
+                          bgcolor: "background.paper",
+                          display: "flex",
+                          textAlign: "left",
+                        }} >
                           <Grid container spacing={2}>
-                            <Grid xs={6} lg={6}>
+                            <Grid xs={6} md={6} lg={6}>
                               <CardMedia
                                 id="posterMovie"
                               >
@@ -227,7 +244,7 @@ const Cinema = () => {
                                   }} />
                               </CardMedia>
                             </Grid>
-                            <Grid xs={6} lg={6} paddingLeft={2}>
+                            <Grid xs={6} md={6} lg={6} paddingLeft={2}>
                               <CardContent>
                                 <Typography
                                   gutterBottom
@@ -238,16 +255,23 @@ const Cinema = () => {
                                 >
                                   {item.tenPhim}
                                 </Typography>
-                                {/* <Typography
-                                  variant="h5"
-                                  color="text.secondary"
-                                  marginBottom={2}
-                                >
-                                  Ngày chiếu:
-                                  {
-                                    dayjs(data.ngayKhoiChieu).format("DD/MM/YYYY ~ hh:mm")
-                                  }
-                                </Typography> */}
+                                {
+                                  item.lstLichChieuTheoPhim.map((value) => {
+                                    return (
+                                      <Typography
+                                        variant="h5"
+                                        color="text.secondary"
+                                        marginBottom={2}
+                                      >
+                                        Ngày chiếu:
+                                        {
+                                          dayjs(value.ngayChieuGioChieu).format("DD/MM/YYYY ~ hh:mm")
+                                        }
+                                      </Typography>
+                                    )
+
+                                  })
+                                }
                               </CardContent>
                             </Grid>
                           </Grid>
