@@ -265,7 +265,11 @@ const Cinema = () => {
                       return (
                         <Card sx={{ maxWidth: 600 }}>
                           <CardMedia
-                            sx={{ height: 300 }}
+                            sx={{
+                              height: 300,
+                              border: "2px solid #1976d2",
+                              borderRadius: "10px",
+                            }} 
                             image={item.hinhAnh}
                             title="green iguana"
                           />

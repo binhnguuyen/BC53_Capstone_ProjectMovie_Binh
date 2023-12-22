@@ -90,7 +90,11 @@ const Showing = () => {
               ) : (
                 <Box>
                   <CardMedia
-                    sx={{ height: 400 }}
+                    sx={{
+                      height: 400,
+                      border: "2px solid #1976d2",
+                      borderRadius: "10px",
+                    }} 
                     image={item.hinhAnh}
                     title="green iguana"
                   />

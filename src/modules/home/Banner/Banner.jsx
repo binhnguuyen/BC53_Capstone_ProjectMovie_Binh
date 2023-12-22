@@ -90,7 +90,12 @@ const Banner = () => {
               <img
                 src={item.hinhAnh}
                 width="100%"
-                style={{ objectFit: "cover", height: 600, }}
+                style={{
+                  height: 800,
+                  objectFit: "cover",
+                  border: "2px solid #1976d2",
+                  borderRadius: "10px",
+                }} 
               />
             </Box>
           );
