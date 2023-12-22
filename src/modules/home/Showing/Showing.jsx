@@ -21,11 +21,6 @@ const Showing = () => {
     rows: 2,
     dots: true,
     swipeToSlide: true,
-    afterChange: function (index) {
-      console.log(
-        `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
-      );
-    },
     appendDots: dots => (
       <div
         style={{
@@ -89,15 +84,35 @@ const Showing = () => {
                 </Box>
               ) : (
                 <Box>
-                  <CardMedia
+                  {/* <CardMedia
                     sx={{
                       height: 400,
                       border: "2px solid #1976d2",
                       borderRadius: "10px",
+                      cursor: "pointer",
                     }} 
-                    image={item.hinhAnh}
                     title="green iguana"
-                  />
+                    image={item.hinhAnh}
+                    onClick={() => {
+                      navigate(`movie/${item.maPhim}`)
+                    }}
+                  /> */}
+                  <Button
+                    onClick={() => {
+                      navigate(`movie/${item.maPhim}`)
+                    }}
+                  >
+                    <img
+                      src={item.hinhAnh}
+                      width="100%"
+                      style={{
+                        height: 800,
+                        objectFit: "cover",
+                        border: "2px solid #1976d2",
+                        borderRadius: "10px",
+                      }}
+                    />
+                  </Button>
                   <CardContent>
                     <Typography
                       gutterBottom

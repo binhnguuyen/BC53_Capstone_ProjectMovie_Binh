@@ -103,10 +103,8 @@ const Banner = () => {
                     border: "2px solid #1976d2",
                     borderRadius: "10px",
                   }}
-
                 />
               </Button>
-
             </Box>
           );
         })}
