@@ -10,6 +10,8 @@ import { Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "../../routes/path";
 import { useAuth } from "../../contexts/UserContext/UserContext";
+import { blue } from '@mui/material/colors';
+
 // import { useContext } from "react"
 // import { UserContext } from "../../contexts/UserContext";
 
@@ -33,8 +35,8 @@ const Header = () => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          News
+        <Typography variant="h4" component="div" sx={{ flexGrow: 1, color: `${blue[600]}`, fontWeight: 700, }}>
+          CyberSoft Movie Pro
         </Typography>
         {currentUser ? (
           <Stack direction={"row"} spacing={2} alignItems={"center"}>
