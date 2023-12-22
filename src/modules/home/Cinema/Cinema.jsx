@@ -243,8 +243,12 @@ const Cinema = () => {
                               height: 300,
                               border: "2px solid #1976d2",
                               borderRadius: "10px",
+                              cursor: "pointer",
                             }}
                             image={item.hinhAnh}
+                            onClick={() => {
+                              navigate(`movie/${item.maPhim}`)
+                            }}
                             title="green iguana"
                           />
                           <CardContent>
