@@ -3,9 +3,9 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react'
 import { getTheaterSystemInfo, getTheaterInfo, getShowtimeInfo } from '../../../apis/cinemaAPI';
 import { useNavigate } from 'react-router-dom';
-import dayjs from 'dayjs';
 import Slider from "react-slick";
 import { red } from '@mui/material/colors';
+import dayjs from 'dayjs';
 
 
 
@@ -61,18 +61,10 @@ const Cinema = () => {
     slidesToScroll: 3,
     vertical: true,
     verticalSwiping: true,
-    beforeChange: function (currentSlide, nextSlide) {
-      console.log("before change", currentSlide, nextSlide);
-    },
-    afterChange: function (currentSlide) {
-      console.log("after change", currentSlide);
-    }
   };
 
   const typographySettings = {
-    // gutterbottom: true,
     variant: "h6",
-    // marginBottom: 2,
     style: {
       fontSize: 20,
       fontWeight: 700,
@@ -104,8 +96,6 @@ const Cinema = () => {
     enabled: !!theaterSystemId,
   });
   const theater = theaterData || [];
-  console.log('theater: ', theater);
-  console.log('theater[0].maCumRap: ', theater[0]?.maCumRap);
 
 
   const { data: showtimeData, isLoading: isLoadingShowtimeInfo } = useQuery({
@@ -115,8 +105,6 @@ const Cinema = () => {
     enabled: !!theaterSystemId,
   });
   const showtime = showtimeData || [];
-  console.log('showtime: ', showtime);
-  console.log('showtime[0].lstCumRap: ', showtime[0]?.lstCumRap);
 
 
 
@@ -129,7 +117,6 @@ const Cinema = () => {
     setTheaterId(newValue);
     handleChangeShowtimeInfo(newValue);
   }
-  console.log('theaterId: ', theaterId);
 
 
   const handleChangeShowtimeInfo = (newValue) => {
@@ -143,7 +130,6 @@ const Cinema = () => {
       }
     }
     setShowtimeInfo(showtimeList);
-    console.log('showtimeInfo: ', showtimeInfo);
   }
 
 
@@ -158,14 +144,12 @@ const Cinema = () => {
     if (theater.length > 0) {
       setTheaterId(theater[0].maCumRap);
       handleChangeShowtimeInfo(theater[0].maCumRap);
-      console.log("Được rồi nha 1");
     }
   }, [theater]);
 
   useEffect(() => {
     if (showtime[0]?.lstCumRap.length > 0) {
       handleChangeShowtimeInfo(theater[0].maCumRap);
-      console.log("Được rồi nha 2");
     }
   }, [showtime[0]?.lstCumRap]);
 
@@ -199,11 +183,6 @@ const Cinema = () => {
               );
             })}
           </Tabs>
-          {/* {theaterSystems.map((item) => (
-            <TabPanel value={theaterSystemsValue} index={item.maHeThongRap}>
-
-            </TabPanel>
-          ))} */}
         </Grid>
         <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
           <Tabs
@@ -240,11 +219,6 @@ const Cinema = () => {
               );
             })}
           </Tabs>
-          {/* {theaterInfo.map((item) => (
-            <TabPanel value={theaterInfoValue} index={item.maCumRap}>
-
-            </TabPanel>
-          ))} */}
         </Grid>
         <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
           <Tabs
@@ -269,25 +243,32 @@ const Cinema = () => {
                               height: 300,
                               border: "2px solid #1976d2",
                               borderRadius: "10px",
-                            }} 
+                            }}
                             image={item.hinhAnh}
                             title="green iguana"
                           />
                           <CardContent>
+                            <Typography
+                              gutterBottom
+                              variant="h4"
+                              component="div"
+                              {...typographySettings}
+                              style={{
+                                fontSize: 28,
+                              }}
+                            >
+                              {item.tenPhim}
+                            </Typography>
                             <Typography 
-                            gutterBottom 
-                            variant="h4" 
-                            component="div"
-                            {...typographySettings}
-                            sx={{
-                              fontSize: 40,
+                            {...typographySettings} 
+                            style={{
+                              fontSize: 18,
                             }}
                             >
-                            {item.tenPhim}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                              Lizards are a widespread group of squamate reptiles, with over 6,000
-                              species, ranging across all continents except Antarctica
+                              Ngày giờ chiếu: 
+                              {
+                                dayjs(item.lstLichChieuTheoPhim[0]?.ngayChieuGioChieu).format("DD/MM/YYYY ~ hh:mm")
+                              }
                             </Typography>
                           </CardContent>
                           <CardActions>
