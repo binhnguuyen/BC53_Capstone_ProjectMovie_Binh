@@ -8,9 +8,11 @@ import Paper from '@mui/material/Paper';
 
 // setting của slick
 const settings = {
+  className: "center",
+  centerMode: true,
   dots: true,
   infinite: true,
-  speed: 500,
+  speed: 1000,
   slidesToShow: 1,
   slidesToScroll: 1,
   autoplay: true,
@@ -76,7 +78,7 @@ const Banner = () => {
   }
 
   return (
-    <Container maxWidth="xl" sx={{marginBottom: 10}}>
+    <Container maxWidth="xl" sx={{ marginBottom: 10 }} spacing={2}>
       <Slider
         // slider này nó clone lại cái settings
         {...settings}
@@ -84,11 +86,11 @@ const Banner = () => {
         {data.map((item, index) => {
           return (
             // cái box này để bọc lại phần nội dung của carousel
-            <Box style={{ height: "auto", width: "100%"}} key={index}>
+            <Box style={{ height: "auto", width: "100%" }} key={index}>
               <img
                 src={item.hinhAnh}
                 width="100%"
-                style={{ objectFit: "cover" }}
+                style={{ objectFit: "cover", height: 600, }}
               />
             </Box>
           );
