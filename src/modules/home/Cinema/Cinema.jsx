@@ -1,9 +1,12 @@
-import { Box, Button, CardContent, CardMedia, Container, Grid, Skeleton, Tab, Tabs, Typography } from '@mui/material'
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Grid, Skeleton, Stack, Tab, Tabs, Typography } from '@mui/material'
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react'
 import { getTheaterSystemInfo, getTheaterInfo, getShowtimeInfo } from '../../../apis/cinemaAPI';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
+import Slider from "react-slick";
+import { red } from '@mui/material/colors';
+
 
 
 // Ở đầy dùng Vertical tabs của MUI
@@ -26,7 +29,46 @@ function TabPanel(props) {
   );
 }
 
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "red" }}
+      onClick={onClick}
+    />
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "green" }}
+      onClick={onClick}
+    />
+  );
+}
+
 const Cinema = () => {
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 3,
+    swipeToSlide: true,
+    slidesToScroll: 3,
+    vertical: true,
+    verticalSwiping: true,
+    beforeChange: function (currentSlide, nextSlide) {
+      console.log("before change", currentSlide, nextSlide);
+    },
+    afterChange: function (currentSlide) {
+      console.log("after change", currentSlide);
+    }
+  };
+
   const typographySettings = {
     // gutterbottom: true,
     variant: "h6",
@@ -217,136 +259,70 @@ const Cinema = () => {
           >
             {
               showtimeInfo ? (
-                showtimeInfo.map((item) => {
-                  return (
-                    <Tab
-                      key={item.maPhim}
-                      onClick={() => {
-                        navigate(`movie/${item.maPhim}`)
-                      }}
-                      label={
-                        <Box sx={{
-                          flexGrow: 1,
-                          bgcolor: "background.paper",
-                          display: "flex",
-                          textAlign: "left",
-                        }} >
-                          <Grid container spacing={2}>
-                            <Grid xs={6} md={6} lg={6}>
-                              <CardMedia
-                                id="posterMovie"
-                              >
-                                <img src={item.hinhAnh} alt="" id='posterImg'
-                                  style={{
-                                    width: 150,
-                                    border: "2px solid #1976d2",
-                                    borderRadius: "10px",
-                                  }} />
-                              </CardMedia>
-                            </Grid>
-                            <Grid xs={6} md={6} lg={6} paddingLeft={2}>
-                              <CardContent>
-                                <Typography
-                                  gutterBottom
-                                  variant="h4"
-                                  component="div"
-                                  marginBottom={2}
-                                  {...typographySettings}
-                                >
-                                  {item.tenPhim}
-                                </Typography>
-                                {
-                                  item.lstLichChieuTheoPhim.map((value) => {
-                                    return (
-                                      <Typography
-                                        variant="h5"
-                                        color="text.secondary"
-                                        marginBottom={2}
-                                      >
-                                        Ngày chiếu:
-                                        {
-                                          dayjs(value.ngayChieuGioChieu).format("DD/MM/YYYY ~ hh:mm")
-                                        }
-                                      </Typography>
-                                    )
-
-                                  })
-                                }
-                              </CardContent>
-                            </Grid>
-                          </Grid>
-                        </Box>
-                      }
-                      // {...a11yProps(item.maHeThongRap)}
-                      // truyền thêm prop value vào, tương ứng với value dưới TabPanel
-                      value={item.maCumRap}
-                    />
-                  );
-                })
+                <Slider {...settings}>
+                  {
+                    showtimeInfo.map((item) => {
+                      return (
+                        <Card sx={{ maxWidth: 600 }}>
+                          <CardMedia
+                            sx={{ height: 300 }}
+                            image={item.hinhAnh}
+                            title="green iguana"
+                          />
+                          <CardContent>
+                            <Typography 
+                            gutterBottom 
+                            variant="h4" 
+                            component="div"
+                            {...typographySettings}
+                            sx={{
+                              fontSize: 40,
+                            }}
+                            >
+                            {item.tenPhim}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              Lizards are a widespread group of squamate reptiles, with over 6,000
+                              species, ranging across all continents except Antarctica
+                            </Typography>
+                          </CardContent>
+                          <CardActions>
+                            <Button
+                              variant="contained"
+                              style={{
+                                backgroundColor: `${red[500]}`,
+                                display: "flex",
+                                width: 200,
+                                height: 50,
+                                fontSize: 24,
+                                margin: "auto",
+                              }}
+                              onClick={() => {
+                                navigate(`movie/${item.maPhim}`)
+                              }}>
+                              Mua vé
+                            </Button>
+                          </CardActions>
+                        </Card>
+                      );
+                    })
+                  }
+                </Slider>
               ) : (
-                showtime[0]?.lstCumRap[0]?.map((item) => {
-                  return (
-                    <Tab
-                      key={item.maCumRap}
-                      onClick={() => {
-                        navigate(`movie/${item.maPhim}`)
-                      }}
-                      label={
-                        <Box>
-                          {
-                            item.danhSachPhim.map((item) => {
-                              {
-                                return (
-                                  <Box textAlign="left">
-                                    <Grid container spacing={2}>
-                                      <Grid xs={6} lg={6}>
-                                        <CardMedia
-                                          id="posterMovie"
-                                        >
-                                          <img src={item.hinhAnh} alt="" id='posterImg'
-                                            style={{
-                                              border: "2px solid #1976d2",
-                                              borderRadius: "10px",
-                                            }} />
-                                        </CardMedia>
-                                      </Grid>
-                                      <Grid xs={6} lg={6} paddingLeft={4}>
-                                        <CardContent >
-                                          <Typography
-                                            gutterBottom
-                                            variant="h4"
-                                            component="div"
-                                            className="truncate"
-                                            marginBottom={2}
-                                          >
-                                            {item.tenPhim}
-                                          </Typography>
-                                          {/* <Typography
-                                            variant="h5"
-                                            color="text.secondary"
-                                            marginBottom={2}
-                                          >
-                                            Ngày chiếu:
-                                            {
-                                              dayjs(item.ngayKhoiChieu).format("DD/MM/YYYY ~ hh:mm")
-                                            }
-                                          </Typography> */}
-                                        </CardContent>
-                                      </Grid>
-                                    </Grid>
-                                  </Box>
-                                )
-                              }
-                            })
-                          }
-                        </Box>
-                      }
-                      // {...a11yProps(item.maHeThongRap)}
-                      // truyền thêm prop value vào, tương ứng với value dưới TabPanel
-                      value={item.maCumRap}
-                    />
-                  );
-                })
+                <Box maxWidth="md">
+                  <Grid container spacing={2}>
+                    <Grid xs={6} lg={6}>
+                      <Skeleton variant="rounded" sx={{ height: 500 }} animation="wave" style={{ margin: 10 }} />
+                    </Grid>
+                    <Grid xs={6} lg={6}>
+                      <Skeleton animation="wave" height={25} width="60%" style={{ margin: 10 }} />
+                      <Skeleton variant="rounded" sx={{ height: 50 }} animation="wave" style={{ margin: 10 }} />
+                      <Skeleton animation="wave" height={25} width="60%" style={{ margin: 10 }} />
+                      <Skeleton animation="wave" height={25} width="60%" style={{ margin: 10 }} />
+                      <Skeleton variant="rounded" sx={{ height: 50 }} width="60%" animation="wave" style={{ margin: 10 }} />
+                    </Grid>
+                  </Grid>
+                </Box>
               )
             }
 
