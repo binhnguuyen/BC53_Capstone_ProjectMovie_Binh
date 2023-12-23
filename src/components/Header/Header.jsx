@@ -9,21 +9,20 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "../../routes/path";
-import { useAuth } from "../../contexts/UserContext/UserContext";
+import { useAuth, useDarkMode } from "../../contexts/UserContext/UserContext";
 import { blue } from '@mui/material/colors';
+import DarkModeToggle from '../DarkModeToggle/DarkModeToggle';
 
-// import { useContext } from "react"
-// import { UserContext } from "../../contexts/UserContext";
 
 const Header = () => {
   const navigate = useNavigate();
-  // const {currentUser} = useContext(UserContext);
-  // console.log('currentUser: ', currentUser);
+
   const { currentUser, handleLogout } = useAuth();
-  // console.log('currentUser: ', currentUser);
+
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   return (
-    <Box sx={{ flexGrow: 1 }} >
+    <Box sx={{ flexGrow: 1 }} className={isDarkMode ? 'dark-mode' : 'light-mode'}>
       {/* <AppBar position="static"> */}
       <Toolbar>
         <IconButton
@@ -38,14 +37,24 @@ const Header = () => {
         <Typography variant="h4" component="div" sx={{ flexGrow: 1, color: `${blue[600]}`, fontWeight: 700, }}>
           CyberSoft Movie Pro
         </Typography>
+        <Typography
+          onChange={() => {
+            toggleDarkMode()
+          }}
+        >
+          <DarkModeToggle />
+        </Typography>
         {currentUser ? (
           <Stack direction={"row"} spacing={2} alignItems={"center"}>
             <Typography variant="h6">Xin chào {currentUser.hoTen}</Typography>
-            <Button size="large" variant="contained" onClick={() => {
-              handleLogout();
-              // đăng xuất rồi thì đá qua trang HOME
-              navigate(PATH.HOME);
-            }}>
+            <Button
+              size="large"
+              variant="contained"
+              onClick={() => {
+                handleLogout();
+                // đăng xuất rồi thì đá qua trang HOME
+                navigate(PATH.HOME);
+              }}>
               Logout
             </Button>
           </Stack>

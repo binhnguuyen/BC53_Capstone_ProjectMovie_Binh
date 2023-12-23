@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick'
 import { blue } from '@mui/material/colors';
 
-
 const Showing = () => {
 
   const settings = {
