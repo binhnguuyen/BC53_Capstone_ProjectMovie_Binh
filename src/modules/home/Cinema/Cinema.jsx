@@ -164,7 +164,7 @@ const Cinema = () => {
           <Tabs
             orientation="vertical"
             aria-label="Vertical tabs example"
-            sx={{ borderRight: 1, borderColor: "divider" }}
+            sx={{ borderRight: 1, borderBottom: 1, borderColor: "divider" }}
             // truyền thêm prop value vào, cái value này tương đương với value trong Tab bên dưới
             value={theaterSystemId}
             onChange={(event, newValue) => {
@@ -191,7 +191,7 @@ const Cinema = () => {
           <Tabs
             orientation="vertical"
             aria-label="Vertical tabs example"
-            sx={{ borderRight: 1, borderColor: "divider" }}
+            sx={{ borderRight: 1, borderBottom: 1, borderColor: "divider" }}
             // truyền thêm prop value vào, cái value này tương đương với value trong Tab bên dưới
             value={theaterId}
             onChange={(event, newValue) => {
@@ -223,13 +223,17 @@ const Cinema = () => {
             })}
           </Tabs>
         </Grid>
-        <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+        <Grid item xs={6} sm={6} md={6} lg={6} xl={6}
+        >
           <Tabs
             orientation="vertical"
             aria-label="Vertical tabs example"
-            sx={{ borderRight: 1, borderColor: "divider" }}
+            sx={{ borderRight: 1, borderBottom: 1, borderColor: "divider" }}
             // truyền thêm prop value vào
             value={theaterSystemId}
+            style={{
+              textAlign: "center"
+            }}
           // onChange={(event, newValue) => {
           //   setShowtimeInfo(newValue);
           // }}
@@ -240,13 +244,18 @@ const Cinema = () => {
                   {
                     showtimeInfo.map((item) => {
                       return (
-                        <Card sx={{ maxWidth: 600 }}>
+                        <Card
+                          sx={{
+                            maxWidth: 600,
+                          }}
+                        >
                           <CardMedia
                             sx={{
                               height: 300,
                               border: "2px solid #1976d2",
                               borderRadius: "10px",
                               cursor: "pointer",
+                              textAlign: "left"
                             }}
                             image={item.hinhAnh}
                             onClick={() => {
@@ -266,13 +275,13 @@ const Cinema = () => {
                             >
                               {item.tenPhim}
                             </Typography>
-                            <Typography 
-                            {...typographySettings} 
-                            style={{
-                              fontSize: 18,
-                            }}
+                            <Typography
+                              {...typographySettings}
+                              style={{
+                                fontSize: 18,
+                              }}
                             >
-                              Ngày giờ chiếu: 
+                              Ngày giờ chiếu:
                               {
                                 dayjs(item.lstLichChieuTheoPhim[0]?.ngayChieuGioChieu).format("DD/MM/YYYY ~ hh:mm")
                               }
