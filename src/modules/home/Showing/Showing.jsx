@@ -5,8 +5,12 @@ import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography, Co
 import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick'
 import { blue } from '@mui/material/colors';
+import { useAuth, useDarkMode } from "../../../contexts/UserContext/UserContext";
+import DarkModeToggle from '../../../components/DarkModeToggle/DarkModeToggle';
 
 const Showing = () => {
+
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   const settings = {
     className: "center",
@@ -28,7 +32,7 @@ const Showing = () => {
           padding: "2px",
           fontSize: 20,
           width: "30px",
-          color: 'black',
+          // color: 'black',
           // backgroundColor: `${blue[200]}`,
           border: `1px ${blue[500]} solid`,
           borderRadius: "5px",
@@ -77,20 +81,12 @@ const Showing = () => {
                   <Skeleton variant="rounded" sx={{ height: 50 }} animation="wave" style={{ margin: 10 }} />
                 </Box>
               ) : (
-                <Box>
-                  {/* <CardMedia
-                    sx={{
-                      height: 400,
-                      border: "2px solid #1976d2",
-                      borderRadius: "10px",
-                      cursor: "pointer",
-                    }} 
-                    title="green iguana"
-                    image={item.hinhAnh}
-                    onClick={() => {
-                      navigate(`movie/${item.maPhim}`)
-                    }}
-                  /> */}
+                <Box className={isDarkMode ? 'dark-mode' : 'light-mode'}
+                  // style={{
+                  //   border: "2px solid #1976d2",
+                  //   borderRadius: "10px",
+                  // }}
+                >
                   <Button
                     onClick={() => {
                       navigate(`movie/${item.maPhim}`)
@@ -98,9 +94,10 @@ const Showing = () => {
                   >
                     <img
                       src={item.hinhAnh}
-                      width="100%"
+                      // width="100%"
                       style={{
-                        height: 800,
+                        width: "100%",
+                        height: 600,
                         objectFit: "cover",
                         border: "2px solid #1976d2",
                         borderRadius: "10px",
@@ -117,13 +114,12 @@ const Showing = () => {
                     </Typography>
                     <Typography
                       variant="body2"
-                      color="text.secondary"
                       className="truncate truncate--1">
                       {item.moTa}
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small"
+                    <Button size="large"
                       variant="contained"
                       fullWidth
                       onClick={() => {
