@@ -3,14 +3,53 @@ import React from 'react'
 import { getListMovieAPI } from "../../../apis/movieApi";
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography, Container, Skeleton, Box } from "@mui/material"
 import { useNavigate } from 'react-router-dom';
+import Slider from 'react-slick'
+import { blue } from '@mui/material/colors';
+import { useAuth, useDarkMode } from "../../../contexts/UserContext/UserContext";
+import DarkModeToggle from '../../../components/DarkModeToggle/DarkModeToggle';
 
 const Showing = () => {
+
+  const { isDarkMode } = useDarkMode();
+
+  const settings = {
+    className: "center",
+    centerMode: true,
+    centerPadding: "60px",
+    infinite: true,
+    speed: 500,
+    autoplaySpeed: 2000,
+    slidesToShow: 3,
+    autoplay: true,
+    initialSlide: 0,
+    rows: 2,
+    dots: true,
+    swipeToSlide: true,
+    customPaging: i => (
+      <div
+        style={{
+          margin: "5px",
+          padding: "2px",
+          fontSize: 20,
+          width: "30px",
+          // color: 'black',
+          // backgroundColor: `${blue[200]}`,
+          border: `1px ${blue[500]} solid`,
+          borderRadius: "5px",
+        }}
+      >
+        {i + 1}
+      </div>
+    )
+  };
+
   // cái hook giúp mình chuyển trang
   const navigate = useNavigate()
   // khi load trang lên, thằng banner chạy thì nó sẽ chạy thằng useQuerry và get API
   // đặt data là 1 cái mảng ngay từ đầu luôn để nó ko bị undefined lúc đầu
   const { data = [], isLoading, isError, error } = useQuery({
     queryKey: ["showing"],
+    // queryFn ko truyền vào tham số thì gọi thế này(nếu có truyền tham số thì phải gọi bằng 1 callback)
     queryFn: getListMovieAPI,
   });
 
@@ -25,65 +64,77 @@ const Showing = () => {
   return (
     // thằng Container này từ MUI, thay nó cho thằng div
     // nó sẽ có chức năng giống container của BS
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ marginBottom: 10 }} spacing={2}>
       {/* <Button variant="outlined" size="large">
         Hello World
       </Button> */}
       {/* thằng Grid này giống row trong BS */}
-      <Grid container spacing={2}>
-        {/* row */}
+      <Slider {...settings}>
         {data.map((item) => (
-          // col-x trong BS
-          <Grid item xs={6} sm={4} md={4} lg={3} xl={3} key={item.maPhim}>
-            {/* col */}
-            <Card >
-              {
-                isLoading ? (
-                  <Box>
-                    <Skeleton variant="rounded" sx={{ height: 400 }} animation="wave" style={{ margin: 10 }} />
-                    <Skeleton animation="wave" height={25} style={{ margin: 10 }} />
-                    <Skeleton animation="wave" height={25} width="80%" style={{ margin: 10 }} />
-                    <Skeleton variant="rounded" sx={{ height: 50 }} animation="wave" style={{ margin: 10 }} />
-                  </Box>
-                ) : (
-                  <Box>
-                    <CardMedia
-                      sx={{ height: 400 }}
-                      image={item.hinhAnh}
-                      title="green iguana"
+          <Card >
+            {
+              isLoading ? (
+                <Box>
+                  <Skeleton variant="rounded" sx={{ height: 400 }} animation="wave" style={{ margin: 10 }} />
+                  <Skeleton animation="wave" height={25} style={{ margin: 10 }} />
+                  <Skeleton animation="wave" height={25} width="80%" style={{ margin: 10 }} />
+                  <Skeleton variant="rounded" sx={{ height: 50 }} animation="wave" style={{ margin: 10 }} />
+                </Box>
+              ) : (
+                <Box className={isDarkMode ? 'dark-mode' : 'light-mode'}
+                  // style={{
+                  //   border: "2px solid #1976d2",
+                  //   borderRadius: "10px",
+                  // }}
+                >
+                  <Button
+                    onClick={() => {
+                      navigate(`movie/${item.maPhim}`)
+                    }}
+                  >
+                    <img
+                      src={item.hinhAnh}
+                      // width="100%"
+                      style={{
+                        width: "100%",
+                        height: 600,
+                        objectFit: "cover",
+                        border: "2px solid #1976d2",
+                        borderRadius: "10px",
+                      }}
                     />
-                    <CardContent>
-                      <Typography
-                        gutterBottom
-                        variant="h5"
-                        component="div"
-                        className="truncate" >
-                        {item.tenPhim}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        className="truncate truncate--2">
-                        {item.moTa}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button size="small"
-                        variant="contained"
-                        fullWidth
-                        onClick={() => {
-                          navigate(`movie/${item.maPhim}`)
-                        }}
-                      >Xem chi tiết
-                      </Button>
-                    </CardActions>
-                  </Box>
-                )
-              }
-            </Card>
-          </Grid>
+                  </Button>
+                  <CardContent>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                      className="truncate" >
+                      {item.tenPhim}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      className="truncate truncate--1">
+                      {item.moTa}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="large"
+                      variant="contained"
+                      fullWidth
+                      onClick={() => {
+                        navigate(`movie/${item.maPhim}`)
+                      }}
+                    >Xem chi tiết
+                    </Button>
+                  </CardActions>
+                </Box>
+              )
+            }
+          </Card>
         ))}
-      </Grid>
+      </Slider>
+
     </Container>
   );
 

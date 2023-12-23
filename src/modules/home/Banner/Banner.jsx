@@ -2,22 +2,26 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { getBannersAPI } from "../../../apis/movieApi";
 import Slider from "react-slick";
-import { Box, Grid, Skeleton } from "@mui/material";
+import { Box, Button, Container, Grid, Skeleton } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import { useNavigate } from "react-router-dom";
 
 // setting của slick
 const settings = {
+  className: "center",
+  centerMode: true,
   dots: true,
-  infinite: true,
-  speed: 500,
   slidesToShow: 1,
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 3000,
+  speed: 1000,
+  infinite: true,
 };
 
 const Banner = () => {
+  const navigate = useNavigate();
   // khi load trang lên, thằng banner chạy thì nó sẽ chạy thằng useQuerry và get API
   // đặt data là 1 cái mảng ngay từ đầu luôn để nó ko bị undefined lúc đầu
   // dùng useQuery để khi có 1 thay đổi thì nó sẽ GET API về
@@ -76,7 +80,7 @@ const Banner = () => {
   }
 
   return (
-    <div>
+    <Container maxWidth="xl" sx={{ marginBottom: 10 }} spacing={2}>
       <Slider
         // slider này nó clone lại cái settings
         {...settings}
@@ -84,17 +88,28 @@ const Banner = () => {
         {data.map((item, index) => {
           return (
             // cái box này để bọc lại phần nội dung của carousel
-            <Box style={{ height: "auto", width: "100%"}} key={index}>
-              <img
-                src={item.hinhAnh}
-                width="100%"
-                style={{ objectFit: "cover" }}
-              />
+            <Box style={{ height: "auto", width: "100%" }} key={index}>
+              <Button
+                onClick={() => {
+                  navigate(`movie/${item.maPhim}`)
+                }}
+              >
+                <img
+                  src={item.hinhAnh}
+                  width="100%"
+                  style={{
+                    height: 800,
+                    objectFit: "cover",
+                    border: "2px solid #1976d2",
+                    borderRadius: "10px",
+                  }}
+                />
+              </Button>
             </Box>
           );
         })}
       </Slider>
-    </div >
+    </Container >
   );
 
 };

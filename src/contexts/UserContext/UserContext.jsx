@@ -3,8 +3,10 @@ import { CURRENT_USER } from '../../constants';
 
 export const UserContext = createContext();
 
+export const DarkModeContext = createContext();
+
 export const UserProvider = ({ children }) => {
-    const [currentUser, setCurrentUser]  = useState(() => {
+    const [currentUser, setCurrentUser] = useState(() => {
         const user = JSON.parse(localStorage.getItem(CURRENT_USER));
         return user || null;
     })
@@ -32,5 +34,23 @@ export const useAuth = () => {
     const value = useContext(UserContext);
     return value;
 }
+
+export const DarkModeProvider = ({ children }) => {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    const toggleDarkMode = () => {
+        setIsDarkMode(!isDarkMode);
+    };
+
+    return (
+        <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
+            {children}
+        </DarkModeContext.Provider>
+    );
+};
+
+export const useDarkMode = () => {
+    return useContext(DarkModeContext);
+};
 
 // export default UserContext

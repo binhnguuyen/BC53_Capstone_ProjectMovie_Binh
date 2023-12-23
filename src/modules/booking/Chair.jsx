@@ -40,7 +40,7 @@ const Chair = () => {
 
 
     return (
-        <Grid container spacing={3}>
+        <Grid container spacing={1.5} columns={{ xs: 4, sm: 6, md: 12, lg: 16, xl: 16 }}>
             {
                 isLoading ? (
                     <Grid xs={12} md={12} lg={12}>
@@ -52,10 +52,7 @@ const Chair = () => {
                             <Grid
                                 item
                                 key={ghe.tenGhe}
-                                xs={3}
-                                sm={2}
-                                md={1}
-                                lg={1}
+                                xs={1}
                             >
                                 {
                                     <Typography

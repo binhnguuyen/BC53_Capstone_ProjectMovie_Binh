@@ -44,13 +44,14 @@ const ShowTimes = ({ movieId }) => {
 
   // dùng useQuery để khi có 1 thay đổi thì nó sẽ GET API về
   const { data = {}, isLoading, isError, error } = useQuery({
+    // "showtimes" là key tự do ko bắt buộc, modieId truyền vào để khi modieId thay  đổi thì queryFn tự chạy lại giống useEffect 
+    queryKey: ["showtimes", movieId],
     // thằng function này phải truyền tham số movieId vào nên phải dùng callback function
     // thằng nào ko cần truyền tham số thì chỉ gọi ra giống bên Showing là OK
     // queryFn: () => {
     //   return getMovieDetailsAPI(movieId);
     // },
     // hoặc viết gọn lại như sau
-    queryKey: ["showtimes", movieId],
     queryFn: () => getMovieShowTimesAPI(movieId),
     // nếu movieId khác undefined(tức là false) thì cái queryFn trên mới chạy
     // tức là khi có movieId mới chạy
@@ -58,7 +59,6 @@ const ShowTimes = ({ movieId }) => {
     enabled: !!movieId,
   });
   const cinemaSystems = data.heThongRapChieu || [];
-  console.log('cinemaSystems: ', cinemaSystems);
 
   // khi cinemaSystems thay đổi (>0) thì mặc định render ra thằng đầu tiên
   useEffect(() => {

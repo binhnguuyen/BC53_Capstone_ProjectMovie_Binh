@@ -4,12 +4,17 @@ import Cinema from "./Cinema";
 import Showing from "./Showing";
 import { Skeleton } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
+import DarkModeToggle from '../../components/DarkModeToggle/DarkModeToggle';
+import { useDarkMode } from "../../contexts/UserContext/UserContext";
 
 // thư viện Lottie
 import Lottie from 'react-lottie';
 import animationData from "../../Lotties/Aniki Hamster.json"
 
 const Home = () => {
+  const { isDarkMode } = useDarkMode();
+  console.log('isDarkMode: ', isDarkMode);
+
   // thư viện Lottie
   const defaultOptions = {
     loop: true,
@@ -32,10 +37,10 @@ const Home = () => {
   // }
   
   return (
-    <div>
+    <div className={isDarkMode ? 'dark-mode' : 'light-mode'}>
       <Banner />
-      <Cinema />
       <Showing />
+      <Cinema />
     </div>
   );
 };
