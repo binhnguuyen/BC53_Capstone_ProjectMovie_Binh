@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import Slider from "react-slick";
 import { red } from '@mui/material/colors';
 import dayjs from 'dayjs';
-
+import { useAuth, useDarkMode } from "../../../contexts/UserContext/UserContext";
+import DarkModeToggle from '../../../components/DarkModeToggle/DarkModeToggle';
 
 
 // Ở đầy dùng Vertical tabs của MUI
@@ -52,6 +53,7 @@ function SamplePrevArrow(props) {
 }
 
 const Cinema = () => {
+  const { isDarkMode } = useDarkMode();
 
   const settings = {
     dots: true,
@@ -164,7 +166,7 @@ const Cinema = () => {
           <Tabs
             orientation="vertical"
             aria-label="Vertical tabs example"
-            sx={{ borderRight: 1, borderBottom: 1, borderColor: "divider" }}
+            sx={{ borderRight: 1, borderColor: "divider" }}
             // truyền thêm prop value vào, cái value này tương đương với value trong Tab bên dưới
             value={theaterSystemId}
             onChange={(event, newValue) => {
@@ -177,6 +179,7 @@ const Cinema = () => {
               return (
                 <Tab
                   key={item.maHeThongRap}
+                  sx={{ borderBottom: 1, borderColor: "divider" }}
                   // onClick={() => handleChangeTheaterSystemId(item.maHeThongRap)}
                   label={<img src={item.logo} style={{ width: 100 }} />}
                   // {...a11yProps(item.maHeThongRap)}
@@ -191,7 +194,7 @@ const Cinema = () => {
           <Tabs
             orientation="vertical"
             aria-label="Vertical tabs example"
-            sx={{ borderRight: 1, borderBottom: 1, borderColor: "divider" }}
+            sx={{ borderRight: 1, borderColor: "divider" }}
             // truyền thêm prop value vào, cái value này tương đương với value trong Tab bên dưới
             value={theaterId}
             onChange={(event, newValue) => {
@@ -201,10 +204,11 @@ const Cinema = () => {
             {theater?.map((item) => {
               return (
                 <Tab
+                  sx={{ borderBottom: 1, borderColor: "divider", width: "100%" }}
                   key={item.maCumRap}
                   // onClick={() => handleChangeTheaterId(item.maCumRap)}
                   label={
-                    <Box textAlign="left">
+                    <Box textAlign="left" className={isDarkMode ? 'dark-mode' : 'light-mode'}>
                       <Typography {...typographySettings}>
                         {item.tenCumRap}
                       </Typography>
@@ -228,7 +232,7 @@ const Cinema = () => {
           <Tabs
             orientation="vertical"
             aria-label="Vertical tabs example"
-            sx={{ borderRight: 1, borderBottom: 1, borderColor: "divider" }}
+            sx={{ borderBottom: 1, borderColor: "divider" }}
             // truyền thêm prop value vào
             value={theaterSystemId}
             style={{
@@ -248,6 +252,7 @@ const Cinema = () => {
                           sx={{
                             maxWidth: 600,
                           }}
+                          
                         >
                           <CardMedia
                             sx={{
@@ -263,7 +268,7 @@ const Cinema = () => {
                             }}
                             title="green iguana"
                           />
-                          <CardContent>
+                          <CardContent className={isDarkMode ? 'dark-mode' : 'light-mode'}>
                             <Typography
                               gutterBottom
                               variant="h4"
@@ -286,11 +291,10 @@ const Cinema = () => {
                                 dayjs(item.lstLichChieuTheoPhim[0]?.ngayChieuGioChieu).format("DD/MM/YYYY ~ hh:mm")
                               }
                             </Typography>
-                          </CardContent>
-                          <CardActions>
                             <Button
                               variant="contained"
                               style={{
+                                marginTop: 20,
                                 backgroundColor: `${red[500]}`,
                                 display: "flex",
                                 width: 200,
@@ -303,7 +307,7 @@ const Cinema = () => {
                               }}>
                               Mua vé
                             </Button>
-                          </CardActions>
+                          </CardContent>
                         </Card>
                       );
                     })

@@ -12,7 +12,7 @@ import Lottie from 'react-lottie';
 import animationData from "../../Lotties/Aniki Hamster.json"
 
 const Home = () => {
-  const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const { isDarkMode } = useDarkMode();
   console.log('isDarkMode: ', isDarkMode);
 
   // thư viện Lottie

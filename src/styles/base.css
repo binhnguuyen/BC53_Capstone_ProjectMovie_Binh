@@ -5,13 +5,13 @@
 }
 
 .dark-mode {
-  background-color: #222;
-  color: #fff !important;
+  background-color: #333;
+  color: #ddd;
 }
 
 .light-mode {
-  background-color: #fff;
-  color: #222 !important;
+  background-color: #ddd;
+  color: #333;
 }
 
 /* giúp mình ẩn bớt những đoạn văn dài, biến nó thành ... */

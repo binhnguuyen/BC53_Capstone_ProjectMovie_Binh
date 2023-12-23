@@ -10,7 +10,7 @@ import DarkModeToggle from '../../../components/DarkModeToggle/DarkModeToggle';
 
 const Showing = () => {
 
-  const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const { isDarkMode } = useDarkMode();
 
   const settings = {
     className: "center",
