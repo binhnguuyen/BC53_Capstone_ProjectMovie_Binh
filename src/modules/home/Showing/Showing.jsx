@@ -4,6 +4,7 @@ import { getListMovieAPI } from "../../../apis/movieApi";
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography, Container, Skeleton, Box } from "@mui/material"
 import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick'
+import { blue } from '@mui/material/colors';
 
 
 const Showing = () => {
@@ -21,28 +22,22 @@ const Showing = () => {
     rows: 2,
     dots: true,
     swipeToSlide: true,
-    appendDots: dots => (
+    customPaging: i => (
       <div
         style={{
-          backgroundColor: "#ddd",
-          borderRadius: "10px",
-          padding: "10px"
+          margin: "5px",
+          padding: "2px",
+          fontSize: 20,
+          width: "30px",
+          color: 'black',
+          // backgroundColor: `${blue[200]}`,
+          border: `1px ${blue[500]} solid`,
+          borderRadius: "5px",
         }}
       >
-        <ul style={{ margin: "0px" }}> {dots} </ul>
+        {i + 1}
       </div>
-    ),
-    // customPaging: i => (
-    //   <div
-    //     style={{
-    //       width: "30px",
-    //       color: "blue",
-    //       border: "1px blue solid"
-    //     }}
-    //   >
-    //     {i + 1}
-    //   </div>
-    // )
+    )
   };
 
   // cái hook giúp mình chuyển trang
