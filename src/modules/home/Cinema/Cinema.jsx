@@ -160,7 +160,7 @@ const Cinema = () => {
 
 
   return (
-    <Container maxWidth="xl" sx={{ marginBottom: 100 }}>
+    <Container maxWidth="xl">
       <Grid container spacing={2}>
         <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
           <Tabs
