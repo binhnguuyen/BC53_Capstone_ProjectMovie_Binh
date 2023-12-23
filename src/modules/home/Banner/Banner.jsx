@@ -80,7 +80,7 @@ const Banner = () => {
   }
 
   return (
-    <Container maxWidth="xl" sx={{ marginBottom: 10 }} spacing={2}>
+    <Container style = {{ maxWidth: "1600px" }} sx={{ marginBottom: 10 }} spacing={2}>
       <Slider
         // slider này nó clone lại cái settings
         {...settings}

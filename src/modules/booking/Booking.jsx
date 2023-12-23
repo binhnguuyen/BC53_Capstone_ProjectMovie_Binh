@@ -94,7 +94,7 @@ const Booking = () => {
 
 
     return (
-        <Container maxWidth="xl">
+        <Container style = {{ maxWidth: "1600px" }}>
             <Grid container spacing={2} alignItems={"center"}>
                 <Grid item xs={7} lg={7} xl={7}>
                     <Typography className="screen">

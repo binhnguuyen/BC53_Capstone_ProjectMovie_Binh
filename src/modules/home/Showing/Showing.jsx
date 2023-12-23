@@ -64,7 +64,7 @@ const Showing = () => {
   return (
     // thằng Container này từ MUI, thay nó cho thằng div
     // nó sẽ có chức năng giống container của BS
-    <Container maxWidth="xl" sx={{ marginBottom: 10 }} spacing={2}>
+    <Container style = {{ maxWidth: "1600px" }} sx={{ marginBottom: 10 }} spacing={2}>
       {/* <Button variant="outlined" size="large">
         Hello World
       </Button> */}
