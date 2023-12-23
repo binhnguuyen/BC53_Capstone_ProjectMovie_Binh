@@ -55,12 +55,15 @@ const Cinema = () => {
 
   const settings = {
     dots: true,
-    infinite: true,
     slidesToShow: 3,
     swipeToSlide: true,
     slidesToScroll: 3,
     vertical: true,
     verticalSwiping: true,
+    autoplay: true,
+    speed: 3000,
+    autoplaySpeed: 5000,
+    infinite: true,
   };
 
   const typographySettings = {
@@ -314,14 +317,7 @@ const Cinema = () => {
                 </Box>
               )
             }
-
-
           </Tabs>
-          {/* {showtimeInfo.map((item) => (
-            <TabPanel value={showtimeInfoValue} index={item.maHeThongRap}>
-
-            </TabPanel>
-          ))} */}
         </Grid>
       </Grid>
     </Container >
