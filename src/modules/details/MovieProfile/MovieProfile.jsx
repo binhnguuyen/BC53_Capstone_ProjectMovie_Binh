@@ -55,15 +55,15 @@ const MovieProfile = ({ movieId }) => {
     // thằng function này phải truyền tham số movieId vào nên phải dùng callback function
     // thằng nào ko cần truyền tham số thì chỉ gọi ra giống bên Showing là OK
     // queryFn: () => {
-      //   return getMovieDetailsAPI(movieId);
-      // },
-      // hoặc viết gọn lại như sau
-      queryFn: () => getMovieDetailsAPI(movieId),
-      // nếu movieId khác undefined(tức là false) thì cái queryFn trên mới chạy
-      // tức là khi có movieId mới chạy
-      // còn nếu movieId chưa có thì queryFn sẽ ko chạy
-      enabled: !!movieId,
-    });
+    //   return getMovieDetailsAPI(movieId);
+    // },
+    // hoặc viết gọn lại như sau
+    queryFn: () => getMovieDetailsAPI(movieId),
+    // nếu movieId khác undefined(tức là false) thì cái queryFn trên mới chạy
+    // tức là khi có movieId mới chạy
+    // còn nếu movieId chưa có thì queryFn sẽ ko chạy
+    enabled: !!movieId,
+  });
 
 
   const handleURLYouTube = (url) => {
@@ -76,8 +76,8 @@ const MovieProfile = ({ movieId }) => {
   }
 
   return (
-    <Container 
-    style={{ maxWidth: "1600px" }} 
+    <Container
+      style={{ maxWidth: "1600px" }}
     >
       {
         isLoading ? (
@@ -102,7 +102,7 @@ const MovieProfile = ({ movieId }) => {
               bgcolor: "background.paper",
               display: "flex",
             }}
-            className={isDarkMode ? 'dark-mode' : 'light-mode'} 
+            className={isDarkMode ? 'dark-mode' : 'light-mode'}
           >
             <Grid container spacing={2}>
               <Grid xs={6} lg={6}>
@@ -141,7 +141,7 @@ const MovieProfile = ({ movieId }) => {
                     className="truncate"
                     marginBottom={2}
                   >
-                    Đánh giá: 
+                    Đánh giá:
                   </Typography>
                   <Rating name="size-large" defaultValue={data.danhGia / 2} size="large"></Rating>
                   <Typography
@@ -205,8 +205,12 @@ const MovieProfile = ({ movieId }) => {
               onClose={handleCloseRap}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
+
             >
-              <Box sx={style}>
+              <Box
+                sx={style}
+                className={isDarkMode ? 'dark-mode' : 'light-mode'}
+              >
                 <Typography id="modal-modal-title" variant="h4" component="h2" align='center'>
                   Xin vui lòng chọn rạp
                 </Typography>
