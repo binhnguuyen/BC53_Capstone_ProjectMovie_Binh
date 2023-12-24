@@ -3,11 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react'
 import { getTheaterSystemInfo, getTheaterInfo, getShowtimeInfo } from '../../../apis/cinemaAPI';
 import { useNavigate } from 'react-router-dom';
-import Slider from "react-slick";
 import { red } from '@mui/material/colors';
 import dayjs from 'dayjs';
 import { useAuth, useDarkMode } from "../../../contexts/UserContext/UserContext";
-import DarkModeToggle from '../../../components/DarkModeToggle/DarkModeToggle';
+import Scrollbars from 'react-custom-scrollbars';
 
 
 // Ở đầy dùng Vertical tabs của MUI
@@ -244,7 +243,10 @@ const Cinema = () => {
           >
             {
               showtimeInfo ? (
-                <Slider {...settings}>
+                <Scrollbars
+                  class="ScrollbarsCustom-Content"
+                  style={{ width: 1100, height: 900 }}
+                >
                   {
                     showtimeInfo.map((item) => {
                       return (
@@ -252,7 +254,6 @@ const Cinema = () => {
                           sx={{
                             maxWidth: 600,
                           }}
-
                         >
                           <CardMedia
                             sx={{
@@ -322,7 +323,7 @@ const Cinema = () => {
                       );
                     })
                   }
-                </Slider>
+                </Scrollbars>
               ) : (
                 <Box maxWidth="md">
                   <Grid container spacing={2}>
