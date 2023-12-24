@@ -9,8 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { red } from '@mui/material/colors';
 import ShowTimes from '../ShowTimes/ShowTimes';
 import { useDarkMode } from "../../../contexts/UserContext/UserContext";
-// import DarkModeToggle from '../../../components/DarkModeToggle/DarkModeToggle';
-import { Scrollbar } from 'react-scrollbars-custom';
 
 
 const MovieProfile = ({ movieId }) => {

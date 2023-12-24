@@ -6,8 +6,7 @@ import dayjs from 'dayjs';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { PATH } from '../../../routes/path';
 import { useAuth, useDarkMode } from "../../../contexts/UserContext/UserContext";
-// import DarkModeToggle from '../../../components/DarkModeToggle/DarkModeToggle';
-import { Scrollbars } from 'react-custom-scrollbars';
+import { Scrollbar } from 'react-scrollbars-custom';
 
 
 // Ở đầy dùng Vertical tabs của MUI
@@ -122,7 +121,7 @@ const ShowTimes = ({ movieId }) => {
             })}
           </Tabs>
         </Grid>
-        <Scrollbars
+        <Scrollbar
           class="ScrollbarsCustom-Content"
           style={{ width: 1200, height: 1000 }}
         >
@@ -153,7 +152,7 @@ const ShowTimes = ({ movieId }) => {
                       flexWrap="wrap"
                       divider={<Divider orientation="vertical" flexItem />}
                     >
-                      <Scrollbars
+                      <Scrollbar
                         class="ScrollbarsCustom-Content"
                         style={{ width: 1100, height: 250 }}
                       >
@@ -183,7 +182,7 @@ const ShowTimes = ({ movieId }) => {
                             );
                           })
                         }
-                      </Scrollbars>
+                      </Scrollbar>
                     </Stack>
                   </Box>
                 ))}
@@ -191,7 +190,7 @@ const ShowTimes = ({ movieId }) => {
               </TabPanel>
             </Grid>
           ))}
-        </Scrollbars>
+        </Scrollbar>
       </Box>
     </Container >
   );

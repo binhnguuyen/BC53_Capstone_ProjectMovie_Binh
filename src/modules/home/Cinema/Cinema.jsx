@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { red } from '@mui/material/colors';
 import dayjs from 'dayjs';
 import { useAuth, useDarkMode } from "../../../contexts/UserContext/UserContext";
-import Scrollbars from 'react-custom-scrollbars';
+import { Scrollbar } from 'react-scrollbars-custom';
 
 
 // Ở đầy dùng Vertical tabs của MUI
@@ -243,7 +243,7 @@ const Cinema = () => {
           >
             {
               showtimeInfo ? (
-                <Scrollbars
+                <Scrollbar
                   class="ScrollbarsCustom-Content"
                   style={{ width: 1100, height: 900 }}
                 >
@@ -323,7 +323,7 @@ const Cinema = () => {
                       );
                     })
                   }
-                </Scrollbars>
+                </Scrollbar>
               ) : (
                 <Box maxWidth="md">
                   <Grid container spacing={2}>
