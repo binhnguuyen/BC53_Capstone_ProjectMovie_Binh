@@ -98,139 +98,141 @@ const Booking = () => {
 
 
     return (
-        <Container
-            style={{ maxWidth: "1600px" }}
-            className={isDarkMode ? 'dark-mode container' : 'light-mode container'}>
-            <Grid container spacing={2} alignItems={"center"}>
-                <Grid item xs={7} lg={7} xl={7}>
-                    <Typography className="screen">
-                        Màn chiếu
-                    </Typography>
-                    <Chair />
-                </Grid>
-                <Grid item xs={5} lg={5} xl={5}>
-                    <BookingResult />
-                </Grid>
-            </Grid>
-            <Grid>
-                <LoadingButton
-                    type="submit"
-                    loading={isPending}
-                    variant="contained"
-                    style={{
-                        backgroundColor: `${red[500]}`,
-                        display: "flex",
-                        width: 200,
-                        height: 50,
-                        fontSize: 24,
-                        margin: "auto",
-                    }}
-                    onClick={handleOpen}
-                >Đặt vé
-                </LoadingButton>
-            </Grid>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+        <Box className={isDarkMode ? 'dark-mode container' : 'light-mode container'}>
+            <Container
+                style={{ maxWidth: "1600px" }}
             >
-                <Box sx={style}>
-                    {
-                        chairsBooking.length ? (
-                            <Box>
-                                <Typography id="modal-modal-title" variant="h4" gutterBottom>
-                                    Xác nhận mua vé
-                                </Typography>
-                                <Typography id="modal-modal-description" variant="h5" gutterBottom>
-                                    <Table aria-label="simple table">
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell align="left" {...typographySettings}>Số ghế</TableCell>
-                                                <TableCell align="center" {...typographySettings}>Giá vé</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {
-                                                chairsBooking.map((ghe) => {
-                                                    return (
-                                                        <TableRow key={ghe.maGhe}>
-                                                            <TableCell align="left" {...typographySettings}>{ghe.tenGhe}</TableCell>
-                                                            <TableCell align="center" {...typographySettings}>{ghe.giaVe}</TableCell>
-                                                        </TableRow>
-                                                    )
-                                                })
-                                            }
-                                        </TableBody>
-                                    </Table>
-                                    <Table>
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell
-                                                    align="left"
-                                                    {...typographySettings}
-                                                    style={{
-                                                        fontSize: 24,
-                                                        fontWeight: 700,
-                                                    }}
-                                                >
-                                                    Tổng tiền
-                                                </TableCell>
-                                                <TableCell
-                                                    align="center"
-                                                    {...typographySettings}
-                                                    style={{
-                                                        fontSize: 24,
-                                                        fontWeight: 700,
-                                                    }}
-                                                >
-                                                    {
-                                                        chairsBooking.reduce((total, value) => (total + value.giaVe), 0)
-                                                    }
-                                                </TableCell>
-                                                <TableCell
-                                                    align="right"
-                                                    {...typographySettings}
-                                                    style={{
-                                                        fontSize: 24,
-                                                        fontWeight: 700,
-                                                    }}
-                                                >
-                                                    VND
-                                                </TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                    </Table>
-                                    <Button
-                                        variant="contained"
-                                        style={{
-                                            backgroundColor: `${red[500]}`,
-                                            display: "flex",
-                                            width: 200,
-                                            height: 50,
-                                            fontSize: 24,
-                                            margin: "auto",
-                                        }}
-                                        onClick={() => {
-                                            handleSubmit(chairsBooking)
-                                        }}
-                                    >Mua</Button>
-                                </Typography>
-                            </Box>
-                        ) : (
-                            <Box>
-                                <Typography
-                                    {...typographySettings}
-                                >
-                                    Bạn chưa chọn ghế
-                                </Typography>
-                            </Box>
-                        )
-                    }
+                <Grid container spacing={2} alignItems={"center"}>
+                    <Grid item xs={7} lg={7} xl={7}>
+                        <Typography className="screen">
+                            Màn chiếu
+                        </Typography>
+                        <Chair />
+                    </Grid>
+                    <Grid item xs={5} lg={5} xl={5}>
+                        <BookingResult />
+                    </Grid>
+                </Grid>
+                <Grid>
+                    <LoadingButton
+                        type="submit"
+                        loading={isPending}
+                        variant="contained"
+                        style={{
+                            backgroundColor: `${red[500]}`,
+                            display: "flex",
+                            width: 200,
+                            height: 50,
+                            fontSize: 24,
+                            margin: "auto",
+                        }}
+                        onClick={handleOpen}
+                    >Đặt vé
+                    </LoadingButton>
+                </Grid>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={style}>
+                        {
+                            chairsBooking.length ? (
+                                <Box>
+                                    <Typography id="modal-modal-title" variant="h4" gutterBottom>
+                                        Xác nhận mua vé
+                                    </Typography>
+                                    <Typography id="modal-modal-description" variant="h5" gutterBottom>
+                                        <Table aria-label="simple table">
+                                            <TableHead>
+                                                <TableRow>
+                                                    <TableCell align="left" {...typographySettings}>Số ghế</TableCell>
+                                                    <TableCell align="center" {...typographySettings}>Giá vé</TableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                {
+                                                    chairsBooking.map((ghe) => {
+                                                        return (
+                                                            <TableRow key={ghe.maGhe}>
+                                                                <TableCell align="left" {...typographySettings}>{ghe.tenGhe}</TableCell>
+                                                                <TableCell align="center" {...typographySettings}>{ghe.giaVe}</TableCell>
+                                                            </TableRow>
+                                                        )
+                                                    })
+                                                }
+                                            </TableBody>
+                                        </Table>
+                                        <Table>
+                                            <TableHead>
+                                                <TableRow>
+                                                    <TableCell
+                                                        align="left"
+                                                        {...typographySettings}
+                                                        style={{
+                                                            fontSize: 24,
+                                                            fontWeight: 700,
+                                                        }}
+                                                    >
+                                                        Tổng tiền
+                                                    </TableCell>
+                                                    <TableCell
+                                                        align="center"
+                                                        {...typographySettings}
+                                                        style={{
+                                                            fontSize: 24,
+                                                            fontWeight: 700,
+                                                        }}
+                                                    >
+                                                        {
+                                                            chairsBooking.reduce((total, value) => (total + value.giaVe), 0)
+                                                        }
+                                                    </TableCell>
+                                                    <TableCell
+                                                        align="right"
+                                                        {...typographySettings}
+                                                        style={{
+                                                            fontSize: 24,
+                                                            fontWeight: 700,
+                                                        }}
+                                                    >
+                                                        VND
+                                                    </TableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                        </Table>
+                                        <Button
+                                            variant="contained"
+                                            style={{
+                                                backgroundColor: `${red[500]}`,
+                                                display: "flex",
+                                                width: 200,
+                                                height: 50,
+                                                fontSize: 24,
+                                                margin: "auto",
+                                            }}
+                                            onClick={() => {
+                                                handleSubmit(chairsBooking)
+                                            }}
+                                        >Mua</Button>
+                                    </Typography>
+                                </Box>
+                            ) : (
+                                <Box>
+                                    <Typography
+                                        {...typographySettings}
+                                    >
+                                        Bạn chưa chọn ghế
+                                    </Typography>
+                                </Box>
+                            )
+                        }
 
-                </Box>
-            </Modal>
-        </Container>
+                    </Box>
+                </Modal>
+            </Container>
+        </Box>
     )
 }
 
