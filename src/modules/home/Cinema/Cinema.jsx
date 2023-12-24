@@ -5,7 +5,7 @@ import { getTheaterSystemInfo, getTheaterInfo, getShowtimeInfo } from '../../../
 import { useNavigate } from 'react-router-dom';
 import { red } from '@mui/material/colors';
 import dayjs from 'dayjs';
-import { useAuth, useDarkMode } from "../../../contexts/UserContext/UserContext";
+import { useDarkMode } from "../../../contexts/UserContext/UserContext";
 import { Scrollbar } from 'react-scrollbars-custom';
 
 
