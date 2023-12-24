@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from "react";
 import { getMovieShowTimesAPI } from "../../../apis/cinemaAPI"
-import { Box, Button, Container, Stack, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Button, Container, Divider, Grid, Stack, Tab, Tabs, Typography } from "@mui/material";
 import dayjs from 'dayjs';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { PATH } from '../../../routes/path';
@@ -68,7 +68,7 @@ const ShowTimes = ({ movieId }) => {
   }, [cinemaSystems]);
 
   return (
-    <Container maxWidth="lg" style={{ marginTop: 20 }}>
+    <Container className='container' style={{ maxWidth: "1600px" }}>
       <Box
         sx={{
           flexGrow: 1,
@@ -76,82 +76,95 @@ const ShowTimes = ({ movieId }) => {
           display: "flex",
         }}
       >
-
-        <Tabs
-          orientation="vertical"
-          aria-label="Vertical tabs example"
-          sx={{ borderRight: 1, borderColor: "divider" }}
-          // truyền thêm prop value vào
-          value={value}
-          onChange={(event, newValue) => {
-            // console.log("newValue", newValue);
-            // console.log("event", event);
-            setValue(newValue);
-          }}
-        >
-          {cinemaSystems.map((item) => {
-            return (
-              <Tab
-                // onClick={() => handleChange(item.maHeThongRap)}
-                label={<img src={item.logo} style={{ width: 100 }} />}
-                // {...a11yProps(item.maHeThongRap)}
-                // truyền thêm prop value vào, tương ứng với value dưới TabPanel
-                value={item.maHeThongRap}
-              />
-            );
-          })}
-        </Tabs>
+        <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
+          <Tabs
+            orientation="vertical"
+            aria-label="Vertical tabs example"
+            sx={{ borderRight: 1, borderColor: "divider" }}
+            // truyền thêm prop value vào
+            value={value}
+            onChange={(event, newValue) => {
+              // console.log("newValue", newValue);
+              // console.log("event", event);
+              setValue(newValue);
+            }}
+          >
+            {cinemaSystems.map((item) => {
+              return (
+                <Tab
+                  // onClick={() => handleChange(item.maHeThongRap)}
+                  label={<img src={item.logo} style={{ width: 100 }} />}
+                  // {...a11yProps(item.maHeThongRap)}
+                  // truyền thêm prop value vào, tương ứng với value dưới TabPanel
+                  value={item.maHeThongRap}
+                />
+              );
+            })}
+          </Tabs>
+        </Grid>
         {cinemaSystems.map((item) => (
-          <TabPanel value={value} index={item.maHeThongRap}>
-            {item.cumRapChieu.map((rap) => (
-              <Box sx={{ mb: 4 }}>
-                <Typography
-                  variant="h5"
-                  component="h6"
-                  style={{
-                    fontSize: 24,
-                    fontWeight: 700,
-                  }}
-                >
-                  {rap.tenCumRap}
-                </Typography>
-                {/* thằng stack này có hết thuộc tính của flex, nên ko cần phải display: flex này nọ nữa */}
-                {/* display: flex;
+          <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
+            <TabPanel value={value} index={item.maHeThongRap}>
+              {item.cumRapChieu.map((rap) => (
+                <Box sx={{ mb: 4 }}>
+                  <Typography
+                    variant="h5"
+                    component="h6"
+                    style={{
+                      fontSize: 24,
+                      fontWeight: 700,
+                    }}
+                  >
+                    {rap.tenCumRap}
+                  </Typography>
+                  {/* thằng stack này có hết thuộc tính của flex, nên ko cần phải display: flex này nọ nữa */}
+                  {/* display: flex;
               flex-direction: row;
               gap: 3; */}
-                <Stack spacing={2} direction={"row"}>
-                  {rap.lichChieuPhim.map((lichChieu) => {
-                    const date = new Date(lichChieu.ngayChieuGioChieu);
-                    // nếu chưa cài Day.js rồi thì dùng như sau:
-                    // const times = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()} ~ ${date.getHours()}:${date.getMinutes()}` // dd//mm//yyyy
-                    // nếu đã cài Day.js rồi thì dùng như sau:
-                    const times = dayjs(lichChieu.ngayChieuGioChieu).format(
-                      "DD/MM/YYYY ~ hh:mm"
-                    )
-                    return (
-                        <Button
-                          variant="outlined"
-                          size='large'
-                          style={{
-                            fontSize: 20,
-                            fontWeight: 700,
-                          }}
-                          onClick={() => {
-                            navigate(`${PATH.BOOKING}/${lichChieu.maLichChieu}`)
-                          }}
-                        >
-                          {times}
-                        </Button>
-                    );
-                  })}
-                </Stack>
-              </Box>
-            ))}
-            {/* </Stack> */}
-          </TabPanel>
+                  <Stack
+                    xs={6} lg={6}
+                    spacing={{ xs: 1, sm: 2 }}
+                    direction={{ xs: 'column', sm: 'row' }}
+                    useFlexGap
+                    flexWrap="wrap"
+                    divider={<Divider orientation="vertical" flexItem />}
+                  >
+                    {
+                      rap.lichChieuPhim.map((lichChieu) => {
+                        const date = new Date(lichChieu.ngayChieuGioChieu);
+                        // nếu chưa cài Day.js rồi thì dùng như sau:
+                        // const times = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()} ~ ${date.getHours()}:${date.getMinutes()}` // dd//mm//yyyy
+                        // nếu đã cài Day.js rồi thì dùng như sau:
+                        const times = dayjs(lichChieu.ngayChieuGioChieu).format(
+                          "DD/MM/YYYY ~ hh:mm"
+                        )
+                        return (
+                          <Button
+                            variant="outlined"
+                            size='large'
+                            style={{
+                              fontSize: 20,
+                              fontWeight: 700,
+                            }}
+                            onClick={() => {
+                              navigate(`${PATH.BOOKING}/${lichChieu.maLichChieu}`)
+                            }}
+                          >
+                            {times}
+                          </Button>
+                        );
+                      })
+                    }
+                  </Stack>
+                </Box>
+              ))}
+              {/* </Stack> */}
+            </TabPanel>
+          </Grid>
+
         ))}
       </Box>
-    </Container>
+    </Container >
   );
 };
 

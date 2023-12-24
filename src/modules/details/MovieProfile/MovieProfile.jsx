@@ -72,7 +72,7 @@ const MovieProfile = ({ movieId }) => {
   }
 
   return (
-    <Container maxWidth="lg" className='container'>
+    <Container className='container' style={{ maxWidth: "1600px" }} >
       {
         isLoading ? (
           <Box maxWidth="md">
