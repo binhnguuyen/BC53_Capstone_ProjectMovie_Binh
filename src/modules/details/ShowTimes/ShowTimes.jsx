@@ -7,6 +7,8 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { PATH } from '../../../routes/path';
 import { useDarkMode } from "../../../contexts/UserContext/UserContext";
 import DarkModeToggle from '../../../components/DarkModeToggle/DarkModeToggle';
+import { Scrollbar } from 'react-scrollbars-custom';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 // Ở đầy dùng Vertical tabs của MUI
 function TabPanel(props) {
@@ -79,7 +81,7 @@ const ShowTimes = ({ movieId }) => {
           bgcolor: "background.paper",
           display: "flex",
         }}
-        className={isDarkMode ? 'dark-mode' : 'light-mode'} 
+        className={isDarkMode ? 'dark-mode' : 'light-mode'}
       >
         <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
           <Tabs
@@ -107,67 +109,76 @@ const ShowTimes = ({ movieId }) => {
             })}
           </Tabs>
         </Grid>
-        {cinemaSystems.map((item) => (
-          <Grid item xs={9} sm={9} md={9} lg={9} xl={9}>
-            <TabPanel value={value} index={item.maHeThongRap}>
-              {item.cumRapChieu.map((rap) => (
-                <Box sx={{ mb: 4 }}>
-                  <Typography
-                    variant="h5"
-                    component="h6"
-                    style={{
-                      fontSize: 24,
-                      fontWeight: 700,
-                    }}
-                  >
-                    {rap.tenCumRap}
-                  </Typography>
-                  {/* thằng stack này có hết thuộc tính của flex, nên ko cần phải display: flex này nọ nữa */}
-                  {/* display: flex;
+        <Scrollbars
+          class="ScrollbarsCustom-Content"
+          style={{ width: 1200, height: 1000 }}
+        >
+          {cinemaSystems.map((item) => (
+            <Grid item xs={9} sm={9} md={9} lg={9} xl={9}>
+              <TabPanel value={value} index={item.maHeThongRap}>
+                {item.cumRapChieu.map((rap) => (
+                  <Box sx={{ mb: 4 }}>
+                    <Typography
+                      variant="h5"
+                      component="h6"
+                      style={{
+                        fontSize: 24,
+                        fontWeight: 700,
+                      }}
+                    >
+                      {rap.tenCumRap}
+                    </Typography>
+                    {/* thằng stack này có hết thuộc tính của flex, nên ko cần phải display: flex này nọ nữa */}
+                    {/* display: flex;
               flex-direction: row;
-              gap: 3; */}
-                  <Stack
-                    xs={6} lg={6}
-                    spacing={{ xs: 1, sm: 2 }}
-                    direction={{ xs: 'column', sm: 'row' }}
-                    useFlexGap
-                    flexWrap="wrap"
-                    divider={<Divider orientation="vertical" flexItem />}
-                  >
-                    {
-                      rap.lichChieuPhim.map((lichChieu) => {
-                        const date = new Date(lichChieu.ngayChieuGioChieu);
-                        // nếu chưa cài Day.js rồi thì dùng như sau:
-                        // const times = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()} ~ ${date.getHours()}:${date.getMinutes()}` // dd//mm//yyyy
-                        // nếu đã cài Day.js rồi thì dùng như sau:
-                        const times = dayjs(lichChieu.ngayChieuGioChieu).format(
-                          "DD/MM/YYYY ~ hh:mm"
-                        )
-                        return (
-                          <Button
-                            variant="outlined"
-                            size='large'
-                            style={{
-                              fontSize: 20,
-                              fontWeight: 700,
-                            }}
-                            onClick={() => {
-                              navigate(`${PATH.BOOKING}/${lichChieu.maLichChieu}`)
-                            }}
-                          >
-                            {times}
-                          </Button>
-                        );
-                      })
-                    }
-                  </Stack>
-                </Box>
-              ))}
-              {/* </Stack> */}
-            </TabPanel>
-          </Grid>
-
-        ))}
+            gap: 3; */}
+                    <Stack
+                      xs={6} lg={6}
+                      spacing={{ xs: 1, sm: 2 }}
+                      direction={{ xs: 'column', sm: 'row' }}
+                      useFlexGap
+                      flexWrap="wrap"
+                      divider={<Divider orientation="vertical" flexItem />}
+                    >
+                      <Scrollbars
+                        class="ScrollbarsCustom-Content"
+                        style={{ width: 1100, height: 250 }}
+                      >
+                        {
+                          rap.lichChieuPhim.map((lichChieu) => {
+                            const date = new Date(lichChieu.ngayChieuGioChieu);
+                            // nếu chưa cài Day.js rồi thì dùng như sau:
+                            // const times = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()} ~ ${date.getHours()}:${date.getMinutes()}` // dd//mm//yyyy
+                            // nếu đã cài Day.js rồi thì dùng như sau:
+                            const times = dayjs(lichChieu.ngayChieuGioChieu).format(
+                              "DD/MM/YYYY ~ hh:mm"
+                            )
+                            return (
+                              <Button
+                                variant="outlined"
+                                size='large'
+                                style={{
+                                  fontSize: 20,
+                                  fontWeight: 700,
+                                }}
+                                onClick={() => {
+                                  navigate(`${PATH.BOOKING}/${lichChieu.maLichChieu}`)
+                                }}
+                              >
+                                {times}
+                              </Button>
+                            );
+                          })
+                        }
+                      </Scrollbars>
+                    </Stack>
+                  </Box>
+                ))}
+                {/* </Stack> */}
+              </TabPanel>
+            </Grid>
+          ))}
+        </Scrollbars>
       </Box>
     </Container >
   );
