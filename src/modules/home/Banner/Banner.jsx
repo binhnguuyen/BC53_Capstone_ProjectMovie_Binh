@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 // setting của slick
 const settings = {
-  className: "center",
+  className: "center dots",
   centerMode: true,
   dots: true,
   slidesToShow: 1,

@@ -34,8 +34,17 @@ const Header = () => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h4" component="div" sx={{ flexGrow: 1, color: `${blue[600]}`, fontWeight: 700, }}>
-          CyberSoft Movie Pro
+        <Typography
+          sx={{ flexGrow: 1 }}
+        >
+          <IconButton
+            variant="h4"
+            component="div"
+            sx={{ fontSize: 28, color: `${blue[600]}`, fontWeight: 700, }}
+            onClick={() => navigate(PATH.HOME)}
+          >
+            CyberSoft Movie Pro
+          </IconButton>
         </Typography>
         <Typography
           onChange={() => {

@@ -20,6 +20,22 @@
   padding: 50px 0;
 }
 
+.slick-dots {
+  /* margin-top: 10px; */
+  bottom: -40px;
+}
+
+.slick-dots li {
+  margin: 5px 10px;
+}
+
+.slick-dots li button::before {
+  font-size: 15px;
+}
+
+.slick-arrow::before {
+  font-size: 30px;
+}
 
 /* giúp mình ẩn bớt những đoạn văn dài, biến nó thành ... */
 .truncate {
