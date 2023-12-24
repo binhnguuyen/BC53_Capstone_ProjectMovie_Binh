@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react'
 import { getListMovieAPI } from "../../../apis/movieApi";
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography, Container, Skeleton, Box } from "@mui/material"
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography, Container, Skeleton, Box, Rating } from "@mui/material"
 import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick'
 import { blue } from '@mui/material/colors';
@@ -64,7 +64,7 @@ const Showing = () => {
   return (
     // thằng Container này từ MUI, thay nó cho thằng div
     // nó sẽ có chức năng giống container của BS
-    <Container style = {{ maxWidth: "1600px" }} sx={{ marginBottom: 10 }} spacing={2}>
+    <Container style={{ maxWidth: "1600px" }} sx={{ marginBottom: 10 }} spacing={2}>
       {/* <Button variant="outlined" size="large">
         Hello World
       </Button> */}
@@ -82,10 +82,10 @@ const Showing = () => {
                 </Box>
               ) : (
                 <Box className={isDarkMode ? 'dark-mode' : 'light-mode'}
-                  // style={{
-                  //   border: "2px solid #1976d2",
-                  //   borderRadius: "10px",
-                  // }}
+                // style={{
+                //   border: "2px solid #1976d2",
+                //   borderRadius: "10px",
+                // }}
                 >
                   <Button
                     onClick={() => {
@@ -97,7 +97,7 @@ const Showing = () => {
                       // width="100%"
                       style={{
                         width: "100%",
-                        height: 600,
+                        height: 500,
                         objectFit: "cover",
                         border: "2px solid #1976d2",
                         borderRadius: "10px",
@@ -107,13 +107,23 @@ const Showing = () => {
                   <CardContent>
                     <Typography
                       gutterBottom
-                      variant="h5"
+                      variant="h4"
                       component="div"
                       className="truncate" >
                       {item.tenPhim}
                     </Typography>
                     <Typography
-                      variant="body2"
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                      className="truncate"
+                      marginBottom={2}
+                    >
+                      Đánh giá:
+                    </Typography>
+                    <Rating name="size-large" defaultValue={item.danhGia / 2} size="large"></Rating>
+                    <Typography
+                      variant="h6"
                       className="truncate truncate--1">
                       {item.moTa}
                     </Typography>
