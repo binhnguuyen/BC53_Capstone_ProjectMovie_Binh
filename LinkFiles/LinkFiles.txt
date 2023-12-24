@@ -1,0 +1,8 @@
+Link Deploy:
+http://binhnnguyenbc53-movie.surge.sh/
+
+Link Git Hub:
+https://github.com/binhnguuyen/BC53_Capstone_ProjectMovie_Duy_Binh.git
+
+Link Youtube:
+https://youtu.be/eRh56L5uqLE?si=K2xXJiK-d0zWVAkW
