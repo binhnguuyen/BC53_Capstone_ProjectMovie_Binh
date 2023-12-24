@@ -82,7 +82,7 @@ const Signup = () => {
     }
 
     return (
-        <Container maxWidth="sm">
+        <Container maxWidth="xl" className='container'>
             <Typography component="h2">
                 Sign up
             </Typography>

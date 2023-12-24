@@ -12,11 +12,15 @@ import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { useDarkMode } from "../../contexts/UserContext/UserContext";
 
 
 const Booking = () => {
     // thư viện SweetAlert
     const MySwal = withReactContent(Swal);
+
+    const { isDarkMode } = useDarkMode();
+
 
     // Hàm để handle modal
     const [open, setOpen] = React.useState(false);
@@ -94,7 +98,9 @@ const Booking = () => {
 
 
     return (
-        <Container style = {{ maxWidth: "1600px" }}>
+        <Container
+            style={{ maxWidth: "1600px" }}
+            className={isDarkMode ? 'dark-mode container' : 'light-mode container'}>
             <Grid container spacing={2} alignItems={"center"}>
                 <Grid item xs={7} lg={7} xl={7}>
                     <Typography className="screen">

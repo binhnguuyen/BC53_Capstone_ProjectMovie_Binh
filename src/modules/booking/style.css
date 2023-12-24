@@ -30,6 +30,7 @@ Màu đỏ theme chính
   font-size: 20px;
   font-weight: 600;
   cursor: pointer;
+  color: #494949;
 }
 
 .gheThuong {
@@ -43,7 +44,6 @@ Màu đỏ theme chính
 }
 
 .gheDangChon {
-  color: #000;
   background-color: #4caf50;
   border: 1px solid #43a047;
 }

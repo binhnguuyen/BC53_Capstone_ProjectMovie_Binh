@@ -61,10 +61,10 @@ const Header = () => {
         ) : (
           <Stack spacing={2} direction={"row"}>
             <Button variant="outlined" onClick={() => navigate(PATH.SIGN_UP)}>
-              Signup
+              Sign up
             </Button>
             <Button variant="contained" onClick={() => navigate(PATH.SIGN_IN)}>
-              Signin
+              Sign in
             </Button>
           </Stack>
         )}

@@ -20,13 +20,6 @@
   padding: 50px 0;
 }
 
-.scrollbars {
-  height: 1200px;
-  width: 300px;
-  width: 100px;
-
-}
-
 
 /* giúp mình ẩn bớt những đoạn văn dài, biến nó thành ... */
 .truncate {

@@ -1,14 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from "react";
 import { getMovieShowTimesAPI } from "../../../apis/cinemaAPI"
-import { Box, Button, Container, Divider, Grid, Stack, Tab, Tabs, Typography } from "@mui/material";
+import { Alert, Box, Button, Container, Divider, Grid, Stack, Tab, Tabs, Typography } from "@mui/material";
 import dayjs from 'dayjs';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { PATH } from '../../../routes/path';
-import { useDarkMode } from "../../../contexts/UserContext/UserContext";
-import DarkModeToggle from '../../../components/DarkModeToggle/DarkModeToggle';
+import { useAuth, useDarkMode } from "../../../contexts/UserContext/UserContext";
+// import DarkModeToggle from '../../../components/DarkModeToggle/DarkModeToggle';
 import { Scrollbar } from 'react-scrollbars-custom';
 import { Scrollbars } from 'react-custom-scrollbars';
+
 
 // Ở đầy dùng Vertical tabs của MUI
 function TabPanel(props) {
@@ -40,6 +41,7 @@ function TabPanel(props) {
 
 const ShowTimes = ({ movieId }) => {
   const { isDarkMode } = useDarkMode();
+  const { currentUser } = useAuth();
 
   const navigate = useNavigate();
 
@@ -47,6 +49,17 @@ const ShowTimes = ({ movieId }) => {
   const handleChange = (newValue) => {
     setValue(newValue);
   };
+
+  const handleBooking = (maLichChieu) => {
+    if (currentUser && currentUser.maLoaiNguoiDung ==="KhachHang") {
+      navigate(`${PATH.BOOKING}/${maLichChieu}`)
+    }
+    else {
+      alert("Xin vui lòng đăng nhập");
+      navigate(PATH.SIGN_IN)
+    }
+  }
+
 
   // dùng useQuery để khi có 1 thay đổi thì nó sẽ GET API về
   const { data = {}, isLoading, isError, error } = useQuery({
@@ -162,7 +175,7 @@ const ShowTimes = ({ movieId }) => {
                                   fontWeight: 700,
                                 }}
                                 onClick={() => {
-                                  navigate(`${PATH.BOOKING}/${lichChieu.maLichChieu}`)
+                                  handleBooking(lichChieu.maLichChieu);
                                 }}
                               >
                                 {times}

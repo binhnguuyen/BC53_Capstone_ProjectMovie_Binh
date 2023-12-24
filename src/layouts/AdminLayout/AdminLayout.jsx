@@ -5,7 +5,6 @@ import { PATH } from '../../routes/path';
 
 const AdminLayout = () => {
   const { currentUser } = useAuth();
-  console.log('currentUser: ', currentUser);
 
   if ( currentUser && currentUser.maLoaiNguoiDung ==="QuanTri" ) {
     return (

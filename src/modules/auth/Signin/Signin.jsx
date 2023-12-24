@@ -84,7 +84,7 @@ const Signin = () => {
   }
 
   return (
-    <Container>
+    <Container maxWidth="xl" className='container'>
       <Typography component="h2">Sign in</Typography>
       <Grid
         container
