@@ -55,7 +55,8 @@ const ShowTimes = ({ movieId }) => {
     }
     else {
       alert("Xin vui lòng đăng nhập");
-      navigate(PATH.SIGN_IN)
+      // cái customOptions này để đưa maLichChieu về sign-in, sai khi user đăng nhập xong chuyển họ lại trang booking
+      navigate(PATH.SIGN_IN, { state: { customOption: `${maLichChieu}` }});
     }
   }
 

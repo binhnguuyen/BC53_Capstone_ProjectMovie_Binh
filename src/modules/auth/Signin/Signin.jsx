@@ -9,7 +9,7 @@ import { useMutation } from '@tanstack/react-query';
 // Thư viện Yup giúp mình validate Hook Form
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useAuth } from '../../../contexts/UserContext/UserContext';
 import { useDarkMode } from "../../../contexts/UserContext/UserContext";
@@ -30,10 +30,13 @@ const schemaSignin = yup.object({
     ),
 });
 
-
 const Signin = () => {
   const { isDarkMode } = useDarkMode();
-  console.log('isDarkMode: ', isDarkMode);
+
+  // location này để lấy options(cụ thể là maLichChieu để xong khi sign-in để chuyển ngược về lại trang đặt vé cho user)
+  const location = useLocation();
+  const {customOption} = location.state;
+  const maLichChieu = customOption;
 
   // do trùng tên hàm nên chỗ này đổi tên
   const { currentUser, handleSignin: handleSigninContext } = useAuth();
@@ -62,9 +65,8 @@ const Signin = () => {
     onSuccess: (values) => {
       // lưu user dưới local storage trước
       handleSigninContext(values);
-
       // tuỳ vào loại người dùng mà đá sang trang khác nhau
-      if (values.maLoaiNguoiDung === "KhachHang") navigate(PATH.HOME);
+      if (values.maLoaiNguoiDung === "KhachHang") navigate(`${PATH.BOOKING}/${maLichChieu}`);
       if (values.maLoaiNguoiDung === "QuanTri") navigate(PATH.ADMIN);
 
     },
@@ -84,7 +86,7 @@ const Signin = () => {
   }
 
   // nếu có currentUser thì đá sang trang HOME
-  if (currentUser) {
+  if (currentUser && currentUser.maLoaiNguoiDung ==="KhachHang") {
     return <Navigate to={PATH.HOME} />;
   }
 
