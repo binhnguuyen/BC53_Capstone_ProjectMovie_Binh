@@ -1,4 +1,4 @@
-import { Button, Container, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from '@mui/material'
+import { Box, Button, Container, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from '@mui/material'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { GROUP_CODE } from "../../../constants";
@@ -12,6 +12,8 @@ import { LoadingButton } from '@mui/lab';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '../../../routes/path';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useDarkMode } from "../../../contexts/UserContext/UserContext";
+
 
 const schemaSignup = yup.object({
     taiKhoan: yup
@@ -32,13 +34,14 @@ const schemaSignup = yup.object({
 });
 
 const Signup = () => {
+    const { isDarkMode } = useDarkMode();
     const navigate = useNavigate();
 
     // khu này để khi ấn vào icon con mắt thì show password ra
     const [showPassword, setShowPassword] = React.useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event) => {
-        event.preventDefault();
+        event.preventDefault()
     };
 
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -82,116 +85,120 @@ const Signup = () => {
     }
 
     return (
-        <Container maxWidth="xl" className='container'>
-            <Typography component="h2">
-                Sign up
-            </Typography>
-            <Grid
-                container
-                spacing={6}
-                justifyContent={"center"}
-                alignItems={"center"}
-            >
-                <Grid item lg={3}>
-                    {/* thằng handleSubmit trong này phải truyền 1 callback onSubmit trung gian vào thì nó mới chạy */}
-                    {/* thành công thì chạy onSubmit, thất bại thì onError */}
-                    {/* ở đây có thể bỏ onError ko nhất thiết phải có */}
-                    <form onSubmit={handleSubmit(onSubmit, onError)} action="">
-                        {/* Thằng stack này giống display: flex trong CSS, giúp xếp các phần tử ngang hoặc dọc */}
-                        <Stack spacing={3}>
-                            {/* {...register} ngay này để khi nó lấy đúng giá trị được điền vào chứ ko phải trí trị initial*/}
-                            {/* Thằng TextField này giống input trong HTML */}
-                            <TextField label="Họ Tên" fullWidth
-                                {...register("hoTen")}
-                                error={Boolean(errors.hoTen)}
-                                helperText={Boolean(errors.hoTen) && errors.hoTen.message}
-                            // {...register("hoTen", {
-                            //     required: {
-                            //         value: true,
-                            //         message: "Vui lòng nhập thông tin"
-                            //     },
-                            // })}
-                            // error={Boolean(errors.hoTen)}
-                            // helperText={Boolean(errors.hoTen) && errors.hoTen.message}
-                            />
-                            {/* nếu ko dùng MUI thì làm như sau nhưng hơi xấu */}
-                            {/* {errors.hoTen && <p style={{ color: "red" }}>{errors.hoTen.message}</p>} */}
-                            <TextField label="Email" fullWidth
-                                {...register("email")}
-                                error={Boolean(errors.email)}
-                                helperText={Boolean(errors.email) && errors.email.message}
-                            // {...register("email", {
-                            //     required: {
-                            //         value: true,
-                            //         message: "Vui lòng nhập thông tin"
-                            //     },
-                            // })}
-                            // error={Boolean(errors.email)}
-                            // helperText={Boolean(errors.email) && errors.email.message}
-                            />
-                            <TextField label="Tài khoản" fullWidth
-                                {...register("taiKhoan")}
-                                error={Boolean(errors.taiKhoan)}
-                                helperText={Boolean(errors.taiKhoan) && errors.taiKhoan.message}
-                            // {...register("taiKhoan", {
-                            //     required: {
-                            //         value: true,
-                            //         message: "Vui lòng nhập thông tin"
-                            //     },
-                            // })}
-                            // error={Boolean(errors.taiKhoan)}
-                            // helperText={Boolean(errors.taiKhoan) && errors.taiKhoan.message}
-                            />                            
-                            <FormControl variant="outlined" fullWidth>
-                                <InputLabel htmlFor="outlined-adornment-password"
-                                    error={Boolean(errors.matKhau)}
-                                >
-                                    Mật khẩu
-                                </InputLabel>
-                                <OutlinedInput
-                                    error={Boolean(errors.matKhau)}
-                                    {...register("matKhau")}
-                                    id="outlined-adornment-password"
-                                    type={showPassword ? 'text' : 'password'}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                            >
-                                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-                                    label="Password"
+        <Box
+            className={isDarkMode ? 'dark-mode container' : 'light-mode container'}
+        >
+            <Container>
+                <Typography component="h2">
+                    Sign up
+                </Typography>
+                <Grid
+                    container
+                    spacing={6}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                >
+                    <Grid item xs={6}>
+                        {/* thằng handleSubmit trong này phải truyền 1 callback onSubmit trung gian vào thì nó mới chạy */}
+                        {/* thành công thì chạy onSubmit, thất bại thì onError */}
+                        {/* ở đây có thể bỏ onError ko nhất thiết phải có */}
+                        <form onSubmit={handleSubmit(onSubmit, onError)} action="">
+                            {/* Thằng stack này giống display: flex trong CSS, giúp xếp các phần tử ngang hoặc dọc */}
+                            <Stack spacing={3}>
+                                {/* {...register} ngay này để khi nó lấy đúng giá trị được điền vào chứ ko phải trí trị initial*/}
+                                {/* Thằng TextField này giống input trong HTML */}
+                                <TextField label="Họ Tên" fullWidth
+                                    {...register("hoTen")}
+                                    error={Boolean(errors.hoTen)}
+                                    helperText={Boolean(errors.hoTen) && errors.hoTen.message}
+                                // {...register("hoTen", {
+                                //     required: {
+                                //         value: true,
+                                //         message: "Vui lòng nhập thông tin"
+                                //     },
+                                // })}
+                                // error={Boolean(errors.hoTen)}
+                                // helperText={Boolean(errors.hoTen) && errors.hoTen.message}
                                 />
-                                <FormHelperText error={Boolean(errors.matKhau)}>
-                                    {Boolean(errors.matKhau) && errors.matKhau.message}
-                                </FormHelperText>
-                            </FormControl>
-                            {/* {errors.matKhau && <p style={{ color: "red" }}>{errors.matKhau.message}</p>} */}
-                            <TextField label="Số điện thoại" fullWidth
-                                {...register("soDt")}
-                                error={Boolean(errors.soDt)}
-                                helperText={Boolean(errors.soDt) && errors.soDt.message}
-                            // {...register("soDt", {
-                            //     required: {
-                            //         value: true,
-                            //         message: "Vui lòng nhập thông tin"
-                            //     },
-                            // })}
-                            // error={Boolean(errors.soDt)}
-                            // helperText={Boolean(errors.soDt) && errors.soDt.message}
-                            />
-                            {/* nút LoadingButton này từ thư viện LoadingButton của MuiLab */}
-                            <LoadingButton variant="outlined" fullWidth type="submit" size='large' loading={isPending}>Sign up</LoadingButton>
-                        </Stack>
-                    </form>
+                                {/* nếu ko dùng MUI thì làm như sau nhưng hơi xấu */}
+                                {/* {errors.hoTen && <p style={{ color: "red" }}>{errors.hoTen.message}</p>} */}
+                                <TextField label="Email" fullWidth
+                                    {...register("email")}
+                                    error={Boolean(errors.email)}
+                                    helperText={Boolean(errors.email) && errors.email.message}
+                                // {...register("email", {
+                                //     required: {
+                                //         value: true,
+                                //         message: "Vui lòng nhập thông tin"
+                                //     },
+                                // })}
+                                // error={Boolean(errors.email)}
+                                // helperText={Boolean(errors.email) && errors.email.message}
+                                />
+                                <TextField label="Tài khoản" fullWidth
+                                    {...register("taiKhoan")}
+                                    error={Boolean(errors.taiKhoan)}
+                                    helperText={Boolean(errors.taiKhoan) && errors.taiKhoan.message}
+                                // {...register("taiKhoan", {
+                                //     required: {
+                                //         value: true,
+                                //         message: "Vui lòng nhập thông tin"
+                                //     },
+                                // })}
+                                // error={Boolean(errors.taiKhoan)}
+                                // helperText={Boolean(errors.taiKhoan) && errors.taiKhoan.message}
+                                />
+                                <FormControl variant="outlined" fullWidth>
+                                    <InputLabel htmlFor="outlined-adornment-password"
+                                        error={Boolean(errors.matKhau)}
+                                    >
+                                        Mật khẩu
+                                    </InputLabel>
+                                    <OutlinedInput
+                                        error={Boolean(errors.matKhau)}
+                                        {...register("matKhau")}
+                                        id="outlined-adornment-password"
+                                        type={showPassword ? 'text' : 'password'}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    edge="end"
+                                                >
+                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        label="Password"
+                                    />
+                                    <FormHelperText error={Boolean(errors.matKhau)}>
+                                        {Boolean(errors.matKhau) && errors.matKhau.message}
+                                    </FormHelperText>
+                                </FormControl>
+                                {/* {errors.matKhau && <p style={{ color: "red" }}>{errors.matKhau.message}</p>} */}
+                                <TextField label="Số điện thoại" fullWidth
+                                    {...register("soDt")}
+                                    error={Boolean(errors.soDt)}
+                                    helperText={Boolean(errors.soDt) && errors.soDt.message}
+                                // {...register("soDt", {
+                                //     required: {
+                                //         value: true,
+                                //         message: "Vui lòng nhập thông tin"
+                                //     },
+                                // })}
+                                // error={Boolean(errors.soDt)}
+                                // helperText={Boolean(errors.soDt) && errors.soDt.message}
+                                />
+                                {/* nút LoadingButton này từ thư viện LoadingButton của MuiLab */}
+                                <LoadingButton variant="outlined" fullWidth type="submit" size='large' loading={isPending}>Sign up</LoadingButton>
+                            </Stack>
+                        </form>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </Container>
+            </Container>
+        </Box>
     )
 }
 

@@ -1,4 +1,4 @@
-import { Alert, Container, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from '@mui/material'
+import { Alert, Box, Container, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { LoadingButton } from '@mui/lab';
@@ -12,6 +12,8 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useAuth } from '../../../contexts/UserContext/UserContext';
+import { useDarkMode } from "../../../contexts/UserContext/UserContext";
+
 
 const schemaSignin = yup.object({
   taiKhoan: yup
@@ -30,6 +32,9 @@ const schemaSignin = yup.object({
 
 
 const Signin = () => {
+  const { isDarkMode } = useDarkMode();
+  console.log('isDarkMode: ', isDarkMode);
+
   // do trùng tên hàm nên chỗ này đổi tên
   const { currentUser, handleSignin: handleSigninContext } = useAuth();
   const navigate = useNavigate();
@@ -59,8 +64,8 @@ const Signin = () => {
       handleSigninContext(values);
 
       // tuỳ vào loại người dùng mà đá sang trang khác nhau
-      if ( values.maLoaiNguoiDung === "KhachHang" ) navigate(PATH.HOME);
-      if ( values.maLoaiNguoiDung === "QuanTri" ) navigate(PATH.ADMIN);
+      if (values.maLoaiNguoiDung === "KhachHang") navigate(PATH.HOME);
+      if (values.maLoaiNguoiDung === "QuanTri") navigate(PATH.ADMIN);
 
     },
     onError: (error) => {
@@ -84,7 +89,8 @@ const Signin = () => {
   }
 
   return (
-    <Container maxWidth="xl" className='container'>
+    <Box className={isDarkMode ? 'dark-mode container' : 'light-mode container'}>
+      <Container>
       <Typography component="h2">Sign in</Typography>
       <Grid
         container
@@ -93,14 +99,18 @@ const Signin = () => {
         alignItems={"center"}
       >
         <Grid item xs={6}>
-          <form onSubmit={handleSubmit(onSubmit, onError)} action="">
+          <form 
+          className={isDarkMode ? 'dark-mode' : 'light-mode'}
+          onSubmit={handleSubmit(onSubmit, onError)} action="">
             <Stack spacing={3}>
-              <TextField label="Tài khoản" fullWidth
+              <TextField
+                label="Tài khoản"
+                fullWidth
                 {...register("taiKhoan")}
                 error={Boolean(errors.taiKhoan)}
                 helperText={Boolean(errors.taiKhoan) && errors.taiKhoan.message}
               />
-              <FormControl variant="outlined" fullWidth>
+              <FormControl variant="outlined" fullWidth >
                 <InputLabel htmlFor="outlined-adornment-password"
                   error={Boolean(errors.matKhau)}
                 >
@@ -135,7 +145,8 @@ const Signin = () => {
           </form>
         </Grid>
       </Grid>
-    </Container>
+      </Container>
+    </Box>
   )
 }
 

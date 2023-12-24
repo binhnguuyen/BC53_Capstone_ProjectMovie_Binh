@@ -7,7 +7,6 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { PATH } from '../../../routes/path';
 import { useAuth, useDarkMode } from "../../../contexts/UserContext/UserContext";
 // import DarkModeToggle from '../../../components/DarkModeToggle/DarkModeToggle';
-import { Scrollbar } from 'react-scrollbars-custom';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 
