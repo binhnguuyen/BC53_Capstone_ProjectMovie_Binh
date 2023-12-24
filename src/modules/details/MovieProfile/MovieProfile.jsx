@@ -2,15 +2,18 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { getMovieDetailsAPI } from "../../../apis/movieApi";
-import { Box, CardActions, Card, CardMedia, CardContent, Container, Grid, Skeleton, Typography, Button, Modal } from '@mui/material';
+import { Box, CardActions, Card, CardMedia, CardContent, Container, Grid, Skeleton, Typography, Button, Modal, Rating } from '@mui/material';
 import dayjs from 'dayjs';
 import style from "./style.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { red } from '@mui/material/colors';
 import ShowTimes from '../ShowTimes/ShowTimes';
+import { useDarkMode } from "../../../contexts/UserContext/UserContext";
+import DarkModeToggle from '../../../components/DarkModeToggle/DarkModeToggle';
 
 
 const MovieProfile = ({ movieId }) => {
+  const { isDarkMode } = useDarkMode();
 
   const styleIframe = {
     position: 'absolute',
@@ -51,15 +54,15 @@ const MovieProfile = ({ movieId }) => {
     // thằng function này phải truyền tham số movieId vào nên phải dùng callback function
     // thằng nào ko cần truyền tham số thì chỉ gọi ra giống bên Showing là OK
     // queryFn: () => {
-    //   return getMovieDetailsAPI(movieId);
-    // },
-    // hoặc viết gọn lại như sau
-    queryFn: () => getMovieDetailsAPI(movieId),
-    // nếu movieId khác undefined(tức là false) thì cái queryFn trên mới chạy
-    // tức là khi có movieId mới chạy
-    // còn nếu movieId chưa có thì queryFn sẽ ko chạy
-    enabled: !!movieId,
-  });
+      //   return getMovieDetailsAPI(movieId);
+      // },
+      // hoặc viết gọn lại như sau
+      queryFn: () => getMovieDetailsAPI(movieId),
+      // nếu movieId khác undefined(tức là false) thì cái queryFn trên mới chạy
+      // tức là khi có movieId mới chạy
+      // còn nếu movieId chưa có thì queryFn sẽ ko chạy
+      enabled: !!movieId,
+    });
 
 
   const handleURLYouTube = (url) => {
@@ -72,7 +75,9 @@ const MovieProfile = ({ movieId }) => {
   }
 
   return (
-    <Container className='container' style={{ maxWidth: "1600px" }} >
+    <Container 
+    style={{ maxWidth: "1600px" }} 
+    >
       {
         isLoading ? (
           <Box maxWidth="md">
@@ -96,6 +101,7 @@ const MovieProfile = ({ movieId }) => {
               bgcolor: "background.paper",
               display: "flex",
             }}
+            className={isDarkMode ? 'dark-mode' : 'light-mode'} 
           >
             <Grid container spacing={2}>
               <Grid xs={6} lg={6}>
@@ -120,7 +126,7 @@ const MovieProfile = ({ movieId }) => {
                 <CardContent >
                   <Typography
                     gutterBottom
-                    variant="h4"
+                    variant="h3"
                     component="div"
                     className="truncate"
                     marginBottom={2}
@@ -128,8 +134,18 @@ const MovieProfile = ({ movieId }) => {
                     {data.tenPhim}
                   </Typography>
                   <Typography
+                    gutterBottom
                     variant="h5"
-                    color="text.secondary"
+                    component="div"
+                    className="truncate"
+                    marginBottom={2}
+                  >
+                    Đánh giá: 
+                  </Typography>
+                  <Rating name="size-large" defaultValue={data.danhGia / 2} size="large"></Rating>
+                  <Typography
+                    variant="h5"
+                    // color="text.secondary"
                     marginBottom={2}
                   >
                     Ngày chiếu:
@@ -137,9 +153,10 @@ const MovieProfile = ({ movieId }) => {
                       dayjs(data.ngayKhoiChieu).format("DD/MM/YYYY ~ hh:mm")
                     }
                   </Typography>
+                  <br></br>
                   <Typography
                     justifyContent=""
-                    color="text.secondary"
+                    // color="text.secondary"
                     variant="h6"
                     textAlign='justify'
                   >

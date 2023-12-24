@@ -5,6 +5,8 @@ import { Box, Button, Container, Divider, Grid, Stack, Tab, Tabs, Typography } f
 import dayjs from 'dayjs';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { PATH } from '../../../routes/path';
+import { useDarkMode } from "../../../contexts/UserContext/UserContext";
+import DarkModeToggle from '../../../components/DarkModeToggle/DarkModeToggle';
 
 // Ở đầy dùng Vertical tabs của MUI
 function TabPanel(props) {
@@ -35,6 +37,8 @@ function TabPanel(props) {
 // }
 
 const ShowTimes = ({ movieId }) => {
+  const { isDarkMode } = useDarkMode();
+
   const navigate = useNavigate();
 
   const [value, setValue] = useState("");
@@ -68,15 +72,16 @@ const ShowTimes = ({ movieId }) => {
   }, [cinemaSystems]);
 
   return (
-    <Container className='container' style={{ maxWidth: "1600px" }}>
+    <Container style={{ maxWidth: "1600px", marginTop: 40 }} >
       <Box
         sx={{
           flexGrow: 1,
           bgcolor: "background.paper",
           display: "flex",
         }}
+        className={isDarkMode ? 'dark-mode' : 'light-mode'} 
       >
-        <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
+        <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
           <Tabs
             orientation="vertical"
             aria-label="Vertical tabs example"
@@ -103,7 +108,7 @@ const ShowTimes = ({ movieId }) => {
           </Tabs>
         </Grid>
         {cinemaSystems.map((item) => (
-          <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
+          <Grid item xs={9} sm={9} md={9} lg={9} xl={9}>
             <TabPanel value={value} index={item.maHeThongRap}>
               {item.cumRapChieu.map((rap) => (
                 <Box sx={{ mb: 4 }}>

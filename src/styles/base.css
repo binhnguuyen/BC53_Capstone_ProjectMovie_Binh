@@ -5,19 +5,19 @@
 }
 
 .dark-mode {
-  background-color: #333;
-  color: #ddd;
+  background-color: #333 !important;
+  color: #ddd !important;
 }
 
 .light-mode {
-  background-color: #ddd;
-  color: #333;
+  background-color: #ddd !important;
+  color: #333 !important;
 }
 
 .container {
   /* margin-top: 40px; */
   /* margin-bottom: 40px; */
-  margin: 50px 0;
+  padding: 50px 0;
 }
 
 /* giúp mình ẩn bớt những đoạn văn dài, biến nó thành ... */
