@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Grid, Skeleton, Stack, Tab, Tabs, Typography } from '@mui/material'
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Grid, Rating, Skeleton, Stack, Tab, Tabs, Typography } from '@mui/material'
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react'
 import { getTheaterSystemInfo, getTheaterInfo, getShowtimeInfo } from '../../../apis/cinemaAPI';
@@ -160,7 +160,7 @@ const Cinema = () => {
 
 
   return (
-    <Container style = {{ maxWidth: "1600px" }}>
+    <Container style={{ maxWidth: "1600px" }}>
       <Grid container spacing={2}>
         <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
           <Tabs
@@ -252,7 +252,7 @@ const Cinema = () => {
                           sx={{
                             maxWidth: 600,
                           }}
-                          
+
                         >
                           <CardMedia
                             sx={{
@@ -280,6 +280,16 @@ const Cinema = () => {
                             >
                               {item.tenPhim}
                             </Typography>
+                            <Typography
+                              gutterBottom
+                              variant="h5"
+                              component="div"
+                              className="truncate"
+                              marginBottom={2}
+                            >
+                              Đánh giá:
+                            </Typography>
+                            <Rating name="size-large" defaultValue={item.danhGia / 2} size="large"></Rating>
                             <Typography
                               {...typographySettings}
                               style={{
