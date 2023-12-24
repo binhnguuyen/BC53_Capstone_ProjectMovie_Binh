@@ -13,7 +13,6 @@ import animationData from "../../Lotties/Aniki Hamster.json"
 
 const Home = () => {
   const { isDarkMode } = useDarkMode();
-  console.log('isDarkMode: ', isDarkMode);
 
   // thư viện Lottie
   const defaultOptions = {
