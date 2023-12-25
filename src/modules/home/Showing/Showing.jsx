@@ -19,7 +19,7 @@ const Showing = () => {
     infinite: true,
     speed: 500,
     autoplaySpeed: 2000,
-    slidesToShow: 3,
+    slidesToShow: 4,
     autoplay: true,
     initialSlide: 0,
     rows: 2,
@@ -82,28 +82,28 @@ const Showing = () => {
                 </Box>
               ) : (
                 <Box className={isDarkMode ? 'dark-mode' : 'light-mode'}
-                // style={{
-                //   border: "2px solid #1976d2",
-                //   borderRadius: "10px",
-                // }}
+                style={{
+                  padding: "10px 10px",
+                }}
                 >
-                  <Button
+                  <Card
                     onClick={() => {
                       navigate(`movie/${item.maPhim}`)
                     }}
                   >
                     <img
                       src={item.hinhAnh}
-                      // width="100%"
                       style={{
                         width: "100%",
-                        height: 500,
+                        height: "25vw",
                         objectFit: "cover",
+                        margin: "0 auto",
                         border: "2px solid #1976d2",
                         borderRadius: "10px",
+                        cursor: "pointer",
                       }}
                     />
-                  </Button>
+                  </Card>
                   <CardContent>
                     <Typography
                       gutterBottom

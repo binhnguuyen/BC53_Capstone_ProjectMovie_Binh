@@ -140,13 +140,13 @@ const Cinema = () => {
   }
 
   const handleBooking = (maLichChieu) => {
-    if (currentUser && currentUser.maLoaiNguoiDung ==="KhachHang") {
+    if (currentUser && currentUser.maLoaiNguoiDung === "KhachHang") {
       navigate(`${PATH.BOOKING}/${maLichChieu}`)
     }
     else {
       alert("Xin vui lòng đăng nhập");
       // cái customOptions này để đưa maLichChieu về sign-in, sai khi user đăng nhập xong chuyển họ lại trang booking
-      navigate(PATH.SIGN_IN, { state: { customOption: `${maLichChieu}` }});
+      navigate(PATH.SIGN_IN, { state: { customOption: `${maLichChieu}` } });
     }
   }
 
@@ -259,7 +259,7 @@ const Cinema = () => {
               showtimeInfo ? (
                 <Scrollbar
                   class="ScrollbarsCustom-Content"
-                  style={{ width: 1100, height: 900 }}
+                  style={{ width: "50vw", height: 900 }}
                 >
                   {
                     showtimeInfo.map((item) => {
@@ -270,12 +270,14 @@ const Cinema = () => {
                           }}
                         >
                           <CardMedia
-                            sx={{
-                              height: 300,
+                            style={{
+                              width: "100%",
+                              height: "25vw",
+                              objectFit: "cover",
+                              margin: "0 auto",
                               border: "2px solid #1976d2",
                               borderRadius: "10px",
                               cursor: "pointer",
-                              textAlign: "left"
                             }}
                             image={item.hinhAnh}
                             onClick={() => {
@@ -330,7 +332,7 @@ const Cinema = () => {
                               onClick={() => {
                                 handleBooking(item.lstLichChieuTheoPhim[0]?.maLichChieu);
                               }}
-                              >
+                            >
                               Mua vé
                             </Button>
                           </CardContent>
