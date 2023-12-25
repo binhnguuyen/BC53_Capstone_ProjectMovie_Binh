@@ -5,8 +5,9 @@ import { getTheaterSystemInfo, getTheaterInfo, getShowtimeInfo } from '../../../
 import { useNavigate } from 'react-router-dom';
 import { red } from '@mui/material/colors';
 import dayjs from 'dayjs';
-import { useDarkMode } from "../../../contexts/UserContext/UserContext";
+import { useAuth, useDarkMode } from "../../../contexts/UserContext/UserContext";
 import { Scrollbar } from 'react-scrollbars-custom';
+import { PATH } from '../../../routes/path';
 
 
 // Ở đầy dùng Vertical tabs của MUI
@@ -53,6 +54,8 @@ function SamplePrevArrow(props) {
 
 const Cinema = () => {
   const { isDarkMode } = useDarkMode();
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
 
   const settings = {
     dots: true,
@@ -77,12 +80,12 @@ const Cinema = () => {
   }
 
 
-  const navigate = useNavigate()
 
 
   const [theaterSystemId, setTheaterSystemId] = useState("");
   const [theaterId, setTheaterId] = useState("");
   const [showtimeInfo, setShowtimeInfo] = useState("");
+  console.log('showtimeInfo: ', showtimeInfo);
 
 
   const { data: theaterSystemData, isLoading: isLoadingTheaterSysytem } = useQuery({
@@ -134,6 +137,17 @@ const Cinema = () => {
       }
     }
     setShowtimeInfo(showtimeList);
+  }
+
+  const handleBooking = (maLichChieu) => {
+    if (currentUser && currentUser.maLoaiNguoiDung ==="KhachHang") {
+      navigate(`${PATH.BOOKING}/${maLichChieu}`)
+    }
+    else {
+      alert("Xin vui lòng đăng nhập");
+      // cái customOptions này để đưa maLichChieu về sign-in, sai khi user đăng nhập xong chuyển họ lại trang booking
+      navigate(PATH.SIGN_IN, { state: { customOption: `${maLichChieu}` }});
+    }
   }
 
 
@@ -314,8 +328,9 @@ const Cinema = () => {
                                 margin: "auto",
                               }}
                               onClick={() => {
-                                navigate(`movie/${item.maPhim}`)
-                              }}>
+                                handleBooking(item.lstLichChieuTheoPhim[0]?.maLichChieu);
+                              }}
+                              >
                               Mua vé
                             </Button>
                           </CardContent>
