@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { getBannersAPI } from "../../../apis/movieApi";
 import Slider from "react-slick";
-import { Box, Button, Container, Grid, Skeleton } from "@mui/material";
+import { Box, Button, CardMedia, Container, Grid, Skeleton } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { useNavigate } from "react-router-dom";
@@ -89,7 +89,7 @@ const Banner = () => {
           return (
             // cái box này để bọc lại phần nội dung của carousel
             <Box style={{ height: "auto", width: "100%" }} key={index}>
-              <Button
+              <CardMedia
                 onClick={() => {
                   navigate(`movie/${item.maPhim}`)
                 }}
@@ -98,13 +98,13 @@ const Banner = () => {
                   src={item.hinhAnh}
                   width="100%"
                   style={{
-                    height: 800,
+                    height: "50vw",
                     objectFit: "cover",
                     border: "2px solid #1976d2",
                     borderRadius: "10px",
                   }}
                 />
-              </Button>
+              </CardMedia>
             </Box>
           );
         })}

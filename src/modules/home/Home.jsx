@@ -6,6 +6,7 @@ import { Skeleton } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import DarkModeToggle from '../../components/DarkModeToggle/DarkModeToggle';
 import { useDarkMode } from "../../contexts/UserContext/UserContext";
+import { ThemeProvider, createTheme, responsiveFontSizes } from "@mui/material";
 
 // thư viện Lottie
 import Lottie from 'react-lottie';
@@ -13,6 +14,8 @@ import animationData from "../../Lotties/Aniki Hamster.json"
 
 const Home = () => {
   const { isDarkMode } = useDarkMode();
+  let theme = createTheme();
+  theme = responsiveFontSizes(theme);
 
   // thư viện Lottie
   const defaultOptions = {
@@ -34,12 +37,14 @@ const Home = () => {
   //     <Lottie options={defaultOptions} width={300} height={300}/>
   //   );
   // }
-  
+
   return (
     <div className={isDarkMode ? 'dark-mode' : 'light-mode'}>
-      <Banner />
-      <Showing />
-      <Cinema />
+      <ThemeProvider theme={theme}>
+        <Banner />
+        <Showing />
+        <Cinema />
+      </ThemeProvider>
     </div>
   );
 };

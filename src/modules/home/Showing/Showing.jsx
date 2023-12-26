@@ -86,7 +86,7 @@ const Showing = () => {
                   padding: "10px 10px",
                 }}
                 >
-                  <Card
+                  <CardMedia
                     onClick={() => {
                       navigate(`movie/${item.maPhim}`)
                     }}
@@ -103,18 +103,19 @@ const Showing = () => {
                         cursor: "pointer",
                       }}
                     />
-                  </Card>
+                  </CardMedia>
                   <CardContent>
                     <Typography
                       gutterBottom
                       variant="h4"
+                      // style={{fontSize: 12,}}
                       component="div"
                       className="truncate" >
                       {item.tenPhim}
                     </Typography>
                     <Typography
                       gutterBottom
-                      variant="h5"
+                      variant="h6"
                       component="div"
                       className="truncate"
                       marginBottom={2}

@@ -70,7 +70,7 @@ const Footer = () => {
   const [color, setColor] = React.useState('neutral');
   return (
     <Sheet
-      variant="solid"
+      // variant="solid"
       color={color}
       invertedColors
       sx={{
@@ -96,22 +96,22 @@ const Footer = () => {
           <ColorLensRoundedIcon fontSize="small" />
         </IconButton>
         <Divider orientation="vertical" />
-        <IconButton variant="plain">
+        <IconButton >
           <GitHubIcon />
         </IconButton>
-        <IconButton variant="plain">
+        <IconButton >
           <FacebookRoundedIcon />
         </IconButton>
-        <IconButton variant="plain">
+        <IconButton >
           <InstagramIcon />
         </IconButton>
-        <IconButton variant="plain">
+        <IconButton >
           <TwitterIcon />
         </IconButton>
-        <IconButton variant="plain">
+        <IconButton >
           <YouTubeIcon />
         </IconButton>
-        <IconButton variant="plain">
+        <IconButton >
           <LinkedInIcon />
         </IconButton>
         <Input
