@@ -281,7 +281,7 @@ const Cinema = () => {
                             }}
                             image={item.hinhAnh}
                             onClick={() => {
-                              navigate(`movie/${item.maPhim}`)
+                              handleBooking(item.lstLichChieuTheoPhim[0]?.maLichChieu);
                             }}
                             title="green iguana"
                           />
