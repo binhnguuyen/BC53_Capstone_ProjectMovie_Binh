@@ -1,5 +1,6 @@
 Link Deploy:
 http://binhnnguyenbc53-movie.surge.sh/
+https://bc-53-capstone-project-movie-duy-binh-edb0q58qr-binhnguuyen.vercel.app/
 
 Link Git Hub:
 https://github.com/binhnguuyen/BC53_Capstone_ProjectMovie_Duy_Binh.git
