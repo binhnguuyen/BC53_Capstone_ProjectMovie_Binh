@@ -80,12 +80,9 @@ const Cinema = () => {
   }
 
 
-
-
   const [theaterSystemId, setTheaterSystemId] = useState("");
   const [theaterId, setTheaterId] = useState("");
   const [showtimeInfo, setShowtimeInfo] = useState("");
-  console.log('showtimeInfo: ', showtimeInfo);
 
 
   const { data: theaterSystemData, isLoading: isLoadingTheaterSysytem } = useQuery({

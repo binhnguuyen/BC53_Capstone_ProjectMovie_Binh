@@ -107,8 +107,7 @@ const Showing = () => {
                   <CardContent>
                     <Typography
                       gutterBottom
-                      variant="h4"
-                      // style={{fontSize: 12,}}
+                      variant="h5"
                       component="div"
                       className="truncate" >
                       {item.tenPhim}
