@@ -102,6 +102,7 @@ const Banner = () => {
                     objectFit: "cover",
                     border: "2px solid #1976d2",
                     borderRadius: "10px",
+                    cursor: "pointer",
                   }}
                 />
               </CardMedia>
